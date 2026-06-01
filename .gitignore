@@ -1,0 +1,35 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next
+/out
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# env
+.env*
+
+# vercel
+.vercel
+
+# local verification artifacts
+/artifacts
+
+# prompt file is intentionally kept local per project instructions
+/projectdoc/DEAHO_生图Prompt.md
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
