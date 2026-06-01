@@ -20,6 +20,9 @@ Default locale is `/ko`; English is `/en`.
 - OH and VULCAN URLs live in `lib/config.ts` and are intentionally empty in v1.
 - Phase 1 styleguide is available at `/__styleguide`. It is internally rewritten to the Korean locale route so it can share the locale font and motion providers.
 - Global motion foundation lives in `components/motion/`: reduced-motion context, Lenis setup, reveal choreography, page entrance choreography, and count-up stats.
+- Phase 2 site shell lives in `app/[locale]/(site)`: sticky header, mobile drawer, footer, and every route from the locked sitemap.
+- OH and VULCAN links are disabled until `lib/config.ts` receives real URLs. Fill those strings to enable `target="_blank"` links automatically.
+- Add confirmed image files to `public/images/` using the exact filenames from the design documents. Missing files continue to render named placeholders.
 
 ## Known Content Placeholders
 
