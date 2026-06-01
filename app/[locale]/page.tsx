@@ -24,7 +24,7 @@ function HomeContent() {
           <p className="font-body text-eyebrow font-medium uppercase tracking-[0.22em] text-subtext">
             {t('eyebrow')}
           </p>
-          <h1 className="max-w-5xl font-heading text-hero font-bold leading-none tracking-[-0.01em] text-primary">
+          <h1 className="max-w-5xl font-heading text-hero font-bold leading-none tracking-normal text-primary">
             {t('title')}
           </h1>
           <p className="max-w-2xl font-body text-body text-text">{t('subtitle')}</p>

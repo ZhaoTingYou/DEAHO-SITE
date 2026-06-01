@@ -1,6 +1,6 @@
 # DEAHO Official Site
 
-Phase 0 scaffold for the DEAHO official website.
+Phase 0-1 scaffold for the DEAHO official website.
 
 ## Run
 
@@ -11,13 +11,15 @@ npm run dev
 
 Default locale is `/ko`; English is `/en`.
 
-## Phase 0 Notes
+## Phase Notes
 
 - Technology stack: Next.js App Router, TypeScript, Tailwind CSS, Framer Motion, Lenis, next-intl.
 - Design tokens are defined in `styles/tokens.css` and mapped for Tailwind usage in `app/globals.css`.
 - Fonts follow the project documents: Cormorant Garamond and Inter for English, MaruBuri and Pretendard for Korean.
 - Missing images render as named placeholders so layouts do not collapse.
 - OH and VULCAN URLs live in `lib/config.ts` and are intentionally empty in v1.
+- Phase 1 styleguide is available at `/__styleguide`. It is internally rewritten to the Korean locale route so it can share the locale font and motion providers.
+- Global motion foundation lives in `components/motion/`: reduced-motion context, Lenis setup, reveal choreography, page entrance choreography, and count-up stats.
 
 ## Known Content Placeholders
 

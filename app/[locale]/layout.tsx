@@ -4,6 +4,8 @@ import {getMessages, getTranslations, setRequestLocale} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 
 import '@/app/globals.css';
+import {LenisProvider} from '@/components/motion/lenis-provider';
+import {ReducedMotionProvider} from '@/components/motion/reduced-motion-provider';
 import {routing, type Locale} from '@/i18n/routing';
 
 type Props = {
@@ -45,7 +47,9 @@ export default async function LocaleLayout({children, params}: Props) {
     <html lang={locale} className={localeClass}>
       <body className="bg-bg text-text font-body">
         <NextIntlClientProvider messages={messages} locale={locale as Locale}>
-          {children}
+          <ReducedMotionProvider>
+            <LenisProvider>{children}</LenisProvider>
+          </ReducedMotionProvider>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -10,13 +10,15 @@ type SafeImageProps = {
   alt: string;
   aspect?: string;
   priority?: boolean;
+  variant?: 'spotlight' | 'plain';
 };
 
 export function SafeImage({
   filename,
   alt,
   aspect = 'aspect-[4/3]',
-  priority = false
+  priority = false,
+  variant = 'spotlight'
 }: SafeImageProps) {
   const imagePath = path.join(process.cwd(), 'public', 'images', filename);
 
@@ -24,8 +26,13 @@ export function SafeImage({
     return <PlaceholderImg filename={filename} aspect={aspect} />;
   }
 
+  const frame =
+    variant === 'spotlight'
+      ? 'bg-white shadow-[0_24px_80px_rgba(16,29,48,0.08)]'
+      : 'bg-white';
+
   return (
-    <div className={`${aspect} relative w-full overflow-hidden bg-white shadow-[0_24px_80px_rgba(16,29,48,0.08)]`}>
+    <div className={`${aspect} ${frame} relative w-full overflow-hidden`}>
       <Image
         src={`/images/${filename}`}
         alt={alt}

@@ -82,6 +82,62 @@ select {
   color: var(--primary);
 }
 
+.hover-zoom {
+  overflow: hidden;
+}
+
+.hover-zoom-media {
+  transform: translateZ(0) scale(1);
+  transition: transform var(--dur-hover) var(--ease);
+}
+
+@media (hover: hover) {
+  .hover-zoom:hover .hover-zoom-media {
+    transform: translateZ(0) scale(1.04);
+  }
+}
+
+.link-sweep {
+  position: relative;
+  display: inline-flex;
+  color: var(--primary);
+}
+
+.link-sweep::after {
+  position: absolute;
+  right: 0;
+  bottom: -0.18em;
+  left: 0;
+  height: 1px;
+  content: "";
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--dur-hover) var(--ease);
+}
+
+@media (hover: hover) {
+  .link-sweep:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+.light-layer {
+  background: var(--white);
+  box-shadow: 0 28px 90px rgba(16, 29, 48, .08);
+  transition:
+    background-color 600ms var(--ease),
+    box-shadow 600ms var(--ease),
+    transform 600ms var(--ease);
+}
+
+@media (hover: hover) {
+  .light-layer:hover {
+    box-shadow: 0 34px 110px rgba(16, 29, 48, .12);
+    transform: translateY(-4px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
