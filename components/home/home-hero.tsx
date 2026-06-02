@@ -25,6 +25,7 @@ export function HomeHero({
 }: HomeHeroProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const words = title.split(' ');
+  const isNumericWord = (word: string) => /^[\d,]+$/.test(word);
   const titleVariants: Variants = {
     hidden: {},
     visible: {
@@ -84,7 +85,9 @@ export function HomeHero({
             {words.map((word, index) => (
               <span key={`${word}-${index}`} className="inline-block overflow-hidden">
                 <motion.span variants={wordVariants} className="inline-block">
-                  {word}
+                  <span className={isNumericWord(word) ? 'home-hero__number' : undefined}>
+                    {word}
+                  </span>
                   {index < words.length - 1 ? '\u00A0' : ''}
                 </motion.span>
               </span>

@@ -233,6 +233,14 @@ select {
   transform: scaleX(1);
 }
 
+.home-hero__number {
+  position: relative;
+  top: -0.045em;
+  display: inline-block;
+  font-variant-numeric: lining-nums proportional-nums;
+  font-feature-settings: "lnum" 1, "pnum" 1;
+}
+
 .light-layer {
   background: var(--white);
   box-shadow: 0 28px 90px rgba(16, 29, 48, .08);
