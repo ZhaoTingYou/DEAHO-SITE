@@ -65,12 +65,11 @@ export function HomeHero({
         priority
         className="absolute inset-0 h-[110%] w-full"
       />
-      <div className="home-hero-mask absolute inset-0" aria-hidden="true" />
       <div className="relative z-10 mx-auto flex min-h-screen max-w-[1440px] items-end px-container pb-24 pt-32 md:pb-16">
         <motion.div
           initial="hidden"
           animate="visible"
-          className="home-hero-copy max-w-5xl space-y-7 md:space-y-8"
+          className="max-w-5xl space-y-7 md:space-y-8"
         >
           <motion.p
             variants={copyVariants}
