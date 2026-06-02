@@ -109,6 +109,21 @@ export default async function StyleguidePage({params}: Props) {
       <section className="bg-white py-section">
         <div className="mx-auto max-w-[1440px] space-y-12 px-container">
           <SectionIntro eyebrow="03 Components" title="Reusable page blocks" />
+          <div className="grid gap-8 border border-hairline bg-bg p-8 lg:grid-cols-3">
+            <SectionIntro
+              eyebrow="Variant · Chronicle"
+              title="THE CHRONICLE"
+              variant="chronicle"
+            >
+              <p>Axis-attached intro treatment for the archive timeline pages.</p>
+            </SectionIntro>
+            <SectionIntro eyebrow="Variant · Legacy" title="THE MEANING" variant="legacy">
+              <p>A centered, slow, monument-like intro with much larger title rhythm.</p>
+            </SectionIntro>
+            <SectionIntro eyebrow="Variant · News" title="NEWS" variant="news">
+              <p>Masthead-style rule line for dense editorial pages.</p>
+            </SectionIntro>
+          </div>
           <Hero
             eyebrow="Hero"
             title="THE FIRST LIGHT"

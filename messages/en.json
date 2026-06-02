@@ -87,5 +87,70 @@
       "cta": "View golf",
       "image": "golf_hero.png"
     }
+  },
+  "chronicle": {
+    "hero": {
+      "eyebrow": "EST. 1988",
+      "title": "THE CHRONICLE",
+      "koreanTitle": "역사의 기록물",
+      "subtitle": "The history of DEAHO is the history of championship and appointment rings in Korea.",
+      "image": "chronicle_hero.png"
+    },
+    "timeline": {
+      "eyebrow": "ARCHIVE TIMELINE",
+      "title": "Records held on the scale of time",
+      "body": "Unconfirmed years and events remain as placeholders, ready to be replaced on the same axis when source material arrives.",
+      "items": [
+        {
+          "year": "1988",
+          "kicker": "FOUNDATION",
+          "title": "The beginning of DEAHO",
+          "body": "The starting point of the brand. The full founding narrative will be expanded when verified materials arrive.",
+          "image": "chronicle_milestone_01.png"
+        },
+        {
+          "year": "19XX",
+          "kicker": "FIRST RECORD",
+          "title": "The first standard",
+          "body": "A reserved position for a first-in-market, first-introduced, or patent-related milestone.",
+          "image": "chronicle_milestone_02.png",
+          "first": true
+        },
+        {
+          "year": "20XX",
+          "kicker": "CRAFT ARCHIVE",
+          "title": "Expansion of the craft",
+          "body": "A milestone slot for changes in process, modeling, and production capability.",
+          "image": "chronicle_milestone_03.png"
+        },
+        {
+          "year": "20XX",
+          "kicker": "FIRST RECORD",
+          "title": "A market-defining marker",
+          "body": "A reserved position for a representative project or first case that proves the market.",
+          "image": "chronicle_milestone_04.png",
+          "first": true
+        },
+        {
+          "year": "20XX",
+          "kicker": "RECOGNITION",
+          "title": "Trust accumulated",
+          "body": "A bright archive entry for collaborations, returning clients, and recognition records.",
+          "image": "chronicle_milestone_05.png"
+        },
+        {
+          "year": "Today",
+          "kicker": "ONGOING",
+          "title": "The record continues",
+          "body": "A present-tense entry for current projects and the next markers in DEAHO's archive.",
+          "image": "chronicle_milestone_06.png"
+        }
+      ]
+    },
+    "closing": {
+      "title": "This market — we built it.",
+      "subtitle": "A record of time becomes evidence of trust.",
+      "cta": "View legacy"
+    }
   }
 }

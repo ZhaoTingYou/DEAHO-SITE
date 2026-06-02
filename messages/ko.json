@@ -87,5 +87,70 @@
       "cta": "Golf 보기",
       "image": "golf_hero.png"
     }
+  },
+  "chronicle": {
+    "hero": {
+      "eyebrow": "EST. 1988",
+      "title": "THE CHRONICLE",
+      "koreanTitle": "역사의 기록물",
+      "subtitle": "대호의 역사가 곧 한국 우승·임관 반지의 역사입니다.",
+      "image": "chronicle_hero.png"
+    },
+    "timeline": {
+      "eyebrow": "ARCHIVE TIMELINE",
+      "title": "시간의 눈금 위에 남은 기록",
+      "body": "확인 전인 연도와 사건은 자리표시자로 유지하고, 실제 자료가 도착하면 같은 축 위에 교체합니다.",
+      "items": [
+        {
+          "year": "1988",
+          "kicker": "FOUNDATION",
+          "title": "대호의 시작",
+          "body": "브랜드의 출발점입니다. 상세 창립 서사는 확인 자료가 도착하면 보강합니다.",
+          "image": "chronicle_milestone_01.png"
+        },
+        {
+          "year": "19XX",
+          "kicker": "FIRST RECORD",
+          "title": "첫 번째 기준",
+          "body": "국내 최초·첫 도입·특허 관련 사건을 위한 자리입니다. 사실 확인 전까지 수치를 고정하지 않습니다.",
+          "image": "chronicle_milestone_02.png",
+          "first": true
+        },
+        {
+          "year": "20XX",
+          "kicker": "CRAFT ARCHIVE",
+          "title": "제작 방식의 확장",
+          "body": "공정과 설계 방식이 확장된 시점을 기록할 영역입니다.",
+          "image": "chronicle_milestone_03.png"
+        },
+        {
+          "year": "20XX",
+          "kicker": "FIRST RECORD",
+          "title": "시장에 남은 이정표",
+          "body": "챔피언십 링 시장을 증명하는 첫 사례 또는 대표 프로젝트가 들어갈 자리입니다.",
+          "image": "chronicle_milestone_04.png",
+          "first": true
+        },
+        {
+          "year": "20XX",
+          "kicker": "RECOGNITION",
+          "title": "신뢰의 축적",
+          "body": "협업, 재의뢰, 인정 기록을 위한 밝은 아카이브 항목입니다.",
+          "image": "chronicle_milestone_05.png"
+        },
+        {
+          "year": "Today",
+          "kicker": "ONGOING",
+          "title": "지금도 이어지는 기록",
+          "body": "대호의 현재 프로젝트와 다음 기록을 이어 붙일 현재형 항목입니다.",
+          "image": "chronicle_milestone_06.png"
+        }
+      ]
+    },
+    "closing": {
+      "title": "이 시장은, 우리가 만들었습니다.",
+      "subtitle": "시간의 기록은 곧 신뢰의 증거가 됩니다.",
+      "cta": "Legacy 보기"
+    }
   }
 }
