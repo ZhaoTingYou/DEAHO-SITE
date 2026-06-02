@@ -79,6 +79,7 @@ export function SiteHeader({locale}: SiteHeaderProps) {
   const lastScrollYRef = useRef(0);
   const scrollDeltaRef = useRef(0);
   const [atTop, setAtTop] = useState(true);
+  const [overHomeHero, setOverHomeHero] = useState(true);
   const [isHidden, setIsHidden] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<MegaMenuKey | null>(null);
@@ -99,6 +100,7 @@ export function SiteHeader({locale}: SiteHeaderProps) {
 
   const koLocalePath = withLocale('ko', relativePath === '/' ? '/' : relativePath);
   const enLocalePath = withLocale('en', relativePath === '/' ? '/' : relativePath);
+  const isHome = relativePath === '/';
 
   const clearMegaCloseTimer = () => {
     if (closeTimerRef.current) {
@@ -136,19 +138,27 @@ export function SiteHeader({locale}: SiteHeaderProps) {
     const onScroll = () => {
       const y = window.scrollY;
       const nextAtTop = y < 8;
+      const heroExitY = Math.max(360, window.innerHeight - 96);
+      const nextOverHomeHero = isHome && y < heroExitY;
 
       setAtTop((current) => (current === nextAtTop ? current : nextAtTop));
+      setOverHomeHero((current) =>
+        current === nextOverHomeHero ? current : nextOverHomeHero
+      );
 
-      if (nextAtTop) {
+      if (nextAtTop || nextOverHomeHero) {
         scrollDeltaRef.current = 0;
         setIsHidden(false);
-        setOpenMenu(null);
+
+        if (nextAtTop) {
+          setOpenMenu(null);
+        }
       } else {
         const delta = y - lastScrollYRef.current;
         scrollDeltaRef.current += delta;
 
         if (Math.abs(scrollDeltaRef.current) >= 8) {
-          if (scrollDeltaRef.current > 0 && y > 120) {
+          if (!isHome && scrollDeltaRef.current > 0 && y > 120) {
             setIsHidden(true);
             setOpenMenu(null);
           }
@@ -166,9 +176,13 @@ export function SiteHeader({locale}: SiteHeaderProps) {
 
     onScroll();
     window.addEventListener('scroll', onScroll, {passive: true});
+    window.addEventListener('resize', onScroll);
 
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
+  }, [isHome]);
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : '';
@@ -199,7 +213,8 @@ export function SiteHeader({locale}: SiteHeaderProps) {
 
   const currentMegaItem = openMenu ? navItems.find((item) => item.label === openMenu) : undefined;
   const currentMegaDetails = openMenu ? megaMenuDetails[openMenu] : null;
-  const isSolid = !atTop || isMenuOpen || openMenu !== null;
+  const isHomeHeroTransparent = isHome && (overHomeHero || atTop) && !isMenuOpen && openMenu === null;
+  const isSolid = !isHomeHeroTransparent && (!atTop || isMenuOpen || openMenu !== null);
   const navVariants = prefersReducedMotion ? {hidden: {}, visible: {}} : navListVariants;
   const itemVariants = prefersReducedMotion ? instantItemVariants : navItemVariants;
 
@@ -223,7 +238,9 @@ export function SiteHeader({locale}: SiteHeaderProps) {
       className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter,color] duration-300 ease-brand ${
         isSolid
           ? 'border-b border-hairline bg-bg/95 text-primary shadow-[0_18px_60px_rgba(16,29,48,.08)] backdrop-blur-md [text-shadow:none]'
-          : 'border-b border-transparent bg-transparent text-primary [text-shadow:0_1px_16px_rgba(255,255,255,.72)]'
+          : isHomeHeroTransparent
+            ? 'border-b border-transparent bg-transparent text-white [text-shadow:0_1px_16px_rgba(16,29,48,.42)]'
+            : 'border-b border-transparent bg-transparent text-primary [text-shadow:0_1px_16px_rgba(255,255,255,.72)]'
       }`}
     >
       <div className="hidden lg:block">

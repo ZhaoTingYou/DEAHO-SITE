@@ -69,17 +69,17 @@ export function HomeHero({
         <motion.div
           initial="hidden"
           animate="visible"
-          className="max-w-5xl space-y-7 md:space-y-8"
+          className="max-w-5xl space-y-7 text-white [text-shadow:0_2px_20px_rgba(16,29,48,.34)] md:space-y-8"
         >
           <motion.p
             variants={copyVariants}
-            className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-primary"
+            className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em]"
           >
             {eyebrow}
           </motion.p>
           <motion.h1
             variants={titleVariants}
-            className="font-heading text-hero font-bold leading-none tracking-normal text-primary"
+            className="font-heading text-hero font-bold leading-none tracking-normal"
           >
             {words.map((word, index) => (
               <span key={`${word}-${index}`} className="inline-block overflow-hidden">
@@ -92,18 +92,18 @@ export function HomeHero({
           </motion.h1>
           <motion.p
             variants={copyVariants}
-            className="max-w-2xl font-body text-body leading-[1.7] text-text"
+            className="max-w-2xl font-body text-body leading-[1.7]"
           >
             {subtitle}
           </motion.p>
         </motion.div>
       </div>
       <div
-        className="home-scroll-hint absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3 font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-primary"
+        className="home-scroll-hint absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3 font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-white [text-shadow:0_1px_14px_rgba(16,29,48,.38)]"
         aria-hidden="true"
       >
         <span>Scroll</span>
-        <span className="h-10 w-px bg-primary/50" />
+        <span className="h-10 w-px bg-white/70" />
       </div>
     </section>
   );
