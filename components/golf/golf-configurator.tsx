@@ -133,7 +133,6 @@ export function GolfConfigurator({assets, content, locale}: GolfConfiguratorProp
               className="consult-cta consult-cta--accent consult-cta--large w-fit"
             >
               <span className="consult-cta__label">{content.labels.inquiryCta}</span>
-              <span className="consult-cta__mark" aria-hidden="true" />
             </Link>
           </Reveal>
 

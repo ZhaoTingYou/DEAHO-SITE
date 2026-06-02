@@ -301,7 +301,6 @@ export function SiteHeader({locale}: SiteHeaderProps) {
               className={`consult-cta ${isHomeHeroTransparent ? 'consult-cta--light' : 'consult-cta--accent'}`}
             >
               <span className="consult-cta__label">{contactLabel}</span>
-              <span className="consult-cta__mark" aria-hidden="true" />
             </Link>
           </div>
         </div>
@@ -579,7 +578,6 @@ export function SiteHeader({locale}: SiteHeaderProps) {
               className="consult-cta consult-cta--accent consult-cta--large mt-10 flex w-full"
             >
               <span className="consult-cta__label">{contactLabel}</span>
-              <span className="consult-cta__mark" aria-hidden="true" />
             </Link>
 
             <div className="mt-12 border-t border-hairline pt-8">

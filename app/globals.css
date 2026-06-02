@@ -148,49 +148,28 @@ select {
 }
 
 .consult-cta {
+  --consult-fg: var(--accent);
   position: relative;
-  isolation: isolate;
   display: inline-flex;
   min-height: 44px;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  overflow: hidden;
-  border: 1px solid currentColor;
-  border-radius: 999px;
-  padding: 10px 18px;
+  padding: 8px 0;
   font-family: var(--font-body);
   font-size: 12px;
   font-weight: 700;
   line-height: 1;
   letter-spacing: .14em;
+  color: var(--consult-fg);
   text-transform: uppercase;
   transition:
     color var(--dur-hover) var(--ease),
-    border-color var(--dur-hover) var(--ease),
-    box-shadow var(--dur-hover) var(--ease),
     transform var(--dur-hover) var(--ease);
-}
-
-.consult-cta::before {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  content: "";
-  background: currentColor;
-  transform: translate3d(-102%, 0, 0);
-  transition: transform var(--dur-hover) var(--ease);
 }
 
 .consult-cta:hover,
 .consult-cta:focus-visible {
-  box-shadow: 0 18px 46px rgba(16, 29, 48, .12);
   transform: translate3d(0, -1px, 0);
-}
-
-.consult-cta:hover::before,
-.consult-cta:focus-visible::before {
-  transform: translate3d(0, 0, 0);
 }
 
 .consult-cta:focus-visible {
@@ -199,50 +178,59 @@ select {
 }
 
 .consult-cta--accent {
-  color: var(--accent);
+  --consult-fg: var(--accent);
 }
 
 .consult-cta--accent:hover,
 .consult-cta--accent:focus-visible {
-  color: var(--white);
-  border-color: var(--accent);
+  --consult-fg: var(--accent);
 }
 
 .consult-cta--light {
-  color: var(--white);
+  --consult-fg: var(--white);
 }
 
 .consult-cta--light:hover,
 .consult-cta--light:focus-visible {
-  color: var(--primary);
-  border-color: var(--white);
+  --consult-fg: var(--white);
 }
 
 .consult-cta--large {
-  min-height: 54px;
-  padding: 15px 24px;
+  min-height: 48px;
+  padding: 10px 0;
   font-size: 13px;
   letter-spacing: .16em;
 }
 
-.consult-cta__label,
-.consult-cta__mark {
+.consult-cta__label {
   position: relative;
-  z-index: 1;
 }
 
-.consult-cta__mark {
-  display: inline-flex;
-  width: 30px;
+.consult-cta__label::before,
+.consult-cta__label::after {
+  position: absolute;
+  right: 0;
+  bottom: -6px;
+  left: 0;
   height: 1px;
+  content: "";
   background: currentColor;
   transform-origin: left;
   transition: transform var(--dur-hover) var(--ease);
 }
 
-.consult-cta:hover .consult-cta__mark,
-.consult-cta:focus-visible .consult-cta__mark {
-  transform: scaleX(1.35);
+.consult-cta__label::before {
+  opacity: .24;
+  transform: scaleX(1);
+}
+
+.consult-cta__label::after {
+  transform: scaleX(0);
+}
+
+.consult-cta:hover .consult-cta__label::after,
+.consult-cta:focus-visible .consult-cta__label::after {
+  transform: scaleX(1);
 }
 
 .light-layer {
