@@ -59,17 +59,18 @@ export function GolfInquiryForm({locale, configuration}: GolfInquiryFormProps) {
           <input type="hidden" name="engravingSample" value={configuration.engraving} />
         </>
       ) : null}
-      <TextField id="golf-name" label={text.name} name="name" />
-      <TextField id="golf-contact" label={text.contact} name="contact" />
-      <TextField id="golf-quantity" label={text.quantity} name="quantity" />
-      <TextField id="golf-due" label={text.due} name="due" />
-      <TextField id="golf-team" label={text.team} name="team" />
+      <TextField id="golf-name" label={text.name} name="name" autoComplete="name" />
+      <TextField id="golf-contact" label={text.contact} name="contact" type="tel" inputMode="tel" autoComplete="tel" />
+      <TextField id="golf-quantity" label={text.quantity} name="quantity" type="number" inputMode="numeric" min="1" />
+      <TextField id="golf-due" label={text.due} name="due" type="date" />
+      <TextField id="golf-team" label={text.team} name="team" autoComplete="organization" />
       <TextField id="golf-use" label={text.use} name="use" />
       <label className="block space-y-2 font-body text-sm font-semibold uppercase tracking-[0.12em] text-subtext md:col-span-2">
         <span>{text.message}</span>
         <textarea
           name="message"
           rows={6}
+          autoComplete="off"
           className="w-full resize-none border-b border-primary/30 bg-transparent py-3 text-base normal-case tracking-normal text-primary outline-none transition duration-hover ease-brand focus:border-accent"
         />
       </label>
@@ -91,13 +92,33 @@ export function GolfInquiryForm({locale, configuration}: GolfInquiryFormProps) {
   );
 }
 
-function TextField({id, label, name}: {id: string; label: string; name: string}) {
+function TextField({
+  id,
+  label,
+  name,
+  type = 'text',
+  inputMode,
+  autoComplete,
+  min
+}: {
+  id: string;
+  label: string;
+  name: string;
+  type?: React.HTMLInputTypeAttribute;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode'];
+  autoComplete?: string;
+  min?: string;
+}) {
   return (
     <label htmlFor={id} className="block space-y-2 font-body text-sm font-semibold uppercase tracking-[0.12em] text-subtext">
       <span>{label}</span>
       <input
         id={id}
         name={name}
+        type={type}
+        inputMode={inputMode}
+        autoComplete={autoComplete}
+        min={min}
         className="min-h-12 w-full border-b border-primary/30 bg-transparent py-3 text-base normal-case tracking-normal text-primary outline-none transition duration-hover ease-brand focus:border-accent"
       />
     </label>

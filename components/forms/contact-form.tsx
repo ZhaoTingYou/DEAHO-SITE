@@ -58,9 +58,9 @@ export function ContactForm({locale, defaultType = 'appointment'}: ContactFormPr
         setIsSubmitted(true);
       }}
     >
-      <TextField id="contact-name" label={text.name} name="name" />
-      <TextField id="contact-organization" label={text.organization} name="organization" />
-      <TextField id="contact-contact" label={text.contact} name="contact" />
+      <TextField id="contact-name" label={text.name} name="name" autoComplete="name" />
+      <TextField id="contact-organization" label={text.organization} name="organization" autoComplete="organization" />
+      <TextField id="contact-contact" label={text.contact} name="contact" type="tel" inputMode="tel" autoComplete="tel" />
       <label className="block space-y-2 font-body text-sm font-semibold uppercase tracking-[0.12em] text-subtext">
         <span>{text.type}</span>
         <select
@@ -80,6 +80,7 @@ export function ContactForm({locale, defaultType = 'appointment'}: ContactFormPr
         <textarea
           name="message"
           rows={6}
+          autoComplete="off"
           className="w-full resize-none border-b border-primary/30 bg-transparent py-3 text-base normal-case tracking-normal text-primary outline-none transition duration-hover ease-brand focus:border-accent"
         />
       </label>
@@ -99,13 +100,30 @@ export function ContactForm({locale, defaultType = 'appointment'}: ContactFormPr
   );
 }
 
-function TextField({id, label, name}: {id: string; label: string; name: string}) {
+function TextField({
+  id,
+  label,
+  name,
+  type = 'text',
+  inputMode,
+  autoComplete
+}: {
+  id: string;
+  label: string;
+  name: string;
+  type?: React.HTMLInputTypeAttribute;
+  inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode'];
+  autoComplete?: string;
+}) {
   return (
     <label htmlFor={id} className="block space-y-2 font-body text-sm font-semibold uppercase tracking-[0.12em] text-subtext">
       <span>{label}</span>
       <input
         id={id}
         name={name}
+        type={type}
+        inputMode={inputMode}
+        autoComplete={autoComplete}
         className="min-h-12 w-full border-b border-primary/30 bg-transparent py-3 text-base normal-case tracking-normal text-primary outline-none transition duration-hover ease-brand focus:border-accent"
       />
     </label>

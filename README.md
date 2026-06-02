@@ -34,15 +34,25 @@ npm run build
 - `/[locale]/specialty`
 - `/[locale]/specialty/technique`
 - `/[locale]/specialty/collection`
+- `/[locale]/specialty/collection/[slug]`
 - `/[locale]/news`
+- `/[locale]/news/[slug]`
 - `/[locale]/golf`
+- `/[locale]/golf/inquiry`
+- `/[locale]/contact`
+- `/sitemap.xml`
+- `/robots.txt`
 - `/__styleguide` for the internal design-system sandbox
+
+System states are branded in `app/[locale]/(site)/not-found.tsx`,
+`app/[locale]/(site)/loading.tsx`, and the reusable
+`components/empty-state.tsx`.
 
 ## Design Rules
 
 - Keep the site bright. Do not introduce black or near-black backgrounds.
-- Use only the project tokens defined in `app/globals.css` and
-  `tailwind.config.ts`.
+- Use only the project tokens defined in `styles/tokens.css`, mapped through
+  `app/globals.css` and `tailwind.config.ts`.
 - Use only the approved fonts: Cormorant Garamond, Inter, MaruBuri, and
   Pretendard.
 - Missing images must render named placeholders instead of collapsing layout.
@@ -58,6 +68,11 @@ Main copy lives in:
 Do not replace placeholder figures such as `00`, `19XX`, partner counts,
 retention rates, or exact milestone years until the real content is confirmed.
 
+Add NEWS cards in `messages/*.json` under `news.grid.cards`. The card `id`
+becomes `/[locale]/news/[id]`. Add collection works under
+`specialtyPages.collection.gallery.items`; each item `id` becomes
+`/[locale]/specialty/collection/[id]`.
+
 ## Images
 
 Place confirmed images in `public/images/` with the exact filenames referenced by
@@ -67,7 +82,8 @@ the message files and page code. Current important groups:
   `home_stats_bg.png`, `home_pillar_chronicle.png`, `home_pillar_legacy.png`,
   `home_pillar_specialty.png`, `home_pillar_news.png`
 - Chronicle: `chronicle_hero.png`, `chronicle_milestone_01.png` to
-  `chronicle_milestone_06.png`
+  `chronicle_milestone_06.png`, `chronicle_detail_01.png` to
+  `chronicle_detail_03.png`
 - Legacy: `legacy_hero.png`, `legacy_card_loyalty.png`,
   `legacy_card_credibility.png`, `legacy_card_achievement.png`,
   `legacy_loyalty_hero.png`, `legacy_credibility_hero.png`,
@@ -78,9 +94,10 @@ the message files and page code. Current important groups:
   `specialty_process_1_sketch.png` to `specialty_process_7_delivery.png`,
   `specialty_detail_01.png` to `specialty_detail_03.png`,
   `specialty_bespoke.png`, `specialty_collection_hero.png`,
-  `collection_ring_01.png` to `collection_ring_12.png`
+  `collection_ring_01.png` to `collection_ring_12.png`,
+  `collection_detail_01.png` to `collection_detail_05.png`
 - News: `news_hero.png`, `news_featured.png.png`, `news_card_01.png` to
-  `news_card_06.png`
+  `news_card_06.png`, `news_detail_hero.png`
 - Golf: `golf_hero.png`, `golf_hero_2.png`, `golf_head_ball.png`,
   `golf_head_iron.png`, `golf_head_putter.png`, `golf_head_wood.png`,
   `golf_shaft_black.png`, `golf_shaft_white.png`,
@@ -99,6 +116,22 @@ Supported filenames:
 
 If no video exists, the hero falls back to `home_hero.png`. Reduced-motion and
 data-saver users also receive the poster image.
+
+## Forms
+
+The contact and golf inquiry forms are static consultation forms for v1. They do
+not collect card numbers, account details, or sensitive ID fields. Detail-page
+CTAs route to `/contact` with a query hint such as `type=bespoke`; the golf
+configurator routes to `/golf/inquiry` with `head`, `shaft`, and `engraving`
+query values for the configuration summary.
+
+## SEO
+
+Page metadata is centralized in `lib/seo.ts`. Static index pages use
+`getPageMetadata`; NEWS and COLLECTION detail pages use `getDetailMetadata` with
+their own titles and images. `app/sitemap.ts` includes static routes plus NEWS
+and COLLECTION detail routes for both `ko` and `en`. `app/robots.ts` points
+crawlers to the generated sitemap.
 
 ## External Links
 

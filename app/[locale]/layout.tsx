@@ -58,9 +58,16 @@ export default async function LocaleLayout({children, params}: Props) {
   return (
     <html lang={locale} className={localeClass}>
       <body className="bg-bg text-text font-body">
+        <a href="#main-content" className="skip-link">
+          Skip to main content
+        </a>
         <NextIntlClientProvider messages={messages} locale={locale as Locale}>
           <ReducedMotionProvider>
-            <LenisProvider>{children}</LenisProvider>
+            <LenisProvider>
+              <div id="main-content" tabIndex={-1}>
+                {children}
+              </div>
+            </LenisProvider>
           </ReducedMotionProvider>
         </NextIntlClientProvider>
       </body>

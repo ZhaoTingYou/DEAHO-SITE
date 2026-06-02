@@ -98,12 +98,11 @@ export function HomeHero({
           </motion.p>
         </motion.div>
       </div>
-      <div
-        className="home-scroll-hint absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3 font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-white [text-shadow:0_1px_14px_rgba(16,29,48,.38)]"
-        aria-hidden="true"
-      >
-        <span>Scroll</span>
-        <span className="h-10 w-px bg-white/70" />
+      <div className="pointer-events-none absolute inset-x-0 bottom-6 z-10 flex justify-center pb-[env(safe-area-inset-bottom)]" aria-hidden="true">
+        <div className="home-scroll-hint flex flex-col items-center gap-3 font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-white [text-shadow:0_1px_14px_rgba(16,29,48,.38)]">
+          <span>Scroll</span>
+          <span className="h-10 w-px bg-white/70" />
+        </div>
       </div>
     </section>
   );
