@@ -7,6 +7,85 @@
     "eyebrow": "KOREA'S CHAMPIONSHIP RING AUTHORITY",
     "title": "38 YEARS OF CHAMPIONS",
     "subtitle": "The moment of victory, shaped for eternity.",
-    "image": "home_hero.png"
+    "image": "home_hero.png",
+    "signature": {
+      "eyebrow": "SIGNATURE WORKS",
+      "title": "Victory, refined into form.",
+      "body": "In bright gallery light, DEAHO distills each team's symbols and records into a single ring.",
+      "cta": "View collection"
+    },
+    "rings": [
+      {
+        "title": "Signature 01",
+        "caption": "A championship ring shaped around the winning moment",
+        "image": "home_ring_01.png"
+      },
+      {
+        "title": "Signature 02",
+        "caption": "Team identity refined into precious metal",
+        "image": "home_ring_02.png"
+      },
+      {
+        "title": "Signature 03",
+        "caption": "Bespoke details for names, records, and dates",
+        "image": "home_ring_03.png"
+      },
+      {
+        "title": "Signature 04",
+        "caption": "Settings designed to come alive in light",
+        "image": "home_ring_04.png"
+      },
+      {
+        "title": "Signature 05",
+        "caption": "A final form completed by hand finishing",
+        "image": "home_ring_05.png"
+      }
+    ],
+    "stats": {
+      "eyebrow": "PROOF IN NUMBERS",
+      "title": "Trust, held in numbers",
+      "items": [
+        {"value": 1988, "label": "Established"},
+        {"value": 38, "label": "years of craft"},
+        {"value": 200000, "suffix": "+", "label": "rings produced"}
+      ]
+    },
+    "pillars": {
+      "eyebrow": "FOUR CHAPTERS",
+      "title": "Four stories that prove DEAHO",
+      "items": [
+        {
+          "title": "CHRONICLE",
+          "caption": "We created this market",
+          "image": "home_pillar_chronicle.png",
+          "href": "/chronicle"
+        },
+        {
+          "title": "LEGACY",
+          "caption": "That is why we can be trusted",
+          "image": "home_pillar_legacy.png",
+          "href": "/legacy"
+        },
+        {
+          "title": "SPECIALTY",
+          "caption": "That is why we are the best",
+          "image": "home_pillar_specialty.png",
+          "href": "/specialty"
+        },
+        {
+          "title": "NEWS",
+          "caption": "And we are still creating now",
+          "image": "home_pillar_news.png",
+          "href": "/news"
+        }
+      ]
+    },
+    "golf": {
+      "eyebrow": "GOLF PREVIEW",
+      "title": "FORM OF THE GAME",
+      "subtitle": "Reinterpreting the structure of golf as a singular object.",
+      "cta": "View golf",
+      "image": "golf_hero.png"
+    }
   }
 }

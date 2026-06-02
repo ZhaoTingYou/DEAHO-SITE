@@ -7,6 +7,85 @@
     "eyebrow": "KOREA'S CHAMPIONSHIP RING AUTHORITY",
     "title": "38 YEARS OF CHAMPIONS",
     "subtitle": "승리의 순간을, 영원의 형태로.",
-    "image": "home_hero.png"
+    "image": "home_hero.png",
+    "signature": {
+      "eyebrow": "SIGNATURE WORKS / 대표작",
+      "title": "승리의 형태를 가장 대호답게.",
+      "body": "밝은 전시장 빛 속에서 각 팀의 상징과 기록을 하나의 반지로 정제합니다.",
+      "cta": "Collection 보기"
+    },
+    "rings": [
+      {
+        "title": "Signature 01",
+        "caption": "우승의 순간을 담은 챔피언십 링",
+        "image": "home_ring_01.png"
+      },
+      {
+        "title": "Signature 02",
+        "caption": "팀의 상징을 금속으로 정제한 작품",
+        "image": "home_ring_02.png"
+      },
+      {
+        "title": "Signature 03",
+        "caption": "기록과 이름이 남는 맞춤 제작",
+        "image": "home_ring_03.png"
+      },
+      {
+        "title": "Signature 04",
+        "caption": "빛과 각도로 살아나는 세팅",
+        "image": "home_ring_04.png"
+      },
+      {
+        "title": "Signature 05",
+        "caption": "손끝의 마감으로 완성되는 형태",
+        "image": "home_ring_05.png"
+      }
+    ],
+    "stats": {
+      "eyebrow": "PROOF IN NUMBERS",
+      "title": "숫자로 남은 신뢰",
+      "items": [
+        {"value": 1988, "label": "설립"},
+        {"value": 38, "label": "년의 업력"},
+        {"value": 200000, "suffix": "+", "label": "제작된 반지"}
+      ]
+    },
+    "pillars": {
+      "eyebrow": "FOUR CHAPTERS",
+      "title": "대호를 증명하는 네 가지 이야기",
+      "items": [
+        {
+          "title": "CHRONICLE",
+          "caption": "우리가 시장을 만들었다",
+          "image": "home_pillar_chronicle.png",
+          "href": "/chronicle"
+        },
+        {
+          "title": "LEGACY",
+          "caption": "그래서 신뢰할 수 있다",
+          "image": "home_pillar_legacy.png",
+          "href": "/legacy"
+        },
+        {
+          "title": "SPECIALTY",
+          "caption": "그래서 우리가 최고다",
+          "image": "home_pillar_specialty.png",
+          "href": "/specialty"
+        },
+        {
+          "title": "NEWS",
+          "caption": "그리고 지금도 만들고 있다",
+          "image": "home_pillar_news.png",
+          "href": "/news"
+        }
+      ]
+    },
+    "golf": {
+      "eyebrow": "GOLF PREVIEW",
+      "title": "FORM OF THE GAME",
+      "subtitle": "골프의 구조를 하나의 오브젝트로.",
+      "cta": "Golf 보기",
+      "image": "golf_hero.png"
+    }
   }
 }

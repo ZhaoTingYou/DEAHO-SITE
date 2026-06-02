@@ -65,6 +65,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.locale-ko h1,
+.locale-ko h2,
+.locale-ko h3,
+.locale-ko p {
+  word-break: keep-all;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -171,6 +178,57 @@ select {
 @media (hover: hover) {
   .site-nav-link:hover::after {
     transform: scaleX(1);
+  }
+}
+
+.home-hero-mask {
+  background:
+    linear-gradient(90deg, rgba(248, 246, 242, .94) 0%, rgba(248, 246, 242, .68) 40%, rgba(248, 246, 242, .18) 100%),
+    linear-gradient(0deg, rgba(248, 246, 242, .78) 0%, rgba(248, 246, 242, .1) 44%, rgba(255, 255, 255, .44) 100%);
+}
+
+.home-hero-float {
+  animation: home-hero-float 7s var(--ease) infinite alternate;
+  will-change: transform;
+}
+
+.home-scroll-hint {
+  animation: home-scroll-breathe 2.4s var(--ease) infinite;
+}
+
+@keyframes home-hero-float {
+  from {
+    transform: translate3d(0, -6px, 0);
+  }
+
+  to {
+    transform: translate3d(0, 6px, 0);
+  }
+}
+
+@keyframes home-scroll-breathe {
+  0%,
+  100% {
+    opacity: .42;
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate3d(-50%, 6px, 0);
+  }
+}
+
+@media (max-width: 767px) {
+  .home-hero-mask {
+    background:
+      linear-gradient(180deg, rgba(248, 246, 242, .34) 0%, rgba(248, 246, 242, .82) 58%, rgba(248, 246, 242, .96) 100%),
+      linear-gradient(90deg, rgba(248, 246, 242, .86), rgba(255, 255, 255, .16));
+  }
+
+  .home-hero-float,
+  .home-scroll-hint {
+    animation: none;
   }
 }
 

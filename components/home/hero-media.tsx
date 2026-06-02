@@ -1,0 +1,163 @@
+'use client';
+
+import Image from 'next/image';
+import {useEffect, useRef, useState} from 'react';
+import {motion, useScroll, useTransform} from 'framer-motion';
+
+import {usePrefersReducedMotion} from '@/components/motion/reduced-motion-provider';
+import {PlaceholderImg} from '@/components/placeholder-img';
+
+type HeroMediaProps = {
+  poster: string;
+  videoSrc?: string;
+  webmSrc?: string;
+  priority?: boolean;
+  className?: string;
+};
+
+type NavigatorWithConnection = Navigator & {
+  connection?: {
+    saveData?: boolean;
+  };
+};
+
+export function HeroMedia({
+  poster,
+  videoSrc,
+  webmSrc,
+  priority = false,
+  className = ''
+}: HeroMediaProps) {
+  const frameRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [imageFailed, setImageFailed] = useState(false);
+  const [videoFailed, setVideoFailed] = useState(false);
+  const [saveData] = useState(() => {
+    if (typeof navigator === 'undefined') {
+      return false;
+    }
+
+    const connection = (navigator as NavigatorWithConnection).connection;
+    return Boolean(connection?.saveData);
+  });
+  const [coarsePointer, setCoarsePointer] = useState(() => {
+    if (typeof window === 'undefined') {
+      return false;
+    }
+
+    return window.matchMedia('(pointer: coarse)').matches;
+  });
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const {scrollYProgress} = useScroll({
+    target: frameRef,
+    offset: ['start start', 'end start']
+  });
+  const y = useTransform(scrollYProgress, [0, 1], [0, -72]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(pointer: coarse)');
+    const updatePointer = () => setCoarsePointer(mediaQuery.matches);
+    mediaQuery.addEventListener('change', updatePointer);
+
+    return () => mediaQuery.removeEventListener('change', updatePointer);
+  }, []);
+
+  const shouldRenderVideo =
+    Boolean(videoSrc || webmSrc) && !prefersReducedMotion && !saveData && !videoFailed;
+  const shouldAnimate = !prefersReducedMotion && !coarsePointer && !saveData;
+
+  useEffect(() => {
+    const video = videoRef.current;
+
+    if (!video || !shouldRenderVideo) {
+      return;
+    }
+
+    let isInView = true;
+    video.muted = true;
+
+    const play = () => {
+      video.muted = true;
+      video.play().catch(() => {});
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isInView = entry.isIntersecting;
+
+        if (isInView && !document.hidden) {
+          play();
+        } else {
+          video.pause();
+        }
+      },
+      {threshold: 0.1}
+    );
+
+    observer.observe(video);
+
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        video.pause();
+      } else if (isInView) {
+        play();
+      }
+    };
+
+    document.addEventListener('visibilitychange', onVisibilityChange);
+    play();
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+      video.pause();
+    };
+  }, [shouldRenderVideo]);
+
+  return (
+    <motion.div
+      ref={frameRef}
+      aria-hidden="true"
+      className={`overflow-hidden ${className}`}
+      style={{y: shouldAnimate ? y : 0}}
+    >
+      <div className={shouldAnimate ? 'home-hero-float h-full w-full' : 'h-full w-full'}>
+        <motion.div
+          className="relative h-full w-full"
+          initial={shouldAnimate ? {scale: 1.04} : {scale: 1}}
+          animate={{scale: 1}}
+          transition={{duration: 2, ease: [0.16, 1, 0.3, 1]}}
+        >
+          {imageFailed ? (
+            <PlaceholderImg filename={poster} aspect="h-full" />
+          ) : shouldRenderVideo ? (
+            <video
+              ref={videoRef}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster={`/images/${poster}`}
+              className="h-full w-full object-cover"
+              onError={() => setVideoFailed(true)}
+            >
+              {webmSrc ? <source src={webmSrc} type="video/webm" /> : null}
+              {videoSrc ? <source src={videoSrc} type="video/mp4" /> : null}
+            </video>
+          ) : (
+            <Image
+              src={`/images/${poster}`}
+              alt=""
+              fill
+              priority={priority}
+              sizes="100vw"
+              className="object-cover"
+              onError={() => setImageFailed(true)}
+            />
+          )}
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+}
