@@ -103,6 +103,7 @@ export function SiteHeader({locale}: SiteHeaderProps) {
   const koLocalePath = withLocale('ko', relativePath === '/' ? '/' : relativePath);
   const enLocalePath = withLocale('en', relativePath === '/' ? '/' : relativePath);
   const isHome = relativePath === '/';
+  const contactLabel = locale === 'ko' ? 'CONTACT · 문의' : 'CONTACT';
 
   const clearMegaCloseTimer = () => {
     if (closeTimerRef.current) {
@@ -292,6 +293,19 @@ export function SiteHeader({locale}: SiteHeaderProps) {
               <ExternalSiteLink label="OH" href={externalLinks.oh} className="site-nav-link no-underline" />
               <ExternalSiteLink label="VULCAN" href={externalLinks.vulcan} className="site-nav-link no-underline" />
             </div>
+
+            <span className="h-3 w-px bg-current opacity-25" aria-hidden="true" />
+
+            <Link
+              href={withLocale(locale, '/contact')}
+              className={`inline-flex min-h-9 items-center border px-4 py-2 transition duration-hover ease-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${
+                isHomeHeroTransparent
+                  ? 'border-white/70 text-white hover:bg-white hover:text-primary focus-visible:outline-white'
+                  : 'border-accent text-accent hover:bg-accent hover:text-white'
+              }`}
+            >
+              {contactLabel}
+            </Link>
           </div>
         </div>
 
@@ -561,6 +575,14 @@ export function SiteHeader({locale}: SiteHeaderProps) {
                 );
               })}
             </motion.nav>
+
+            <Link
+              href={withLocale(locale, '/contact')}
+              onClick={() => setIsMenuOpen(false)}
+              className="mt-10 flex min-h-12 items-center justify-center border border-accent px-5 py-3 text-center font-body text-sm font-semibold uppercase tracking-[0.14em] text-accent transition duration-hover ease-brand hover:bg-accent hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+            >
+              {contactLabel}
+            </Link>
 
             <div className="mt-12 border-t border-hairline pt-8">
               <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-subtext">

@@ -135,7 +135,9 @@ crawlers to the generated sitemap.
 
 ## External Links
 
-The utility-bar links are configured in `lib/config.ts`:
+The utility bar shows language switching, disabled external-site placeholders,
+and a permanent `CONTACT · 문의` entry that links to `/contact`. External-site
+links are configured in `lib/config.ts`:
 
 ```ts
 export const externalLinks = {
