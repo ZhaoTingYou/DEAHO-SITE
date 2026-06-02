@@ -9,6 +9,7 @@ import {PlaceholderImg} from '@/components/placeholder-img';
 
 type HeroMediaProps = {
   poster: string;
+  videoPoster?: string;
   videoSrc?: string;
   webmSrc?: string;
   priority?: boolean;
@@ -23,6 +24,7 @@ type NavigatorWithConnection = Navigator & {
 
 export function HeroMedia({
   poster,
+  videoPoster,
   videoSrc,
   webmSrc,
   priority = false,
@@ -64,6 +66,7 @@ export function HeroMedia({
 
   const shouldRenderVideo =
     Boolean(videoSrc || webmSrc) && !prefersReducedMotion && !saveData && !videoFailed;
+  const resolvedVideoPoster = videoPoster ? `/images/${videoPoster}` : undefined;
   const shouldAnimate = !prefersReducedMotion && !coarsePointer && !saveData;
 
   useEffect(() => {
@@ -136,7 +139,7 @@ export function HeroMedia({
               loop
               playsInline
               preload="metadata"
-              poster={`/images/${poster}`}
+              poster={resolvedVideoPoster}
               className="h-full w-full object-cover"
               onError={() => setVideoFailed(true)}
             >

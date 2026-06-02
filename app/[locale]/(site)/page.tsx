@@ -38,14 +38,18 @@ export default async function HomePage({params}: Props) {
 
 function getHomeHeroVideo() {
   const videoDir = path.join(process.cwd(), 'public', 'videos');
+  const imageDir = path.join(process.cwd(), 'public', 'images');
   const mp4Candidates = ['home_hero.mp4', 'home.mp4'];
   const webmCandidates = ['home_hero.webm', 'home.webm'];
+  const posterCandidates = ['home_video_poster.jpg', 'home_video_poster.png'];
   const mp4 = mp4Candidates.find((filename) => existsSync(path.join(videoDir, filename)));
   const webm = webmCandidates.find((filename) => existsSync(path.join(videoDir, filename)));
+  const videoPoster = posterCandidates.find((filename) => existsSync(path.join(imageDir, filename)));
 
   return {
     videoSrc: mp4 ? `/videos/${mp4}` : undefined,
-    webmSrc: webm ? `/videos/${webm}` : undefined
+    webmSrc: webm ? `/videos/${webm}` : undefined,
+    videoPoster
   };
 }
 
@@ -54,6 +58,7 @@ type HomeContentProps = {
   heroVideo: {
     videoSrc?: string;
     webmSrc?: string;
+    videoPoster?: string;
   };
   locale: Locale;
 };
@@ -66,6 +71,7 @@ function HomeContent({content, heroVideo, locale}: HomeContentProps) {
         title={content.title}
         subtitle={content.subtitle}
         poster={content.image}
+        videoPoster={heroVideo.videoPoster}
         videoSrc={heroVideo.videoSrc}
         webmSrc={heroVideo.webmSrc}
       />
