@@ -31,12 +31,14 @@ export default async function HomePage({params}: Props) {
 
 function getHomeHeroVideo() {
   const videoDir = path.join(process.cwd(), 'public', 'videos');
-  const mp4Path = path.join(videoDir, 'home_hero.mp4');
-  const webmPath = path.join(videoDir, 'home_hero.webm');
+  const mp4Candidates = ['home_hero.mp4', 'home.mp4'];
+  const webmCandidates = ['home_hero.webm', 'home.webm'];
+  const mp4 = mp4Candidates.find((filename) => existsSync(path.join(videoDir, filename)));
+  const webm = webmCandidates.find((filename) => existsSync(path.join(videoDir, filename)));
 
   return {
-    videoSrc: existsSync(mp4Path) ? '/videos/home_hero.mp4' : undefined,
-    webmSrc: existsSync(webmPath) ? '/videos/home_hero.webm' : undefined
+    videoSrc: mp4 ? `/videos/${mp4}` : undefined,
+    webmSrc: webm ? `/videos/${webm}` : undefined
   };
 }
 
