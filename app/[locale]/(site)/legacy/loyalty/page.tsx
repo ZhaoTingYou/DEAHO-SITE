@@ -1,8 +1,9 @@
 import {setRequestLocale} from 'next-intl/server';
 
-import {RoutePlaceholderPage} from '@/components/site/route-placeholder-page';
+import {LegacyDetailPage} from '@/components/legacy/legacy-detail-page';
 import type {Locale} from '@/i18n/routing';
-import {getRoutePage} from '@/lib/site-map';
+import enMessages from '@/messages/en.json';
+import koMessages from '@/messages/ko.json';
 
 type Props = {
   params: Promise<{locale: Locale}>;
@@ -11,6 +12,7 @@ type Props = {
 export default async function LoyaltyPage({params}: Props) {
   const {locale} = await params;
   setRequestLocale(locale);
+  const content = locale === 'en' ? enMessages.legacyPages.loyalty : koMessages.legacyPages.loyalty;
 
-  return <RoutePlaceholderPage locale={locale} page={getRoutePage('loyalty', locale)} />;
+  return <LegacyDetailPage locale={locale} content={content} />;
 }

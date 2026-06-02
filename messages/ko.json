@@ -152,5 +152,117 @@
       "subtitle": "시간의 기록은 곧 신뢰의 증거가 됩니다.",
       "cta": "Legacy 보기"
     }
+  },
+  "legacy": {
+    "hero": {
+      "eyebrow": "TESTIMONY IN LIGHT",
+      "title": "THE MEANING, IN FORM",
+      "lines": [
+        "우리는 금속을 만들지 않습니다.",
+        "순간을 영원으로 만듭니다.",
+        "승리의 의미를 형태로 남깁니다."
+      ],
+      "image": "legacy_hero.png"
+    },
+    "pillars": {
+      "eyebrow": "THREE PROOFS",
+      "title": "신뢰를 증명하는 세 가지 기둥",
+      "items": [
+        {
+          "eyebrow": "LOYALTY",
+          "title": "신의",
+          "body": "오래 지속되는 관계와 다시 찾는 신뢰를 밝은 기록으로 정리합니다.",
+          "image": "legacy_card_loyalty.png",
+          "href": "/legacy/loyalty",
+          "cta": "Loyalty 보기"
+        },
+        {
+          "eyebrow": "CREDIBILITY",
+          "title": "신뢰",
+          "body": "업력, 제작 수량, 협업 기록을 과장 없이 숫자로 보여줍니다.",
+          "image": "legacy_card_credibility.png",
+          "href": "/legacy/credibility",
+          "cta": "Credibility 보기"
+        },
+        {
+          "eyebrow": "ACHIEVEMENT",
+          "title": "성취",
+          "body": "인정, 수상, 화제 프로젝트를 하나의 조용한 아카이브로 남깁니다.",
+          "image": "legacy_card_achievement.png",
+          "href": "/legacy/achievement",
+          "cta": "Achievement 보기"
+        }
+      ]
+    },
+    "proof": {
+      "eyebrow": "PROOF IN NUMBERS",
+      "title": "숫자로 남은 신뢰의 무게",
+      "items": [
+        {"value": 38, "label": "년의 업력"},
+        {"value": 200000, "suffix": "+", "label": "제작된 반지"},
+        {"value": 0, "pad": 2, "label": "확인 예정 기록"}
+      ]
+    },
+    "closing": {
+      "title": "기록은 조용하지만, 오래 남습니다.",
+      "cta": "공정 보기"
+    }
+  },
+  "legacyPages": {
+    "loyalty": {
+      "hero": {
+        "eyebrow": "LEGACY · LOYALTY",
+        "title": "신의",
+        "subtitle": "오래 이어지는 관계와 다시 찾는 신뢰를 위한 장입니다.",
+        "image": "legacy_loyalty_hero.png"
+      },
+      "metrics": [
+        {"value": 0, "pad": 2, "suffix": "%", "label": "유지 고객 비율"},
+        {"value": 0, "pad": 2, "suffix": "+", "label": "재의뢰"}
+      ],
+      "statement": "확인 전 수치는 자리표시자로 유지하고, 실제 자료가 도착하면 같은 구조 안에서 교체합니다."
+    },
+    "credibility": {
+      "hero": {
+        "eyebrow": "LEGACY · CREDIBILITY",
+        "title": "신뢰",
+        "subtitle": "신뢰는 장식이 아니라 검증 가능한 숫자와 관계의 배열입니다.",
+        "image": "legacy_credibility_hero.png"
+      },
+      "metrics": [
+        {"value": 38, "label": "년의 업력"},
+        {"value": 200000, "suffix": "+", "label": "제작된 반지"},
+        {"value": 0, "pad": 2, "label": "협업"},
+        {"value": 0, "pad": 2, "suffix": "%", "label": "확인 예정 비율"}
+      ],
+      "partners": {
+        "eyebrow": "PARTNER WALL",
+        "title": "협력의 배열",
+        "body": "실제 로고가 도착하기 전까지는 밝은 자리표시자 벽으로 협력 영역을 유지합니다.",
+        "labels": ["PARTNER 01", "PARTNER 02", "PARTNER 03", "PARTNER 04", "PARTNER 05", "PARTNER 06", "PARTNER 07", "PARTNER 08", "PARTNER 09", "PARTNER 10", "PARTNER 11", "PARTNER 12"]
+      }
+    },
+    "achievement": {
+      "hero": {
+        "eyebrow": "LEGACY · ACHIEVEMENT",
+        "title": "성취",
+        "subtitle": "인정과 화제의 순간을 빛이 스며든 기록으로 남깁니다.",
+        "image": "legacy_achievement_hero.png"
+      },
+      "metrics": [
+        {"value": 0, "pad": 2, "label": "인정 기록"},
+        {"value": 0, "pad": 2, "label": "화제 프로젝트"}
+      ],
+      "gallery": {
+        "eyebrow": "RECOGNITION ARCHIVE",
+        "title": "기록으로 남은 장면",
+        "items": [
+          {"title": "Achievement 01", "image": "legacy_achievement_01.png"},
+          {"title": "Achievement 02", "image": "legacy_achievement_02.png"},
+          {"title": "Achievement 03", "image": "legacy_achievement_03.png"},
+          {"title": "Achievement 04", "image": "legacy_achievement_04.png"}
+        ]
+      }
+    }
   }
 }

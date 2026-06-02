@@ -152,5 +152,117 @@
       "subtitle": "A record of time becomes evidence of trust.",
       "cta": "View legacy"
     }
+  },
+  "legacy": {
+    "hero": {
+      "eyebrow": "TESTIMONY IN LIGHT",
+      "title": "THE MEANING, IN FORM",
+      "lines": [
+        "We do not make metal.",
+        "We make moments permanent.",
+        "We leave the meaning of victory in form."
+      ],
+      "image": "legacy_hero.png"
+    },
+    "pillars": {
+      "eyebrow": "THREE PROOFS",
+      "title": "Three pillars that make trust visible",
+      "items": [
+        {
+          "eyebrow": "LOYALTY",
+          "title": "Loyalty",
+          "body": "Enduring relationships and returning trust are arranged as a quiet record.",
+          "image": "legacy_card_loyalty.png",
+          "href": "/legacy/loyalty",
+          "cta": "View loyalty"
+        },
+        {
+          "eyebrow": "CREDIBILITY",
+          "title": "Credibility",
+          "body": "Years, production volume, and collaboration records are shown without exaggeration.",
+          "image": "legacy_card_credibility.png",
+          "href": "/legacy/credibility",
+          "cta": "View credibility"
+        },
+        {
+          "eyebrow": "ACHIEVEMENT",
+          "title": "Achievement",
+          "body": "Recognition, awards, and notable projects become one quiet archive.",
+          "image": "legacy_card_achievement.png",
+          "href": "/legacy/achievement",
+          "cta": "View achievement"
+        }
+      ]
+    },
+    "proof": {
+      "eyebrow": "PROOF IN NUMBERS",
+      "title": "The weight of trust, held in numbers",
+      "items": [
+        {"value": 38, "label": "years of craft"},
+        {"value": 200000, "suffix": "+", "label": "rings produced"},
+        {"value": 0, "pad": 2, "label": "records pending"}
+      ]
+    },
+    "closing": {
+      "title": "A record is quiet, but it lasts.",
+      "cta": "View specialty"
+    }
+  },
+  "legacyPages": {
+    "loyalty": {
+      "hero": {
+        "eyebrow": "LEGACY · LOYALTY",
+        "title": "LOYALTY",
+        "subtitle": "A chapter for relationships that endure and clients who return.",
+        "image": "legacy_loyalty_hero.png"
+      },
+      "metrics": [
+        {"value": 0, "pad": 2, "suffix": "%", "label": "retention ratio"},
+        {"value": 0, "pad": 2, "suffix": "+", "label": "repeat requests"}
+      ],
+      "statement": "Unconfirmed numbers remain as placeholders and can be replaced in the same structure when verified material arrives."
+    },
+    "credibility": {
+      "hero": {
+        "eyebrow": "LEGACY · CREDIBILITY",
+        "title": "CREDIBILITY",
+        "subtitle": "Trust is not decoration. It is an arrangement of verifiable numbers and relationships.",
+        "image": "legacy_credibility_hero.png"
+      },
+      "metrics": [
+        {"value": 38, "label": "years of craft"},
+        {"value": 200000, "suffix": "+", "label": "rings produced"},
+        {"value": 0, "pad": 2, "label": "collaborations"},
+        {"value": 0, "pad": 2, "suffix": "%", "label": "pending ratio"}
+      ],
+      "partners": {
+        "eyebrow": "PARTNER WALL",
+        "title": "An arrangement of collaboration",
+        "body": "Until verified logos arrive, this bright placeholder wall preserves the collaboration field.",
+        "labels": ["PARTNER 01", "PARTNER 02", "PARTNER 03", "PARTNER 04", "PARTNER 05", "PARTNER 06", "PARTNER 07", "PARTNER 08", "PARTNER 09", "PARTNER 10", "PARTNER 11", "PARTNER 12"]
+      }
+    },
+    "achievement": {
+      "hero": {
+        "eyebrow": "LEGACY · ACHIEVEMENT",
+        "title": "ACHIEVEMENT",
+        "subtitle": "Recognition and notable moments are kept as records filled with light.",
+        "image": "legacy_achievement_hero.png"
+      },
+      "metrics": [
+        {"value": 0, "pad": 2, "label": "recognition records"},
+        {"value": 0, "pad": 2, "label": "notable projects"}
+      ],
+      "gallery": {
+        "eyebrow": "RECOGNITION ARCHIVE",
+        "title": "Scenes kept as records",
+        "items": [
+          {"title": "Achievement 01", "image": "legacy_achievement_01.png"},
+          {"title": "Achievement 02", "image": "legacy_achievement_02.png"},
+          {"title": "Achievement 03", "image": "legacy_achievement_03.png"},
+          {"title": "Achievement 04", "image": "legacy_achievement_04.png"}
+        ]
+      }
+    }
   }
 }
