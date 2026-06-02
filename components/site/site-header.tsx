@@ -298,13 +298,10 @@ export function SiteHeader({locale}: SiteHeaderProps) {
 
             <Link
               href={withLocale(locale, '/contact')}
-              className={`inline-flex min-h-9 items-center border px-4 py-2 transition duration-hover ease-brand focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${
-                isHomeHeroTransparent
-                  ? 'border-white/70 text-white hover:bg-white hover:text-primary focus-visible:outline-white'
-                  : 'border-accent text-accent hover:bg-accent hover:text-white'
-              }`}
+              className={`consult-cta ${isHomeHeroTransparent ? 'consult-cta--light' : 'consult-cta--accent'}`}
             >
-              {contactLabel}
+              <span className="consult-cta__label">{contactLabel}</span>
+              <span className="consult-cta__mark" aria-hidden="true" />
             </Link>
           </div>
         </div>
@@ -579,9 +576,10 @@ export function SiteHeader({locale}: SiteHeaderProps) {
             <Link
               href={withLocale(locale, '/contact')}
               onClick={() => setIsMenuOpen(false)}
-              className="mt-10 flex min-h-12 items-center justify-center border border-accent px-5 py-3 text-center font-body text-sm font-semibold uppercase tracking-[0.14em] text-accent transition duration-hover ease-brand hover:bg-accent hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+              className="consult-cta consult-cta--accent consult-cta--large mt-10 flex w-full"
             >
-              {contactLabel}
+              <span className="consult-cta__label">{contactLabel}</span>
+              <span className="consult-cta__mark" aria-hidden="true" />
             </Link>
 
             <div className="mt-12 border-t border-hairline pt-8">

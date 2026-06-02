@@ -130,9 +130,10 @@ export function GolfConfigurator({assets, content, locale}: GolfConfiguratorProp
             </div>
             <Link
               href={inquiryHref}
-              className="inline-flex min-h-12 items-center border border-accent bg-accent px-6 py-3 font-body text-sm font-semibold uppercase tracking-[0.14em] text-white transition duration-hover ease-brand hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+              className="consult-cta consult-cta--accent consult-cta--large w-fit"
             >
-              {content.labels.inquiryCta}
+              <span className="consult-cta__label">{content.labels.inquiryCta}</span>
+              <span className="consult-cta__mark" aria-hidden="true" />
             </Link>
           </Reveal>
 
