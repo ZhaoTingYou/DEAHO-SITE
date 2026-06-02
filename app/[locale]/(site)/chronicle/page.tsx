@@ -1,3 +1,4 @@
+import type {Metadata} from 'next';
 import {setRequestLocale} from 'next-intl/server';
 import Link from 'next/link';
 
@@ -6,6 +7,7 @@ import {Reveal} from '@/components/motion/reveal';
 import {SafeImage} from '@/components/safe-image';
 import {SectionIntro} from '@/components/section-intro';
 import type {Locale} from '@/i18n/routing';
+import {getPageMetadata} from '@/lib/seo';
 import {withLocale} from '@/lib/site-map';
 import enMessages from '@/messages/en.json';
 import koMessages from '@/messages/ko.json';
@@ -13,6 +15,11 @@ import koMessages from '@/messages/ko.json';
 type Props = {
   params: Promise<{locale: Locale}>;
 };
+
+export async function generateMetadata({params}: Props): Promise<Metadata> {
+  const {locale} = await params;
+  return getPageMetadata(locale, 'chronicle');
+}
 
 export default async function ChroniclePage({params}: Props) {
   const {locale} = await params;

@@ -1,3 +1,4 @@
+import type {Metadata} from 'next';
 import {setRequestLocale} from 'next-intl/server';
 
 import {
@@ -6,12 +7,18 @@ import {
 } from '@/components/golf/golf-configurator';
 import type {Locale} from '@/i18n/routing';
 import {imageExists} from '@/lib/image-exists';
+import {getPageMetadata} from '@/lib/seo';
 import enMessages from '@/messages/en.json';
 import koMessages from '@/messages/ko.json';
 
 type Props = {
   params: Promise<{locale: Locale}>;
 };
+
+export async function generateMetadata({params}: Props): Promise<Metadata> {
+  const {locale} = await params;
+  return getPageMetadata(locale, 'golf');
+}
 
 export default async function GolfPage({params}: Props) {
   const {locale} = await params;

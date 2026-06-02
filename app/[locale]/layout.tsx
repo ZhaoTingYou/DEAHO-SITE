@@ -7,6 +7,7 @@ import '@/app/globals.css';
 import {LenisProvider} from '@/components/motion/lenis-provider';
 import {ReducedMotionProvider} from '@/components/motion/reduced-motion-provider';
 import {routing, type Locale} from '@/i18n/routing';
+import {metadataBase} from '@/lib/seo';
 
 type Props = {
   children: React.ReactNode;
@@ -27,8 +28,16 @@ export async function generateMetadata({params}: Omit<Props, 'children'>): Promi
   const t = await getTranslations({locale, namespace: 'metadata'});
 
   return {
+    metadataBase,
     title: t('title'),
     description: t('description'),
+    alternates: {
+      languages: {
+        ko: '/ko',
+        en: '/en',
+        'x-default': '/'
+      }
+    },
     icons: {
       icon: '/favicon.svg'
     }

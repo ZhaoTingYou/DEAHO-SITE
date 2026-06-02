@@ -1,3 +1,4 @@
+import type {Metadata} from 'next';
 import Link from 'next/link';
 import {setRequestLocale} from 'next-intl/server';
 
@@ -8,6 +9,7 @@ import {SpecialtyDetailTriplet} from '@/components/specialty/specialty-detail-tr
 import {SpecialtyProcess} from '@/components/specialty/specialty-process';
 import type {Locale} from '@/i18n/routing';
 import {imageExists} from '@/lib/image-exists';
+import {getPageMetadata} from '@/lib/seo';
 import {withLocale} from '@/lib/site-map';
 import enMessages from '@/messages/en.json';
 import koMessages from '@/messages/ko.json';
@@ -15,6 +17,11 @@ import koMessages from '@/messages/ko.json';
 type Props = {
   params: Promise<{locale: Locale}>;
 };
+
+export async function generateMetadata({params}: Props): Promise<Metadata> {
+  const {locale} = await params;
+  return getPageMetadata(locale, 'technique');
+}
 
 export default async function TechniquePage({params}: Props) {
   const {locale} = await params;

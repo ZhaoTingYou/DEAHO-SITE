@@ -1,3 +1,4 @@
+import type {Metadata} from 'next';
 import {setRequestLocale} from 'next-intl/server';
 
 import {Reveal} from '@/components/motion/reveal';
@@ -6,12 +7,18 @@ import {SectionIntro} from '@/components/section-intro';
 import {SpecialtyCollectionGallery} from '@/components/specialty/specialty-collection-gallery';
 import type {Locale} from '@/i18n/routing';
 import {imageExists} from '@/lib/image-exists';
+import {getPageMetadata} from '@/lib/seo';
 import enMessages from '@/messages/en.json';
 import koMessages from '@/messages/ko.json';
 
 type Props = {
   params: Promise<{locale: Locale}>;
 };
+
+export async function generateMetadata({params}: Props): Promise<Metadata> {
+  const {locale} = await params;
+  return getPageMetadata(locale, 'collection');
+}
 
 export default async function CollectionPage({params}: Props) {
   const {locale} = await params;
