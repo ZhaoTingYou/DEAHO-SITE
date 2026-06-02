@@ -81,6 +81,8 @@ export function SiteHeader({locale}: SiteHeaderProps) {
   const [atTop, setAtTop] = useState(true);
   const [overHomeHero, setOverHomeHero] = useState(true);
   const [isHidden, setIsHidden] = useState(false);
+  const [isHeaderHovered, setIsHeaderHovered] = useState(false);
+  const [hasHeaderFocus, setHasHeaderFocus] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<MegaMenuKey | null>(null);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
@@ -213,8 +215,14 @@ export function SiteHeader({locale}: SiteHeaderProps) {
 
   const currentMegaItem = openMenu ? navItems.find((item) => item.label === openMenu) : undefined;
   const currentMegaDetails = openMenu ? megaMenuDetails[openMenu] : null;
-  const isHomeHeroTransparent = isHome && (overHomeHero || atTop) && !isMenuOpen && openMenu === null;
-  const isSolid = !isHomeHeroTransparent && (!atTop || isMenuOpen || openMenu !== null);
+  const isHeaderInteractive = isHeaderHovered || hasHeaderFocus;
+  const isHomeHeroTransparent =
+    isHome &&
+    (overHomeHero || atTop) &&
+    !isMenuOpen &&
+    openMenu === null &&
+    !isHeaderInteractive;
+  const isSolid = !isHomeHeroTransparent && (!atTop || isMenuOpen || openMenu !== null || isHeaderInteractive);
   const navVariants = prefersReducedMotion ? {hidden: {}, visible: {}} : navListVariants;
   const itemVariants = prefersReducedMotion ? instantItemVariants : navItemVariants;
 
@@ -233,8 +241,12 @@ export function SiteHeader({locale}: SiteHeaderProps) {
           return;
         }
 
+        setHasHeaderFocus(false);
         scheduleMegaClose();
       }}
+      onFocus={() => setHasHeaderFocus(true)}
+      onMouseEnter={() => setIsHeaderHovered(true)}
+      onMouseLeave={() => setIsHeaderHovered(false)}
       className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter,color] duration-300 ease-brand ${
         isSolid
           ? 'border-b border-hairline bg-bg/95 text-primary shadow-[0_18px_60px_rgba(16,29,48,.08)] backdrop-blur-md [text-shadow:none]'
