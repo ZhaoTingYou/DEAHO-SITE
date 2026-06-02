@@ -145,6 +145,7 @@ export default async function NewsPage({params}: Props) {
               filters={content.grid.filters}
               cards={cards}
               filterLabel={locale === 'ko' ? '뉴스 필터' : 'News filters'}
+              locale={locale}
             />
           </Reveal>
         </div>

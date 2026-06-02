@@ -15,7 +15,9 @@ type PageKey =
   | 'technique'
   | 'collection'
   | 'news'
-  | 'golf';
+  | 'golf'
+  | 'contact'
+  | 'golfInquiry';
 
 type PageSeo = {
   path: string;
@@ -32,29 +34,39 @@ export const metadataBase = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://
 
 export function getPageMetadata(locale: Locale, pageKey: PageKey): Metadata {
   const page = getPageSeo(locale, pageKey);
-  const title = `${page.title} | DEAHO`;
+  return getDetailMetadata(locale, page.path, page.title, page.description);
+}
+
+export function getDetailMetadata(
+  locale: Locale,
+  path: string,
+  pageTitle: string,
+  description: string,
+  image = '/images/home_hero.png'
+): Metadata {
+  const title = `${pageTitle} | DEAHO`;
 
   return {
     title,
-    description: page.description,
+    description,
     alternates: {
-      canonical: withLocale(locale, page.path),
+      canonical: withLocale(locale, path),
       languages: {
-        ko: withLocale('ko', page.path),
-        en: withLocale('en', page.path),
-        'x-default': page.path
+        ko: withLocale('ko', path),
+        en: withLocale('en', path),
+        'x-default': path
       }
     },
     openGraph: {
       title,
-      description: page.description,
-      url: withLocale(locale, page.path),
+      description,
+      url: withLocale(locale, path),
       siteName: 'DEAHO',
       locale: locale === 'ko' ? 'ko_KR' : 'en_US',
       type: 'website',
       images: [
         {
-          url: '/images/home_hero.png',
+          url: image,
           alt: 'DEAHO'
         }
       ]
@@ -62,8 +74,8 @@ export function getPageMetadata(locale: Locale, pageKey: PageKey): Metadata {
     twitter: {
       card: 'summary_large_image',
       title,
-      description: page.description,
-      images: ['/images/home_hero.png']
+      description,
+      images: [image]
     }
   };
 }
@@ -137,6 +149,24 @@ function getPageSeo(locale: Locale, pageKey: PageKey): PageSeo {
         path: '/golf',
         title: messages.golf.hero.titleLines.join(' '),
         description: messages.golf.hero.subtitle
+      };
+    case 'contact':
+      return {
+        path: '/contact',
+        title: locale === 'ko' ? 'CONTACT · 문의' : 'CONTACT',
+        description:
+          locale === 'ko'
+            ? '승리의 의미를 형태로 남기는 상담을 시작합니다.'
+            : 'Start a consultation to shape the meaning of victory.'
+      };
+    case 'golfInquiry':
+      return {
+        path: '/golf/inquiry',
+        title: locale === 'ko' ? 'GOLF INQUIRY' : 'GOLF INQUIRY',
+        description:
+          locale === 'ko'
+            ? '선택한 골프 브레이슬릿 구성을 바탕으로 상담을 요청합니다.'
+            : 'Request a consultation based on your selected golf bracelet configuration.'
       };
   }
 }

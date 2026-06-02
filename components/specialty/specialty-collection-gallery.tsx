@@ -1,8 +1,12 @@
 'use client';
 
 import Image from 'next/image';
-import {useEffect, useMemo, useRef, useState} from 'react';
+import Link from 'next/link';
+import {useMemo, useState} from 'react';
 import {AnimatePresence, LayoutGroup, motion} from 'framer-motion';
+
+import {EmptyState} from '@/components/empty-state';
+import type {Locale} from '@/i18n/routing';
 
 export type SpecialtyCollectionFilter = {
   id: string;
@@ -22,41 +26,32 @@ export type SpecialtyCollectionItem = {
 type SpecialtyCollectionGalleryProps = {
   filters: SpecialtyCollectionFilter[];
   items: SpecialtyCollectionItem[];
-  closeLabel: string;
   filterLabel: string;
+  locale: Locale;
 };
 
-export function SpecialtyCollectionGallery({filters, items, closeLabel, filterLabel}: SpecialtyCollectionGalleryProps) {
+const emptyCopy = {
+  ko: {
+    title: '등록된 작품이 없습니다',
+    body: '선택한 분류의 작품 자료가 준비되면 이곳에 추가됩니다.'
+  },
+  en: {
+    title: 'No works in this category',
+    body: 'Works in the selected category will appear here once the archive is ready.'
+  }
+};
+
+export function SpecialtyCollectionGallery({
+  filters,
+  items,
+  filterLabel,
+  locale
+}: SpecialtyCollectionGalleryProps) {
   const [activeFilter, setActiveFilter] = useState(filters[0]?.id ?? 'all');
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const visibleItems = useMemo(
     () => (activeFilter === 'all' ? items : items.filter((item) => item.category === activeFilter)),
     [activeFilter, items]
   );
-  const selectedItem = items.find((item) => item.id === selectedId) ?? null;
-
-  useEffect(() => {
-    if (!selectedItem) {
-      return;
-    }
-
-    const previousOverflow = document.body.style.overflow;
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setSelectedId(null);
-      }
-    };
-
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', handleKeyDown);
-    closeButtonRef.current?.focus();
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [selectedItem]);
 
   return (
     <LayoutGroup>
@@ -83,97 +78,47 @@ export function SpecialtyCollectionGallery({filters, items, closeLabel, filterLa
           })}
         </div>
 
-        <motion.div layout className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
-          <AnimatePresence mode="popLayout">
-            {visibleItems.map((item, index) => (
-              <motion.button
-                layout
-                key={item.id}
-                type="button"
-                onClick={() => setSelectedId(item.id)}
-                initial={{opacity: 0, y: 24}}
-                animate={{opacity: 1, y: 0}}
-                exit={{opacity: 0, scale: 0.96}}
-                transition={{duration: 0.38, delay: Math.min(index * 0.035, 0.16), ease: [0.16, 1, 0.3, 1]}}
-                className="group min-h-11 bg-white p-3 text-left shadow-[0_16px_52px_rgba(16,29,48,0.06)] transition duration-hover ease-brand hover:-translate-y-1 hover:shadow-[0_28px_80px_rgba(16,29,48,0.10)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
-                aria-label={`${item.title}: ${item.caption}`}
-              >
-                <motion.div layoutId={`collection-image-${item.id}`} className="hover-zoom">
-                  <div className="hover-zoom-media">
-                    <CollectionImage item={item} />
-                  </div>
-                </motion.div>
-                <div className="space-y-2 px-1 py-4">
-                  <p className="font-body text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
-                    {item.categoryLabel}
-                  </p>
-                  <h2 className="font-heading text-[clamp(24px,4vw,34px)] font-semibold leading-tight text-primary">
-                    {item.title}
-                  </h2>
-                  <p className="hidden font-body text-sm leading-6 text-text md:block">{item.caption}</p>
-                </div>
-              </motion.button>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-      </div>
-
-      <AnimatePresence>
-        {selectedItem ? (
-          <motion.div
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-bg/90 px-5 py-8 backdrop-blur-sm"
-            initial={{opacity: 0}}
-            animate={{opacity: 1}}
-            exit={{opacity: 0}}
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={`collection-dialog-title-${selectedItem.id}`}
-            aria-describedby={`collection-dialog-caption-${selectedItem.id}`}
-            onClick={() => setSelectedId(null)}
-          >
-            <motion.div
-              className="relative grid max-h-[88dvh] w-full max-w-5xl overflow-auto bg-white p-4 shadow-[0_34px_120px_rgba(16,29,48,0.16)] md:grid-cols-[1.15fr_0.85fr] md:gap-8 md:p-6"
-              initial={{y: 24}}
-              animate={{y: 0}}
-              exit={{y: 24}}
-              transition={{duration: 0.35, ease: [0.16, 1, 0.3, 1]}}
-              onClick={(event) => event.stopPropagation()}
-            >
-              <motion.div layoutId={`collection-image-${selectedItem.id}`}>
-                <CollectionImage item={selectedItem} />
-              </motion.div>
-              <div className="flex flex-col justify-between gap-10 px-1 py-6 md:px-0">
-                <div className="space-y-5">
-                  <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-accent">
-                    {selectedItem.categoryLabel}
-                  </p>
-                  <h2
-                    id={`collection-dialog-title-${selectedItem.id}`}
-                    className="font-heading text-[clamp(42px,8vw,76px)] font-semibold leading-none text-primary"
-                  >
-                    {selectedItem.title}
-                  </h2>
-                  <p
-                    id={`collection-dialog-caption-${selectedItem.id}`}
-                    className="font-body text-[17px] leading-8 text-text"
-                  >
-                    {selectedItem.caption}
-                  </p>
-                </div>
-                <button
-                  ref={closeButtonRef}
-                  type="button"
-                  onClick={() => setSelectedId(null)}
-                  aria-label={closeLabel}
-                  className="min-h-11 w-fit border border-primary px-5 py-3 font-body text-sm font-semibold uppercase tracking-[0.14em] text-primary transition duration-hover ease-brand hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+        {visibleItems.length === 0 ? (
+          <EmptyState title={emptyCopy[locale].title} body={emptyCopy[locale].body} />
+        ) : (
+          <motion.div layout className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
+            <AnimatePresence mode="popLayout">
+              {visibleItems.map((item, index) => (
+                <motion.article
+                  layout
+                  key={item.id}
+                  initial={{opacity: 0, y: 24}}
+                  animate={{opacity: 1, y: 0}}
+                  exit={{opacity: 0, scale: 0.96}}
+                  transition={{duration: 0.38, delay: Math.min(index * 0.035, 0.16), ease: [0.16, 1, 0.3, 1]}}
+                  className="bg-white p-3 shadow-[0_16px_52px_rgba(16,29,48,0.06)] transition duration-hover ease-brand hover:-translate-y-1 hover:shadow-[0_28px_80px_rgba(16,29,48,0.10)]"
                 >
-                  {closeLabel}
-                </button>
-              </div>
-            </motion.div>
+                  <Link
+                    href={`/${locale}/specialty/collection/${item.id}`}
+                    className="group block min-h-11 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                    aria-label={`${item.title}: ${item.caption}`}
+                  >
+                    <div className="hover-zoom">
+                      <div className="hover-zoom-media">
+                        <CollectionImage item={item} />
+                      </div>
+                    </div>
+                    <div className="space-y-2 px-1 py-4">
+                      <p className="font-body text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
+                        {item.categoryLabel}
+                      </p>
+                      <h2 className="font-heading text-[clamp(24px,4vw,34px)] font-semibold leading-tight text-primary">
+                        {item.title}
+                      </h2>
+                      <p className="hidden font-body text-sm leading-6 text-text md:block">{item.caption}</p>
+                    </div>
+                  </Link>
+                </motion.article>
+              ))}
+            </AnimatePresence>
           </motion.div>
-        ) : null}
-      </AnimatePresence>
+        )}
+      </div>
     </LayoutGroup>
   );
 }

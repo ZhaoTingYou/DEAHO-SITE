@@ -1,10 +1,11 @@
 'use client';
 
 import Image from 'next/image';
-import {motion, useScroll, useSpring, useTransform, type MotionValue} from 'framer-motion';
+import {AnimatePresence, motion, useScroll, useSpring, useTransform, type MotionValue} from 'framer-motion';
 import {useRef, useState} from 'react';
 
 import {PlaceholderImg} from '@/components/placeholder-img';
+import type {Locale} from '@/i18n/routing';
 
 type ChronicleMilestone = {
   year: string;
@@ -17,9 +18,31 @@ type ChronicleMilestone = {
 
 type ChronicleTimelineProps = {
   items: ChronicleMilestone[];
+  locale: Locale;
 };
 
-export function ChronicleTimeline({items}: ChronicleTimelineProps) {
+const labels = {
+  ko: {
+    open: '이 해의 의미 보기',
+    close: '접기',
+    title: 'ARCHIVE NOTE',
+    next: '다음 기록은 시간축을 따라 이어집니다.',
+    previousYear: '이전 연도',
+    nextYear: '다음 연도'
+  },
+  en: {
+    open: 'Open archive note',
+    close: 'Close',
+    title: 'ARCHIVE NOTE',
+    next: 'The next record continues along the timeline.',
+    previousYear: 'Previous year',
+    nextYear: 'Next year'
+  }
+};
+
+const detailImages = ['chronicle_detail_01.png', 'chronicle_detail_02.png', 'chronicle_detail_03.png'];
+
+export function ChronicleTimeline({items, locale}: ChronicleTimelineProps) {
   const timelineRef = useRef<HTMLElement>(null);
   const {scrollYProgress} = useScroll({
     target: timelineRef,
@@ -56,6 +79,10 @@ export function ChronicleTimeline({items}: ChronicleTimelineProps) {
             index={index}
             total={items.length}
             progress={smoothProgress}
+            locale={locale}
+            previousYear={items[index - 1]?.year}
+            nextYear={items[index + 1]?.year}
+            detailImage={detailImages[index % detailImages.length]}
           />
         ))}
       </div>
@@ -67,14 +94,25 @@ function MilestoneEntry({
   item,
   index,
   total,
-  progress
+  progress,
+  locale,
+  previousYear,
+  nextYear,
+  detailImage
 }: {
   item: ChronicleMilestone;
   index: number;
   total: number;
   progress: MotionValue<number>;
+  locale: Locale;
+  previousYear?: string;
+  nextYear?: string;
+  detailImage: string;
 }) {
+  const [isExpanded, setIsExpanded] = useState(false);
   const isLeft = index % 2 === 1;
+  const text = labels[locale];
+  const panelId = `chronicle-note-${index}`;
   const t = total === 1 ? 1 : index / (total - 1);
   const nodeScale = useTransform(progress, [Math.max(0, t - 0.035), t], [0.45, 1]);
   const nodeOpacity = useTransform(progress, [Math.max(0, t - 0.04), t], [0.25, 1]);
@@ -116,6 +154,52 @@ function MilestoneEntry({
               {item.title}
             </h3>
             <p className="font-body text-[15px] leading-7 text-text">{item.body}</p>
+            <button
+              type="button"
+              aria-expanded={isExpanded}
+              aria-controls={panelId}
+              onClick={() => setIsExpanded((value) => !value)}
+              className="link-sweep font-body text-sm font-semibold uppercase tracking-[0.12em]"
+            >
+              {isExpanded ? text.close : text.open}
+            </button>
+            <AnimatePresence>
+              {isExpanded ? (
+                <motion.div
+                  id={panelId}
+                  initial={{opacity: 0, height: 0}}
+                  animate={{opacity: 1, height: 'auto'}}
+                  exit={{opacity: 0, height: 0}}
+                  transition={{duration: 0.32, ease: [0.16, 1, 0.3, 1]}}
+                  className="overflow-hidden"
+                >
+                  <div className="mt-2 border-l-2 border-accent bg-bg px-4 py-4">
+                    <div className="grid gap-5 md:grid-cols-[0.92fr_1.08fr] md:items-start">
+                      <TimelineImage filename={detailImage} alt={`${item.title} ${text.title}`} />
+                      <div>
+                        <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+                          {text.title} · {item.year}
+                        </p>
+                        <p className="mt-3 font-body text-[15px] leading-7 text-text">{item.body}</p>
+                        <p className="mt-3 font-body text-[13px] leading-6 text-subtext">{text.next}</p>
+                        <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 border-t border-hairline pt-4 font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-subtext">
+                          {previousYear ? (
+                            <span>
+                              ← {text.previousYear} {previousYear}
+                            </span>
+                          ) : null}
+                          {nextYear ? (
+                            <span>
+                              {text.nextYear} {nextYear} →
+                            </span>
+                          ) : null}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ) : null}
+            </AnimatePresence>
           </div>
         </motion.div>
       </div>

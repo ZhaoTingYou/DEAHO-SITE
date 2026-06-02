@@ -1,11 +1,13 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import {useMemo, useState} from 'react';
 import {AnimatePresence, motion} from 'framer-motion';
 
 import {usePrefersReducedMotion} from '@/components/motion/reduced-motion-provider';
 import {Reveal} from '@/components/motion/reveal';
+import type {Locale} from '@/i18n/routing';
 
 type GolfImageRef = {
   image: string;
@@ -70,15 +72,17 @@ export type GolfConfiguratorContent = {
     selectedShaft: string;
     headGroup: string;
     shaftGroup: string;
+    inquiryCta: string;
   };
 };
 
 type GolfConfiguratorProps = {
   assets: Record<string, boolean>;
   content: GolfConfiguratorContent;
+  locale: Locale;
 };
 
-export function GolfConfigurator({assets, content}: GolfConfiguratorProps) {
+export function GolfConfigurator({assets, content, locale}: GolfConfiguratorProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const [selectedHeadId, setSelectedHeadId] = useState(content.heads.items[0]?.id ?? '');
   const [selectedShaftId, setSelectedShaftId] = useState(content.shafts.items[0]?.id ?? '');
@@ -95,6 +99,8 @@ export function GolfConfigurator({assets, content}: GolfConfiguratorProps) {
   );
   const heroImage = selectedShaft?.image ?? content.hero.image;
   const heroAlt = `${selectedShaft?.label ?? content.hero.specLabel} ${content.hero.subtitle}`;
+  const engravingSample = 'JUDY KIM 2026.05.03';
+  const inquiryHref = `/${locale}/golf/inquiry?head=${selectedHead?.id ?? ''}&shaft=${selectedShaft?.id ?? ''}&engraving=${encodeURIComponent(engravingSample)}`;
 
   return (
     <main className="bg-bg text-text">
@@ -122,6 +128,12 @@ export function GolfConfigurator({assets, content}: GolfConfiguratorProps) {
               <span className="mt-3">{content.labels.selectedShaft}</span>
               <span className="mt-3 text-right text-primary">{selectedShaft?.label}</span>
             </div>
+            <Link
+              href={inquiryHref}
+              className="inline-flex min-h-12 items-center border border-accent bg-accent px-6 py-3 font-body text-sm font-semibold uppercase tracking-[0.14em] text-white transition duration-hover ease-brand hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+            >
+              {content.labels.inquiryCta}
+            </Link>
           </Reveal>
 
           <div className="relative min-h-[440px] lg:min-h-[650px]">

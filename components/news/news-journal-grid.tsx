@@ -1,8 +1,12 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import {useMemo, useState} from 'react';
 import {AnimatePresence, LayoutGroup, motion} from 'framer-motion';
+
+import {EmptyState} from '@/components/empty-state';
+import type {Locale} from '@/i18n/routing';
 
 export type NewsFilter = {
   id: string;
@@ -23,9 +27,21 @@ type NewsJournalGridProps = {
   filters: NewsFilter[];
   cards: NewsCard[];
   filterLabel: string;
+  locale: Locale;
 };
 
-export function NewsJournalGrid({filters, cards, filterLabel}: NewsJournalGridProps) {
+const emptyCopy = {
+  ko: {
+    title: '아직 등록된 소식이 없습니다',
+    body: '검증된 자료가 준비되면 이 지면에 새로운 소식이 추가됩니다.'
+  },
+  en: {
+    title: 'No stories yet',
+    body: 'New verified journal entries will appear here when they are ready.'
+  }
+};
+
+export function NewsJournalGrid({filters, cards, filterLabel, locale}: NewsJournalGridProps) {
   const [activeFilter, setActiveFilter] = useState(filters[0]?.id ?? 'all');
   const visibleCards = useMemo(
     () => (activeFilter === 'all' ? cards : cards.filter((card) => card.category === activeFilter)),
@@ -67,47 +83,57 @@ export function NewsJournalGrid({filters, cards, filterLabel}: NewsJournalGridPr
           })}
         </div>
 
-        <motion.div layout className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          <AnimatePresence mode="popLayout">
-            {visibleCards.map((card, index) => (
-              <motion.article
-                layout
-                key={card.id}
-                initial={{opacity: 0, y: 26}}
-                animate={{opacity: 1, y: 0}}
-                exit={{opacity: 0, scale: 0.97}}
-                transition={{
-                  duration: 0.38,
-                  delay: Math.min(index * 0.04, 0.18),
-                  ease: [0.16, 1, 0.3, 1]
-                }}
-                className="group bg-white p-3 shadow-[0_16px_48px_rgba(16,29,48,0.055)] transition duration-hover ease-brand hover:-translate-y-1.5 hover:shadow-[0_30px_86px_rgba(16,29,48,0.11)]"
-              >
-                <div className="hover-zoom">
-                  <div className="hover-zoom-media">
-                    <NewsCardImage card={card} />
-                  </div>
-                </div>
-                <div className="space-y-4 px-1 py-5">
-                  <motion.div
-                    initial={{opacity: 0, y: 8}}
-                    whileInView={{opacity: 1, y: 0}}
-                    viewport={{once: true, amount: 0.4}}
-                    transition={{duration: 0.36, delay: 0.15, ease: [0.16, 1, 0.3, 1]}}
-                    className="flex flex-wrap items-center gap-x-3 gap-y-1 font-body text-[11px] font-semibold uppercase tracking-[0.16em] text-subtext"
+        {visibleCards.length === 0 ? (
+          <EmptyState title={emptyCopy[locale].title} body={emptyCopy[locale].body} />
+        ) : (
+          <motion.div layout className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <AnimatePresence mode="popLayout">
+              {visibleCards.map((card, index) => (
+                <motion.article
+                  layout
+                  key={card.id}
+                  initial={{opacity: 0, y: 26}}
+                  animate={{opacity: 1, y: 0}}
+                  exit={{opacity: 0, scale: 0.97}}
+                  transition={{
+                    duration: 0.38,
+                    delay: Math.min(index * 0.04, 0.18),
+                    ease: [0.16, 1, 0.3, 1]
+                  }}
+                  className="bg-white p-3 shadow-[0_16px_48px_rgba(16,29,48,0.055)] transition duration-hover ease-brand hover:-translate-y-1.5 hover:shadow-[0_30px_86px_rgba(16,29,48,0.11)]"
+                >
+                  <Link
+                    href={`/${locale}/news/${card.id}`}
+                    className="group block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                    aria-label={`${card.categoryLabel}: ${card.title}`}
                   >
-                    <span className="text-accent">{card.categoryLabel}</span>
-                    <span className="h-3 w-px bg-hairline" aria-hidden="true" />
-                    <span>{card.date}</span>
-                  </motion.div>
-                  <h3 className="font-heading text-[clamp(28px,3vw,40px)] font-semibold leading-tight text-primary">
-                    {card.title}
-                  </h3>
-                </div>
-              </motion.article>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+                    <div className="hover-zoom">
+                      <div className="hover-zoom-media">
+                        <NewsCardImage card={card} />
+                      </div>
+                    </div>
+                    <div className="space-y-4 px-1 py-5">
+                      <motion.div
+                        initial={{opacity: 0, y: 8}}
+                        whileInView={{opacity: 1, y: 0}}
+                        viewport={{once: true, amount: 0.4}}
+                        transition={{duration: 0.36, delay: 0.15, ease: [0.16, 1, 0.3, 1]}}
+                        className="flex flex-wrap items-center gap-x-3 gap-y-1 font-body text-[11px] font-semibold uppercase tracking-[0.16em] text-subtext"
+                      >
+                        <span className="text-accent">{card.categoryLabel}</span>
+                        <span className="h-3 w-px bg-hairline" aria-hidden="true" />
+                        <span>{card.date}</span>
+                      </motion.div>
+                      <h3 className="font-heading text-[clamp(28px,3vw,40px)] font-semibold leading-tight text-primary">
+                        {card.title}
+                      </h3>
+                    </div>
+                  </Link>
+                </motion.article>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+        )}
       </div>
     </LayoutGroup>
   );

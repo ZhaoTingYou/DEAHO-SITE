@@ -80,7 +80,7 @@ export default async function ChroniclePage({params}: Props) {
         </div>
       </section>
 
-      <ChronicleTimeline items={content.timeline.items} />
+      <ChronicleTimeline items={content.timeline.items} locale={locale} />
 
       <section className="bg-white py-section">
         <Reveal className="mx-auto max-w-5xl space-y-8 px-container text-center">

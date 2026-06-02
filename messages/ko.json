@@ -611,7 +611,8 @@
       "selectedHead": "Selected head",
       "selectedShaft": "Selected shaft",
       "headGroup": "클럽 헤드 선택",
-      "shaftGroup": "샤프트 컬러 선택"
+      "shaftGroup": "샤프트 컬러 선택",
+      "inquiryCta": "이 구성으로 문의하기"
     }
   }
 }

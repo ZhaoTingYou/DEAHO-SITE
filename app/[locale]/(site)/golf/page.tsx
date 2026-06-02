@@ -29,7 +29,7 @@ export default async function GolfPage({params}: Props) {
     filenames.map((filename) => [filename, imageExists(filename)])
   );
 
-  return <GolfConfigurator assets={assets} content={content} />;
+  return <GolfConfigurator assets={assets} content={content} locale={locale} />;
 }
 
 function collectGolfImages(content: GolfConfiguratorContent) {

@@ -1,0 +1,181 @@
+import type {Metadata} from 'next';
+import Link from 'next/link';
+import {setRequestLocale} from 'next-intl/server';
+import {notFound} from 'next/navigation';
+
+import {Reveal} from '@/components/motion/reveal';
+import {NewsReadingProgress} from '@/components/news/news-reading-progress';
+import {ShareLinkButton} from '@/components/news/share-link-button';
+import {SafeImage} from '@/components/safe-image';
+import type {Locale} from '@/i18n/routing';
+import {routing} from '@/i18n/routing';
+import {getDetailMetadata} from '@/lib/seo';
+import {withLocale} from '@/lib/site-map';
+import enMessages from '@/messages/en.json';
+import koMessages from '@/messages/ko.json';
+
+type Props = {
+  params: Promise<{locale: Locale; slug: string}>;
+};
+
+const copy = {
+  ko: {
+    back: 'NEWS 목록',
+    author: 'DEAHO Journal',
+    lead: '확인된 자료가 도착하면 실제 기사 본문으로 교체됩니다.',
+    paragraphs: [
+      '현재는 프로젝트 개요와 제작 맥락을 정리하는 밝은 기사 템플릿으로 유지합니다.',
+      '사진, 날짜, 출처, 세부 수치는 모두 검증 후 업데이트됩니다.',
+      '대호의 뉴스 내지는 잡지형 지면의 규칙선과 좁은 판형을 유지합니다.'
+    ],
+    quote: '승리의 순간을 영원의 형태로 남긴다는 원칙은 기사 내지에서도 같은 리듬으로 이어집니다.',
+    tags: ['DEAHO JOURNAL', 'COMING SOON'],
+    ctaTitle: '이 프로젝트가 궁금하신가요?',
+    cta: '문의하기',
+    related: '다음 소식'
+  },
+  en: {
+    back: 'Back to NEWS',
+    author: 'DEAHO Journal',
+    lead: 'Verified source material will replace this article body when available.',
+    paragraphs: [
+      'For now, this bright article template keeps the project overview and production context in place.',
+      'Images, dates, sources, and exact figures will be updated only after verification.',
+      'The page keeps the rule-line masthead and narrow editorial measure of the DEAHO journal.'
+    ],
+    quote: 'The principle of shaping victorious moments into permanence continues inside the article page.',
+    tags: ['DEAHO JOURNAL', 'COMING SOON'],
+    ctaTitle: 'Curious about this project?',
+    cta: 'Contact us',
+    related: 'Next stories'
+  }
+};
+
+export function generateStaticParams() {
+  const slugs = koMessages.news.grid.cards.map((card) => card.id);
+  return routing.locales.flatMap((locale) => slugs.map((slug) => ({locale, slug})));
+}
+
+export async function generateMetadata({params}: Props): Promise<Metadata> {
+  const {locale, slug} = await params;
+  const card = getNewsCard(locale, slug);
+
+  if (!card) {
+    return getDetailMetadata(locale, '/news', 'NEWS', '');
+  }
+
+  return getDetailMetadata(locale, `/news/${slug}`, card.title, card.title, '/images/news_detail_hero.png');
+}
+
+export default async function NewsDetailPage({params}: Props) {
+  const {locale, slug} = await params;
+  setRequestLocale(locale);
+  const card = getNewsCard(locale, slug);
+
+  if (!card) {
+    notFound();
+  }
+
+  const text = copy[locale];
+  const related = getNewsCards(locale).filter((item) => item.id !== slug).slice(0, 3);
+
+  return (
+    <main className="bg-bg text-text">
+      <NewsReadingProgress />
+      <article className="bg-white pt-28">
+        <div className="mx-auto max-w-5xl px-container py-section">
+          <Link href={withLocale(locale, '/news')} className="link-sweep font-body text-sm font-semibold uppercase tracking-[0.12em]">
+            {text.back}
+          </Link>
+          <Reveal className="mt-12 space-y-8">
+            <div className="h-px w-full bg-primary" aria-hidden="true" />
+            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-body text-[12px] font-semibold uppercase tracking-[0.18em]">
+              <span className="text-accent">{card.categoryLabel}</span>
+              <span className="text-subtext">{card.date}</span>
+              <span className="text-subtext">{text.author}</span>
+            </div>
+            <h1 className="font-heading text-[clamp(46px,8vw,104px)] font-semibold leading-none text-primary">
+              {card.title}
+            </h1>
+            <p className="max-w-3xl font-body text-[19px] leading-9 text-subtext">{text.lead}</p>
+          </Reveal>
+          <Reveal className="mt-12">
+            <SafeImage
+              filename="news_detail_hero.png"
+              alt={card.title}
+              aspect="aspect-[16/9]"
+              priority
+              variant="plain"
+            />
+          </Reveal>
+        </div>
+      </article>
+
+      <section className="bg-bg py-section">
+        <div className="mx-auto max-w-[720px] space-y-8 px-container">
+          {text.paragraphs.map((paragraph) => (
+            <Reveal key={paragraph}>
+              <p className="font-body text-[18px] leading-[1.8] text-text">{paragraph}</p>
+            </Reveal>
+          ))}
+          <Reveal>
+            <blockquote className="border-l-2 border-accent bg-white px-6 py-5 font-heading text-[28px] font-semibold leading-tight text-primary">
+              {text.quote}
+            </blockquote>
+          </Reveal>
+          <Reveal className="flex flex-wrap items-center gap-3">
+            {text.tags.map((tag) => (
+              <span key={tag} className="border border-hairline bg-white px-4 py-2 font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-subtext">
+                {tag}
+              </span>
+            ))}
+            <ShareLinkButton locale={locale} />
+          </Reveal>
+          <Reveal className="bg-white p-6 shadow-[0_20px_70px_rgba(16,29,48,0.06)]">
+            <p className="font-heading text-[38px] font-semibold leading-tight text-primary">{text.ctaTitle}</p>
+            <Link href={withLocale(locale, `/contact?type=other&source=news&item=${slug}`)} className="link-sweep mt-5 inline-flex font-body text-sm font-semibold uppercase tracking-[0.12em]">
+              {text.cta}
+            </Link>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="bg-white py-section">
+        <div className="mx-auto max-w-[1440px] space-y-8 px-container">
+          <Reveal>
+            <h2 className="font-heading text-[clamp(42px,6vw,82px)] font-semibold leading-none text-primary">
+              {text.related}
+            </h2>
+          </Reveal>
+          <div className="grid gap-5 md:grid-cols-3">
+            {related.map((item) => (
+              <Link
+                key={item.id}
+                href={withLocale(locale, `/news/${item.id}`)}
+                className="group block bg-bg p-3 shadow-[0_14px_48px_rgba(16,29,48,0.05)] transition duration-hover ease-brand hover:-translate-y-1"
+              >
+                <SafeImage filename={item.image} alt={item.title} aspect="aspect-[3/2]" variant="plain" />
+                <div className="space-y-3 px-1 py-5">
+                  <p className="font-body text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
+                    {item.categoryLabel}
+                  </p>
+                  <h3 className="font-heading text-[30px] font-semibold leading-tight text-primary">
+                    {item.title}
+                  </h3>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function getNewsCards(locale: Locale) {
+  return locale === 'en' ? enMessages.news.grid.cards : koMessages.news.grid.cards;
+}
+
+function getNewsCard(locale: Locale, slug: string) {
+  return getNewsCards(locale).find((card) => card.id === slug);
+}

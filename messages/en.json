@@ -611,7 +611,8 @@
       "selectedHead": "Selected head",
       "selectedShaft": "Selected shaft",
       "headGroup": "Club head selection",
-      "shaftGroup": "Shaft color selection"
+      "shaftGroup": "Shaft color selection",
+      "inquiryCta": "Inquire with this configuration"
     }
   }
 }
