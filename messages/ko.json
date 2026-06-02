@@ -420,5 +420,92 @@
         ]
       }
     }
+  },
+  "news": {
+    "masthead": {
+      "title": "NEWS",
+      "issue": "DEAHO JOURNAL · 발행 2026",
+      "ticker": [
+        "최신 제작 사례는 확인 자료가 도착하면 이 지면에 업데이트됩니다.",
+        "프로젝트 스토리 · 언론/피처 · 협업 소식을 한곳에 모읍니다.",
+        "대호는 지금도 승리의 순간을 형태로 남기고 있습니다."
+      ]
+    },
+    "hero": {
+      "eyebrow": "THE CURRENT PULSE",
+      "title": "지금, 대호",
+      "subtitle": "그리고 지금도 만들고 있다.",
+      "image": "news_hero.png"
+    },
+    "featured": {
+      "eyebrow": "COMING SOON",
+      "category": "TOP STORY",
+      "date": "2026.00.00",
+      "title": "대호의 다음 기록이 이곳에서 시작됩니다.",
+      "body": "새 프로젝트, 제작 현장, 협업 소식은 확인된 자료가 도착하면 가장 먼저 이 지면에 정리됩니다.",
+      "image": "news_featured.png.png"
+    },
+    "grid": {
+      "eyebrow": "LATEST INDEX",
+      "title": "대호 저널",
+      "filters": [
+        {"id": "all", "label": "전체"},
+        {"id": "making", "label": "최근 제작 사례"},
+        {"id": "story", "label": "프로젝트 스토리"},
+        {"id": "press", "label": "언론/피처"},
+        {"id": "partner", "label": "협업"},
+        {"id": "knowledge", "label": "우승반지/귀금속 지식"}
+      ],
+      "cards": [
+        {
+          "id": "news-01",
+          "category": "making",
+          "categoryLabel": "최근 제작 사례",
+          "date": "2026.00.00",
+          "title": "새로운 우승의 순간을 위한 제작 기록",
+          "image": "news_card_01.png"
+        },
+        {
+          "id": "news-02",
+          "category": "story",
+          "categoryLabel": "프로젝트 스토리",
+          "date": "2026.00.00",
+          "title": "팀의 상징이 반지의 구조가 되는 과정",
+          "image": "news_card_02.png"
+        },
+        {
+          "id": "news-03",
+          "category": "press",
+          "categoryLabel": "언론/피처",
+          "date": "2026.00.00",
+          "title": "밝은 지면에 남길 대호의 피처",
+          "image": "news_card_03.png"
+        },
+        {
+          "id": "news-04",
+          "category": "partner",
+          "categoryLabel": "협업",
+          "date": "2026.00.00",
+          "title": "다음 협업을 위한 조용한 예고",
+          "image": "news_card_04.png"
+        },
+        {
+          "id": "news-05",
+          "category": "knowledge",
+          "categoryLabel": "우승반지/귀금속 지식",
+          "date": "2026.00.00",
+          "title": "챔피언십 링을 읽는 다섯 가지 기준",
+          "image": "news_card_05.png"
+        },
+        {
+          "id": "news-06",
+          "category": "story",
+          "categoryLabel": "프로젝트 스토리",
+          "date": "2026.00.00",
+          "title": "기록과 이름을 한 점에 남기는 방식",
+          "image": "news_card_06.png"
+        }
+      ]
+    }
   }
 }

@@ -420,5 +420,92 @@
         ]
       }
     }
+  },
+  "news": {
+    "masthead": {
+      "title": "NEWS",
+      "issue": "DEAHO JOURNAL · ISSUE 2026",
+      "ticker": [
+        "New production cases will be updated here when verified materials arrive.",
+        "Project stories, press features, and collaborations are gathered in one journal field.",
+        "DEAHO is still shaping the moments of victory into form."
+      ]
+    },
+    "hero": {
+      "eyebrow": "THE CURRENT PULSE",
+      "title": "THE CURRENT PULSE",
+      "subtitle": "DEAHO is still creating now.",
+      "image": "news_hero.png"
+    },
+    "featured": {
+      "eyebrow": "COMING SOON",
+      "category": "TOP STORY",
+      "date": "2026.00.00",
+      "title": "The next record from DEAHO begins here.",
+      "body": "New projects, workshop scenes, and collaboration notes will be arranged here first when verified materials arrive.",
+      "image": "news_featured.png.png"
+    },
+    "grid": {
+      "eyebrow": "LATEST INDEX",
+      "title": "DEAHO Journal",
+      "filters": [
+        {"id": "all", "label": "All"},
+        {"id": "making", "label": "Recent work"},
+        {"id": "story", "label": "Project stories"},
+        {"id": "press", "label": "Press / Features"},
+        {"id": "partner", "label": "Collaborations"},
+        {"id": "knowledge", "label": "Ring knowledge"}
+      ],
+      "cards": [
+        {
+          "id": "news-01",
+          "category": "making",
+          "categoryLabel": "Recent work",
+          "date": "2026.00.00",
+          "title": "A production record for a new winning moment",
+          "image": "news_card_01.png"
+        },
+        {
+          "id": "news-02",
+          "category": "story",
+          "categoryLabel": "Project stories",
+          "date": "2026.00.00",
+          "title": "When team symbols become the structure of a ring",
+          "image": "news_card_02.png"
+        },
+        {
+          "id": "news-03",
+          "category": "press",
+          "categoryLabel": "Press / Features",
+          "date": "2026.00.00",
+          "title": "A feature field reserved for DEAHO",
+          "image": "news_card_03.png"
+        },
+        {
+          "id": "news-04",
+          "category": "partner",
+          "categoryLabel": "Collaborations",
+          "date": "2026.00.00",
+          "title": "A quiet preview for the next collaboration",
+          "image": "news_card_04.png"
+        },
+        {
+          "id": "news-05",
+          "category": "knowledge",
+          "categoryLabel": "Ring knowledge",
+          "date": "2026.00.00",
+          "title": "Five standards for reading a championship ring",
+          "image": "news_card_05.png"
+        },
+        {
+          "id": "news-06",
+          "category": "story",
+          "categoryLabel": "Project stories",
+          "date": "2026.00.00",
+          "title": "How names and records remain in a single work",
+          "image": "news_card_06.png"
+        }
+      ]
+    }
   }
 }
