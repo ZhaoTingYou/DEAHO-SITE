@@ -264,5 +264,161 @@
         ]
       }
     }
+  },
+  "specialty": {
+    "hero": {
+      "eyebrow": "ANATOMY OF CRAFT",
+      "title": "THE DIFFERENCE",
+      "koreanTitle": "대호는 왜 다른가",
+      "subtitle": "아무나 만들 수 있는 제품이 아닙니다.",
+      "image": "specialty_hero.png"
+    },
+    "branches": {
+      "eyebrow": "TWO ENTRIES",
+      "title": "제작의 구조와 완성된 작품",
+      "items": [
+        {
+          "eyebrow": "TECHNIQUE",
+          "title": "공정",
+          "body": "스케치에서 전달까지, 한 작품이 완성되는 일곱 단계를 밝은 공방의 구조로 보여줍니다.",
+          "image": "specialty_card_technique.png",
+          "href": "/specialty/technique",
+          "cta": "공정 보기"
+        },
+        {
+          "eyebrow": "COLLECTION",
+          "title": "작품",
+          "body": "챔피언, 임관, 주문 제작의 형태를 하나의 갤러리에서 정리합니다.",
+          "image": "specialty_card_collection.png",
+          "href": "/specialty/collection",
+          "cta": "작품 보기"
+        }
+      ]
+    },
+    "details": {
+      "eyebrow": "MICRO DETAILS",
+      "title": "손끝에서 달라지는 구조",
+      "body": "금속의 깊이, 각인의 선, 광택의 방향이 한 작품의 완성도를 결정합니다.",
+      "items": [
+        {"number": "01", "title": "내부 각인", "image": "specialty_detail_01.png"},
+        {"number": "02", "title": "조각 깊이", "image": "specialty_detail_02.png"},
+        {"number": "03", "title": "거울 마감", "image": "specialty_detail_03.png"}
+      ]
+    },
+    "closing": {
+      "title": "제작의 모든 단계가 작품의 이유가 됩니다.",
+      "cta": "공정 보기"
+    }
+  },
+  "specialtyPages": {
+    "technique": {
+      "hero": {
+        "eyebrow": "SPECIALTY · TECHNIQUE",
+        "title": "THE PROCESS",
+        "subtitle": "한 점의 반지가 완성되기까지, 대호의 공정은 일곱 번의 검증을 통과합니다.",
+        "image": "specialty_technique_hero.png"
+      },
+      "process": {
+        "eyebrow": "SEVEN-STEP PROCESS",
+        "title": "한 작품이 완성되는 일곱 단계",
+        "body": "스크롤을 따라 설계, 모델링, 주조, 세팅, 연마, 포장, 전달의 순서가 하나의 해부도처럼 이어집니다.",
+        "steps": [
+          {
+            "number": "01",
+            "label": "DESIGN SKETCH",
+            "title": "설계 스케치",
+            "body": "팀의 상징, 이름, 기록을 반지의 구조 안에 배치하는 첫 단계입니다.",
+            "image": "specialty_process_1_sketch.png"
+          },
+          {
+            "number": "02",
+            "label": "3D MODELING",
+            "title": "3D 모델링",
+            "body": "입체 구조와 착용감을 함께 검토하며 실제 제작을 위한 형태로 정리합니다.",
+            "image": "specialty_process_2_modeling.png"
+          },
+          {
+            "number": "03",
+            "label": "CASTING",
+            "title": "주조",
+            "body": "설계된 형태를 금속의 물성으로 옮기며 작품의 기본 골격을 만듭니다.",
+            "image": "specialty_process_3_casting.png"
+          },
+          {
+            "number": "04",
+            "label": "STONE SETTING",
+            "title": "스톤 세팅",
+            "body": "빛이 머무는 위치와 깊이를 조율해 상징이 또렷하게 드러나도록 합니다.",
+            "image": "specialty_process_4_setting.png"
+          },
+          {
+            "number": "05",
+            "label": "POLISHING",
+            "title": "연마",
+            "body": "표면의 결을 정리하고 각 면의 반사를 맞추어 최종 빛을 만듭니다.",
+            "image": "specialty_process_5_polishing.png"
+          },
+          {
+            "number": "06",
+            "label": "PACKAGING",
+            "title": "패키징",
+            "body": "작품의 의미가 전달되는 순간까지 흐트러지지 않도록 마지막 상태를 정돈합니다.",
+            "image": "specialty_process_6_packaging.png"
+          },
+          {
+            "number": "07",
+            "label": "DELIVERY",
+            "title": "전달",
+            "body": "완성된 반지는 기록과 함께 주인에게 전달되어 순간의 형태로 남습니다.",
+            "image": "specialty_process_7_delivery.png"
+          }
+        ]
+      },
+      "details": {
+        "eyebrow": "HAND-FINISHED DETAILS",
+        "title": "양산으로 대체할 수 없는 손의 흔적",
+        "body": "내부 각인, 조각 깊이, 거울 마감은 손으로 확인하고 조율해야 하는 대호의 세부 기준입니다.",
+        "items": [
+          {"title": "내부 각인", "body": "이름과 기록이 선명하게 남도록 깊이와 간격을 맞춥니다.", "image": "specialty_detail_01.png"},
+          {"title": "조각 깊이", "body": "문양과 상징이 빛 안에서 읽히도록 레이어를 조절합니다.", "image": "specialty_detail_02.png"},
+          {"title": "거울 마감", "body": "최종 광택은 작품의 인상과 착용감을 함께 완성합니다.", "image": "specialty_detail_03.png"}
+        ]
+      },
+      "bespoke": {
+        "eyebrow": "BESPOKE CAPABILITY",
+        "title": "팀의 이야기를 작품 안으로",
+        "body": "챔피언십 링은 같은 모양의 제품이 아니라, 팀의 상징과 시즌의 기억을 담아 설계되는 주문 제작 작품입니다.",
+        "image": "specialty_bespoke.png",
+        "cta": "작품 보기"
+      }
+    },
+    "collection": {
+      "hero": {
+        "eyebrow": "SPECIALTY · COLLECTION",
+        "title": "THE WORKS",
+        "subtitle": "챔피언, 임관, 주문 제작의 형태를 밝은 갤러리 안에서 살펴봅니다.",
+        "image": "specialty_collection_hero.png"
+      },
+      "gallery": {
+        "eyebrow": "COLLECTION GALLERY",
+        "title": "작품의 분류",
+        "filters": [
+          {"id": "all", "label": "전체"},
+          {"id": "champion", "label": "챔피언"},
+          {"id": "appointment", "label": "임관"},
+          {"id": "bespoke", "label": "주문 제작"}
+        ],
+        "items": [
+          {"id": "ring-01", "title": "Collection 01", "caption": "챔피언십 링 자료가 들어갈 자리입니다.", "category": "champion", "categoryLabel": "챔피언", "image": "collection_ring_01.png"},
+          {"id": "ring-02", "title": "Collection 02", "caption": "임관 반지 자료가 들어갈 자리입니다.", "category": "appointment", "categoryLabel": "임관", "image": "collection_ring_02.png"},
+          {"id": "ring-03", "title": "Collection 03", "caption": "주문 제작 반지 자료가 들어갈 자리입니다.", "category": "bespoke", "categoryLabel": "주문 제작", "image": "collection_ring_03.png"},
+          {"id": "ring-04", "title": "Collection 04", "caption": "팀 상징과 기록을 보여줄 자리입니다.", "category": "champion", "categoryLabel": "챔피언", "image": "collection_ring_04.png"},
+          {"id": "ring-05", "title": "Collection 05", "caption": "상징과 문양의 구성을 보여줄 자리입니다.", "category": "appointment", "categoryLabel": "임관", "image": "collection_ring_05.png"},
+          {"id": "ring-06", "title": "Collection 06", "caption": "맞춤 제작 구조를 보여줄 자리입니다.", "category": "bespoke", "categoryLabel": "주문 제작", "image": "collection_ring_06.png"},
+          {"id": "ring-07", "title": "Collection 07", "caption": "우승의 순간을 담은 작품 자료 자리입니다.", "category": "champion", "categoryLabel": "챔피언", "image": "collection_ring_07.png"},
+          {"id": "ring-08", "title": "Collection 08", "caption": "의미와 착용감을 함께 보여줄 자리입니다.", "category": "bespoke", "categoryLabel": "주문 제작", "image": "collection_ring_08.png"}
+        ]
+      }
+    }
   }
 }

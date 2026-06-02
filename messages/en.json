@@ -264,5 +264,161 @@
         ]
       }
     }
+  },
+  "specialty": {
+    "hero": {
+      "eyebrow": "ANATOMY OF CRAFT",
+      "title": "THE DIFFERENCE",
+      "koreanTitle": "Why DEAHO is different",
+      "subtitle": "This is not a product anyone can make.",
+      "image": "specialty_hero.png"
+    },
+    "branches": {
+      "eyebrow": "TWO ENTRIES",
+      "title": "The process and the completed works",
+      "items": [
+        {
+          "eyebrow": "TECHNIQUE",
+          "title": "Technique",
+          "body": "From sketch to delivery, seven steps reveal how a single work is completed in the light of the workshop.",
+          "image": "specialty_card_technique.png",
+          "href": "/specialty/technique",
+          "cta": "View technique"
+        },
+        {
+          "eyebrow": "COLLECTION",
+          "title": "Collection",
+          "body": "Championship, appointment, and bespoke forms are arranged as one bright gallery.",
+          "image": "specialty_card_collection.png",
+          "href": "/specialty/collection",
+          "cta": "View collection"
+        }
+      ]
+    },
+    "details": {
+      "eyebrow": "MICRO DETAILS",
+      "title": "The structure changes at the fingertips",
+      "body": "Depth in metal, engraved lines, and the direction of polish decide the finish of each work.",
+      "items": [
+        {"number": "01", "title": "Inner engraving", "image": "specialty_detail_01.png"},
+        {"number": "02", "title": "Carving depth", "image": "specialty_detail_02.png"},
+        {"number": "03", "title": "Mirror polish", "image": "specialty_detail_03.png"}
+      ]
+    },
+    "closing": {
+      "title": "Every step of the process becomes the reason for the work.",
+      "cta": "View technique"
+    }
+  },
+  "specialtyPages": {
+    "technique": {
+      "hero": {
+        "eyebrow": "SPECIALTY · TECHNIQUE",
+        "title": "THE PROCESS",
+        "subtitle": "Before a ring is complete, DEAHO's process passes through seven acts of inspection.",
+        "image": "specialty_technique_hero.png"
+      },
+      "process": {
+        "eyebrow": "SEVEN-STEP PROCESS",
+        "title": "Seven steps behind a finished work",
+        "body": "As the page scrolls, design, modeling, casting, setting, polishing, packaging, and delivery unfold like an anatomy of craft.",
+        "steps": [
+          {
+            "number": "01",
+            "label": "DESIGN SKETCH",
+            "title": "Design sketch",
+            "body": "The team's symbols, names, and records are first arranged inside the structure of the ring.",
+            "image": "specialty_process_1_sketch.png"
+          },
+          {
+            "number": "02",
+            "label": "3D MODELING",
+            "title": "3D modeling",
+            "body": "The dimensional form and wearing feel are reviewed before the piece moves into production.",
+            "image": "specialty_process_2_modeling.png"
+          },
+          {
+            "number": "03",
+            "label": "CASTING",
+            "title": "Casting",
+            "body": "The planned form is translated into metal, establishing the work's core structure.",
+            "image": "specialty_process_3_casting.png"
+          },
+          {
+            "number": "04",
+            "label": "STONE SETTING",
+            "title": "Stone setting",
+            "body": "Position and depth are tuned so the symbols stay clear inside the light.",
+            "image": "specialty_process_4_setting.png"
+          },
+          {
+            "number": "05",
+            "label": "POLISHING",
+            "title": "Polishing",
+            "body": "Surface grain and reflection are refined to create the final brightness.",
+            "image": "specialty_process_5_polishing.png"
+          },
+          {
+            "number": "06",
+            "label": "PACKAGING",
+            "title": "Packaging",
+            "body": "The final state is arranged so the meaning stays intact until the work is received.",
+            "image": "specialty_process_6_packaging.png"
+          },
+          {
+            "number": "07",
+            "label": "DELIVERY",
+            "title": "Delivery",
+            "body": "The completed ring is delivered with its record and becomes the form of a moment.",
+            "image": "specialty_process_7_delivery.png"
+          }
+        ]
+      },
+      "details": {
+        "eyebrow": "HAND-FINISHED DETAILS",
+        "title": "Traces of the hand that mass production cannot replace",
+        "body": "Inner engraving, carving depth, and mirror polish are detail standards that must be checked and adjusted by hand.",
+        "items": [
+          {"title": "Inner engraving", "body": "Depth and spacing are tuned so names and records stay clear.", "image": "specialty_detail_01.png"},
+          {"title": "Carving depth", "body": "Layers are adjusted so symbols remain legible in light.", "image": "specialty_detail_02.png"},
+          {"title": "Mirror polish", "body": "The final polish completes both the impression and the wearing feel.", "image": "specialty_detail_03.png"}
+        ]
+      },
+      "bespoke": {
+        "eyebrow": "BESPOKE CAPABILITY",
+        "title": "A team's story inside the work",
+        "body": "A championship ring is not a repeated product. It is a bespoke work designed around symbols and season memories.",
+        "image": "specialty_bespoke.png",
+        "cta": "View collection"
+      }
+    },
+    "collection": {
+      "hero": {
+        "eyebrow": "SPECIALTY · COLLECTION",
+        "title": "THE WORKS",
+        "subtitle": "Championship, appointment, and bespoke forms are shown inside a bright gallery.",
+        "image": "specialty_collection_hero.png"
+      },
+      "gallery": {
+        "eyebrow": "COLLECTION GALLERY",
+        "title": "Categories of work",
+        "filters": [
+          {"id": "all", "label": "All"},
+          {"id": "champion", "label": "Champion"},
+          {"id": "appointment", "label": "Appointment"},
+          {"id": "bespoke", "label": "Bespoke"}
+        ],
+        "items": [
+          {"id": "ring-01", "title": "Collection 01", "caption": "A reserved slot for championship ring material.", "category": "champion", "categoryLabel": "Champion", "image": "collection_ring_01.png"},
+          {"id": "ring-02", "title": "Collection 02", "caption": "A reserved slot for appointment ring material.", "category": "appointment", "categoryLabel": "Appointment", "image": "collection_ring_02.png"},
+          {"id": "ring-03", "title": "Collection 03", "caption": "A reserved slot for bespoke ring material.", "category": "bespoke", "categoryLabel": "Bespoke", "image": "collection_ring_03.png"},
+          {"id": "ring-04", "title": "Collection 04", "caption": "A reserved slot for team symbols and records.", "category": "champion", "categoryLabel": "Champion", "image": "collection_ring_04.png"},
+          {"id": "ring-05", "title": "Collection 05", "caption": "A reserved slot for symbolic composition.", "category": "appointment", "categoryLabel": "Appointment", "image": "collection_ring_05.png"},
+          {"id": "ring-06", "title": "Collection 06", "caption": "A reserved slot for bespoke structure.", "category": "bespoke", "categoryLabel": "Bespoke", "image": "collection_ring_06.png"},
+          {"id": "ring-07", "title": "Collection 07", "caption": "A reserved slot for a work shaped by a winning moment.", "category": "champion", "categoryLabel": "Champion", "image": "collection_ring_07.png"},
+          {"id": "ring-08", "title": "Collection 08", "caption": "A reserved slot for meaning and wearing feel.", "category": "bespoke", "categoryLabel": "Bespoke", "image": "collection_ring_08.png"}
+        ]
+      }
+    }
   }
 }
