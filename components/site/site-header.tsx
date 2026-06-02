@@ -142,13 +142,15 @@ export function SiteHeader({locale}: SiteHeaderProps) {
       const nextAtTop = y < 8;
       const heroExitY = Math.max(360, window.innerHeight - 96);
       const nextOverHomeHero = isHome && y < heroExitY;
+      const shouldKeepHeaderVisible =
+        isMenuOpen || openMenu !== null || isHeaderHovered || hasHeaderFocus;
 
       setAtTop((current) => (current === nextAtTop ? current : nextAtTop));
       setOverHomeHero((current) =>
         current === nextOverHomeHero ? current : nextOverHomeHero
       );
 
-      if (nextAtTop || nextOverHomeHero) {
+      if (nextAtTop || shouldKeepHeaderVisible) {
         scrollDeltaRef.current = 0;
         setIsHidden(false);
 
@@ -160,7 +162,7 @@ export function SiteHeader({locale}: SiteHeaderProps) {
         scrollDeltaRef.current += delta;
 
         if (Math.abs(scrollDeltaRef.current) >= 8) {
-          if (!isHome && scrollDeltaRef.current > 0 && y > 120) {
+          if (scrollDeltaRef.current > 0 && y > 120) {
             setIsHidden(true);
             setOpenMenu(null);
           }
@@ -176,6 +178,7 @@ export function SiteHeader({locale}: SiteHeaderProps) {
       lastScrollYRef.current = y;
     };
 
+    lastScrollYRef.current = window.scrollY;
     onScroll();
     window.addEventListener('scroll', onScroll, {passive: true});
     window.addEventListener('resize', onScroll);
@@ -184,7 +187,7 @@ export function SiteHeader({locale}: SiteHeaderProps) {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
-  }, [isHome]);
+  }, [hasHeaderFocus, isHeaderHovered, isHome, isMenuOpen, openMenu]);
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : '';
