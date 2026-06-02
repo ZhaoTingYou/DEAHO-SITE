@@ -153,10 +153,6 @@ export function SiteHeader({locale}: SiteHeaderProps) {
       if (nextAtTop || shouldKeepHeaderVisible) {
         scrollDeltaRef.current = 0;
         setIsHidden(false);
-
-        if (nextAtTop) {
-          setOpenMenu(null);
-        }
       } else {
         const delta = y - lastScrollYRef.current;
         scrollDeltaRef.current += delta;
