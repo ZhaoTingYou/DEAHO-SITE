@@ -187,23 +187,8 @@ select {
   outline-offset: 4px;
 }
 
-.home-hero-float {
-  animation: home-hero-float 7s var(--ease) infinite alternate;
-  will-change: transform;
-}
-
 .home-scroll-hint {
   animation: home-scroll-breathe 2.4s var(--ease) infinite;
-}
-
-@keyframes home-hero-float {
-  from {
-    transform: translate3d(0, -10px, 0);
-  }
-
-  to {
-    transform: translate3d(0, 0, 0);
-  }
 }
 
 @keyframes home-scroll-breathe {
@@ -220,7 +205,6 @@ select {
 }
 
 @media (max-width: 767px) {
-  .home-hero-float,
   .home-scroll-hint {
     animation: none;
   }

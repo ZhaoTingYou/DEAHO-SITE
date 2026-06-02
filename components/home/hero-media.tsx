@@ -121,12 +121,10 @@ export function HeroMedia({
       className={`overflow-hidden ${className}`}
       style={{y: shouldAnimate ? y : 0}}
     >
-      <div className={shouldAnimate ? 'home-hero-float h-full w-full' : 'h-full w-full'}>
+      <div className="h-full w-full">
         <motion.div
           className="relative h-full w-full"
-          initial={shouldAnimate ? {scale: 1.04} : {scale: 1}}
-          animate={{scale: 1}}
-          transition={{duration: 2, ease: [0.16, 1, 0.3, 1]}}
+          initial={false}
         >
           {imageFailed ? (
             <PlaceholderImg filename={poster} aspect="h-full" />
