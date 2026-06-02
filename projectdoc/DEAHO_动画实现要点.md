@@ -46,6 +46,36 @@
 
 ---
 
+## 2.5 顶栏 Header · 方向感知 + mega menu + 透明态(详)
+
+> 对应《设计书》§1.8。三件事:① 透明↔象牙 切换;② 下滚隐藏/上滚出现;③ LEGACY/SPECIALTY 的通栏 mega menu。
+
+**① 透明态 ↔ 象牙态(基于滚动位置)**
+- 维护一个状态 `atTop`(滚动 `y < 阈值`,如 8px)。`atTop` 为真 → 透明态(文字反白、无底);为假 → 象牙态(`--bg` 底 + `backdrop-blur` + hairline,文字 `--primary`)。
+- 用 motionValue/`useMotionValueEvent(scrollY,'change')` 读取,**只在跨阈值时 `setState` 一次**(别每帧 set)。颜色/底边用 CSS transition 300ms 过渡。
+
+**② 方向感知隐藏/出现(下滚藏、上滚现)**
+- 记录上一帧 `scrollY`,比较方向:`delta = y - prevY`。`delta > 0` 且 `y > 安全阈值`(如 120px,避免顶部抖动)→ `hidden=true`;`delta < 0` → `hidden=false`。
+- header 容器 `style={{ y: hidden ? '-100%' : '0%' }}`(Framer `animate` 或 motion 值),`--ease`,出现 ~200ms / 隐藏 ~260ms。
+- 防抖:给方向判断加一个小阈值(累计位移 > 6–8px 才翻转),避免微小抖动反复触发。
+- `hidden` 变真时**同时关闭 mega menu**。
+- 始终在最顶部(`atTop`)时强制 `hidden=false`。
+- 移动端触屏照样可用(此逻辑与 Lenis 无关,读 `window.scrollY` 即可);但若 Lenis 开着,统一从 Lenis 的 scroll 值读,避免两套来源。
+
+**③ Mega menu(LEGACY / SPECIALTY)**
+- 状态 `openMenu: 'legacy' | 'specialty' | null`。hover 主项 → set 对应值;hover 面板自身 → 保持;移出主项或面板 → **延迟 150ms 置 null**(用一个 `setTimeout`,再次进入时 `clearTimeout`,解决"斜向移动到面板就消失"的经典问题)。
+- 面板**满宽**,定位在主导航底缘:`position:absolute; left:0; right:0; top:100%`。展开 = 高度/opacity 从 0→auto/1(高度动画用 `scaleY` 或测量高度,`--ease-expo` 360ms);顶部酒红线先画(scaleX,提前 80ms);子项 `staggerChildren 0.05` 上浮。
+- 关闭:opacity→0 + 轻微上收,200ms。
+- 无障碍:主项 `aria-haspopup="true"` `aria-expanded`;`Esc` 关;面板内子项可 Tab;焦点移出面板自动关。
+- 触摸:无 hover → 点击主项 toggle 面板(`onClick`),阻止首次点击直接跳转;移动端实际走抽屉(§8)。
+
+**坑**
+- 透明态文字反白务必配 hero 顶部暖白渐变,否则浅色画面上反白不可读(见《设计书》§2.1)。
+- 方向隐藏与 mega menu 同时存在时,隐藏动画期间面板要先关,避免"飞出去还挂着面板"。
+- 别用滚动事件里直接改 DOM 类名做大量样式;集中到 `atTop`/`hidden`/`openMenu` 三个状态 + CSS 过渡。
+
+---
+
 ## 3. CHRONICLE 时间轴 · "随滚动自我绘制"(详)
 
 **目标:** 一条竖向轴线随下滑一笔笔画出来;经过的节点点亮;年份对焦显影;条目左右交替滑入。
@@ -125,11 +155,52 @@
 
 ---
 
-## 5. 其他招牌(简要实现思路)
+---
 
-- **HOME hero 逐词上浮:** 标题按词拆成多个 `span`;父 `variants` `staggerChildren:0.12`,子 `hidden {y:40,opacity:0}`→`visible`,`--ease-expo`。hero 图 `initial scale:1.06`→`animate scale:1.0` 1600ms。
+## 6. HOME Hero 背景视频 · 播放与滚动行为(详)
+
+> 目标 = Omega / Porsche 那种"进站即播的全屏背景影片"。这一节只讲**播放/滚动/降级的行为逻辑**(视觉与文件位见《设计书》§2.1"Hero 视频规范")。做成可复用组件 `<HeroMedia poster videoSrc?>`。
+
+**① 自动播放(最容易栽的地方)**
+- 四个属性**缺一不可**:`autoPlay`、`muted`、`loop`、`playsInline`(iOS Safari 无 `playsInline` 不会自动播,而是全屏弹出)。
+- React 坑:除了写 JSX 的 `muted` 属性,**还要在 ref 回调里手动 `el.muted = true`**——React 有时不会把 `muted` 反映到真实 DOM 属性,导致浏览器判定"有声"而拦截自动播。
+- `preload="metadata"`;给两个 `<source>`:`.webm`(VP9/AV1)在前、`.mp4`(H.264)兜底;`poster={home_hero}`。
+- 启动兜底:`video.play()` 返回的是 Promise,**用 `.catch()` 兜住**自动播被拒的情况(此时已有 poster 兜底,体验不破)。
+
+**② 回退链(当前阶段就走这条)**
+- `videoSrc` 为空 → **直接渲染 `<img src={poster}>`**(= `home_hero.png`),根本不挂 `<video>`。
+- `videoSrc` 非空 → 渲染 `<video poster=...>`;视频可播放前,poster 自然作首帧占位。
+- 对外接口不变:日后只传入 `videoSrc` 即从图无缝升级为视频,**不改版式、不改下面的滚动逻辑**。
+
+**③ 滚出暂停 / 滚回播放(省电,属滚动驱动行为)**
+- 用 IntersectionObserver 观察 Hero:`isIntersecting` 为真 → `video.play().catch(()=>{})`;为假 → `video.pause()`。
+- 阈值 `threshold: 0.1` 左右即可;只对 `<video>` 生效,回退图无需此逻辑。
+- 与 Lenis:用 IntersectionObserver(不是逐帧 scroll 计算)就**天然与 Lenis 解耦、不会抖**;不要在 Lenis 的 `scroll` 回调里逐帧判断可见性。
+
+**④ 离场视差/缩放(可选,轻量)**
+- 复用 §5 视差思路:`y = useTransform(heroScrollProgress,[0,1],[0,-距离])`、`scale` 略增;**只作用在媒体容器**,与③互不冲突。
+
+**⑤ reduced-motion / 省电**
+- `prefers-reduced-motion: reduce` → **不自动播**,只渲染 poster(可给一个手动播放按钮:点了再 `play()`)。
+- 走全局 `usePrefersReducedMotion`(§1),不要在组件里单独 `matchMedia` 各写各的。
+- 移动端可换更小码率/更短的版本;低端机或 `navigator.connection?.saveData` 为真 → 退回 poster。
+
+**⑥ 蒙版与无障碍**
+- 文字下垫**暖白渐变**(非黑)保证 AA(见《设计书》§2.1)。
+- 背景视频是装饰 → 容器 `aria-hidden="true"`、无音轨;所有关键信息在叠加文字层,不依赖视频内容。
+
+**坑速查**
+- 没声音却被拦截 → 八成是 DOM `muted` 没真正置位(见①的 ref 写法)。
+- iOS 点开变全屏 → 漏了 `playsInline`。
+- 切页面回来不动 → 监听 `visibilitychange`,页面隐藏 `pause()`、可见且在视口内再 `play()`。
+
+---
+
+## 7. 其他招牌(简要实现思路)
+
+- **HOME hero 逐词上浮:** 标题按词拆成多个 `span`;父 `variants` `staggerChildren:0.12`,子 `hidden {y:40,opacity:0}`→`visible`,`--ease-expo`。hero 媒体(视频/图)`initial scale:1.04→1.0` 约 2s,与 poster→播放衔接,无跳变。
 - **漂浮 float:** 纯 CSS `@keyframes` `translateY:±6px`,6s `ease-in-out infinite alternate`(最省)。或 FM `animate={{y:[-6,6]}}` `repeat:Infinity, repeatType:'mirror'`。多个元素**相位错开**(不同 `animation-delay`)。
-- **视差 parallax:** 元素 `y = useTransform(页面或局部 scrollYProgress, [0,1], [0, -距离])`;hero 图比背景慢 ~20%。
+- **视差 parallax:** 元素 `y = useTransform(页面或局部 scrollYProgress, [0,1], [0, -距离])`;hero 媒体比背景慢 ~20%。
 - **LEGACY 光扫文字:** 每行 `clip-path` 从 `inset(0 100% 0 0)`→`inset(0 0 0 0)`,1s,逐行 `delay +0.6s`;可叠一条 `::after` 高光条沿行 `translateX` 扫过。reduced/移动端 → 逐行淡入+位移。
 - **GOLF 配置器(state 驱动,不涉及滚动):** `selectedHead` state;中区叠多张 hero 图,选中项 `opacity:1` 其余 `0`,切换 400ms 交叉溶解;选项卡当前态加细边框 + 轻微下沉。颜色卡同理(可选增强,先做 hover 放大)。
 - **NEWS COMING SOON 微光:** 标签上一条 `::after` 线性高光,`@keyframes` `translateX(-120%→120%)` 2.5s infinite;featured 图静态光边。
@@ -137,22 +208,24 @@
 
 ---
 
-## 6. 移动端降级(逐个,务必照做)
+## 8. 移动端降级(逐个,务必照做)
 
 > 总则:触屏**禁用 Lenis**(用系统原生滚动,更跟手更省电);**关闭视差 / Ken-Burns / 漂浮**;`prefers-reduced-motion` 时所有滚动驱动直接给终态。
 
+- **HOME Hero 视频 →** 自动播放逻辑保留(同样 `muted/autoPlay/loop/playsInline` + DOM `muted=true`),但换**更小码率/更短**的版本;**低端机或 `saveData` 为真 → 退回 `home_hero.png` poster**;IntersectionObserver 滚出暂停照旧。
 - **CHRONICLE 时间轴 → 放弃连续描线。** 轴线移到最左单列;改为**节点逐个 `whileInView` 点亮 + 轴线分段填充**(每过一个节点,该段轴线用 CSS 过渡填色)。避免在原生滚动上跑逐帧 `pathLength` 的开销与抖动。
 - **SPECIALTY 七步 → 放弃钉屏。** 改为**七张全幅卡片正常流堆叠**:每张 = 大步骤号 `01..07`(静态)+ 微距图 + 文案,`whileInView` 揭示(图 `scale 1.04→1.0` + 文案上浮)。彻底绕开移动端 sticky+超高 section 的卡顿与 iOS 抖动。
 - **LEGACY 光扫文字 →** 退化为逐行淡入 + 轻微位移。
 - **GOLF 配置器 →** hero 交叉溶解切换**保留**(state 驱动,便宜);杆头/颜色选项改**横向 snap carousel**(每项约 70% 宽,露出下一项暗示可滑)。
-- **HOME 逐词 hero →** 保留但缩短(stagger 0.08、位移 24px);hero 改竖向满屏图。
+- **HOME 逐词 hero →** 保留但缩短(stagger 0.08、位移 24px)。
 - **视差 / 漂浮 / Ken-Burns →** 一律关闭;count-up、reveal、hover→点击态 保留(reveal 缩短为 600ms、错峰 60ms)。
 
 ---
 
-## 7. 自测验收
+## 9. 自测验收
 - 桌面:Lenis 平滑滚动下,时间轴描线、七步溶解、视差**不掉帧、不回弹**(同步 OK)。
+- **Hero 视频:真机(iOS Safari + 安卓 Chrome)自动播放成功;滚出暂停、滚回播放;切走标签页暂停;`videoSrc` 为空时回退 `home_hero.png`、非空时无需改版式即自动启用。**
 - 七步钉屏:首尾不突兀,跨步号码只在跨界变一次,无频繁 re-render(React DevTools Profiler 确认)。
-- 移动端真机(iOS Safari + 低端安卓):七步=堆叠卡片、时间轴=分段点亮、无 sticky 抖动,滚动 ~60fps。
-- 开 `prefers-reduced-motion`:全部退化为静态/瞬时,信息无缺失。
+- 移动端真机(iOS Safari + 低端安卓):七步=堆叠卡片、时间轴=分段点亮、无 sticky 抖动,滚动 ~60fps;Hero 视频用小码率或退回 poster。
+- 开 `prefers-reduced-motion`:全部退化为静态/瞬时(Hero 只显 poster),信息无缺失。
 - 所有动画只用 transform/opacity;无 hover-only 的关键交互(触屏可达)。
