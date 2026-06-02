@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import {useEffect, useMemo, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 import {AnimatePresence, LayoutGroup, motion} from 'framer-motion';
 
 export type SpecialtyCollectionFilter = {
@@ -23,11 +23,13 @@ type SpecialtyCollectionGalleryProps = {
   filters: SpecialtyCollectionFilter[];
   items: SpecialtyCollectionItem[];
   closeLabel: string;
+  filterLabel: string;
 };
 
-export function SpecialtyCollectionGallery({filters, items, closeLabel}: SpecialtyCollectionGalleryProps) {
+export function SpecialtyCollectionGallery({filters, items, closeLabel, filterLabel}: SpecialtyCollectionGalleryProps) {
   const [activeFilter, setActiveFilter] = useState(filters[0]?.id ?? 'all');
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
   const visibleItems = useMemo(
     () => (activeFilter === 'all' ? items : items.filter((item) => item.category === activeFilter)),
     [activeFilter, items]
@@ -48,6 +50,7 @@ export function SpecialtyCollectionGallery({filters, items, closeLabel}: Special
 
     document.body.style.overflow = 'hidden';
     window.addEventListener('keydown', handleKeyDown);
+    closeButtonRef.current?.focus();
 
     return () => {
       document.body.style.overflow = previousOverflow;
@@ -58,7 +61,7 @@ export function SpecialtyCollectionGallery({filters, items, closeLabel}: Special
   return (
     <LayoutGroup>
       <div className="space-y-10">
-        <div className="flex flex-wrap gap-3" aria-label="Collection filters">
+        <div className="flex flex-wrap gap-3" role="group" aria-label={filterLabel}>
           {filters.map((filter) => {
             const isActive = filter.id === activeFilter;
 
@@ -124,7 +127,8 @@ export function SpecialtyCollectionGallery({filters, items, closeLabel}: Special
             exit={{opacity: 0}}
             role="dialog"
             aria-modal="true"
-            aria-label={selectedItem.title}
+            aria-labelledby={`collection-dialog-title-${selectedItem.id}`}
+            aria-describedby={`collection-dialog-caption-${selectedItem.id}`}
             onClick={() => setSelectedId(null)}
           >
             <motion.div
@@ -143,14 +147,24 @@ export function SpecialtyCollectionGallery({filters, items, closeLabel}: Special
                   <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-accent">
                     {selectedItem.categoryLabel}
                   </p>
-                  <h2 className="font-heading text-[clamp(42px,8vw,76px)] font-semibold leading-none text-primary">
+                  <h2
+                    id={`collection-dialog-title-${selectedItem.id}`}
+                    className="font-heading text-[clamp(42px,8vw,76px)] font-semibold leading-none text-primary"
+                  >
                     {selectedItem.title}
                   </h2>
-                  <p className="font-body text-[17px] leading-8 text-text">{selectedItem.caption}</p>
+                  <p
+                    id={`collection-dialog-caption-${selectedItem.id}`}
+                    className="font-body text-[17px] leading-8 text-text"
+                  >
+                    {selectedItem.caption}
+                  </p>
                 </div>
                 <button
+                  ref={closeButtonRef}
                   type="button"
                   onClick={() => setSelectedId(null)}
+                  aria-label={closeLabel}
                   className="min-h-11 w-fit border border-primary px-5 py-3 font-body text-sm font-semibold uppercase tracking-[0.14em] text-primary transition duration-hover ease-brand hover:border-accent hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
                 >
                   {closeLabel}

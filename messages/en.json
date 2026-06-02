@@ -416,7 +416,11 @@
           {"id": "ring-05", "title": "Collection 05", "caption": "A reserved slot for symbolic composition.", "category": "appointment", "categoryLabel": "Appointment", "image": "collection_ring_05.png"},
           {"id": "ring-06", "title": "Collection 06", "caption": "A reserved slot for bespoke structure.", "category": "bespoke", "categoryLabel": "Bespoke", "image": "collection_ring_06.png"},
           {"id": "ring-07", "title": "Collection 07", "caption": "A reserved slot for a work shaped by a winning moment.", "category": "champion", "categoryLabel": "Champion", "image": "collection_ring_07.png"},
-          {"id": "ring-08", "title": "Collection 08", "caption": "A reserved slot for meaning and wearing feel.", "category": "bespoke", "categoryLabel": "Bespoke", "image": "collection_ring_08.png"}
+          {"id": "ring-08", "title": "Collection 08", "caption": "A reserved slot for meaning and wearing feel.", "category": "bespoke", "categoryLabel": "Bespoke", "image": "collection_ring_08.png"},
+          {"id": "ring-09", "title": "Collection 09", "caption": "A reserved slot for the side structure of a championship ring.", "category": "champion", "categoryLabel": "Champion", "image": "collection_ring_09.png"},
+          {"id": "ring-10", "title": "Collection 10", "caption": "A reserved slot for appointment and affiliation symbols.", "category": "appointment", "categoryLabel": "Appointment", "image": "collection_ring_10.png"},
+          {"id": "ring-11", "title": "Collection 11", "caption": "A reserved slot for bespoke production details.", "category": "bespoke", "categoryLabel": "Bespoke", "image": "collection_ring_11.png"},
+          {"id": "ring-12", "title": "Collection 12", "caption": "A reserved slot for final proportion and polish.", "category": "champion", "categoryLabel": "Champion", "image": "collection_ring_12.png"}
         ]
       }
     }

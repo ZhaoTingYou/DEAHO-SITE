@@ -68,6 +68,7 @@ export default async function CollectionPage({params}: Props) {
             filters={content.gallery.filters}
             items={items}
             closeLabel={locale === 'ko' ? '닫기' : 'Close'}
+            filterLabel={locale === 'ko' ? '작품 필터' : 'Collection filters'}
           />
         </div>
       </section>

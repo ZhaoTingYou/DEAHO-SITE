@@ -416,7 +416,11 @@
           {"id": "ring-05", "title": "Collection 05", "caption": "상징과 문양의 구성을 보여줄 자리입니다.", "category": "appointment", "categoryLabel": "임관", "image": "collection_ring_05.png"},
           {"id": "ring-06", "title": "Collection 06", "caption": "맞춤 제작 구조를 보여줄 자리입니다.", "category": "bespoke", "categoryLabel": "주문 제작", "image": "collection_ring_06.png"},
           {"id": "ring-07", "title": "Collection 07", "caption": "우승의 순간을 담은 작품 자료 자리입니다.", "category": "champion", "categoryLabel": "챔피언", "image": "collection_ring_07.png"},
-          {"id": "ring-08", "title": "Collection 08", "caption": "의미와 착용감을 함께 보여줄 자리입니다.", "category": "bespoke", "categoryLabel": "주문 제작", "image": "collection_ring_08.png"}
+          {"id": "ring-08", "title": "Collection 08", "caption": "의미와 착용감을 함께 보여줄 자리입니다.", "category": "bespoke", "categoryLabel": "주문 제작", "image": "collection_ring_08.png"},
+          {"id": "ring-09", "title": "Collection 09", "caption": "챔피언십 링의 측면 구조를 보여줄 자료 자리입니다.", "category": "champion", "categoryLabel": "챔피언", "image": "collection_ring_09.png"},
+          {"id": "ring-10", "title": "Collection 10", "caption": "임관과 소속의 상징을 보여줄 자료 자리입니다.", "category": "appointment", "categoryLabel": "임관", "image": "collection_ring_10.png"},
+          {"id": "ring-11", "title": "Collection 11", "caption": "주문 제작 디테일을 보여줄 자료 자리입니다.", "category": "bespoke", "categoryLabel": "주문 제작", "image": "collection_ring_11.png"},
+          {"id": "ring-12", "title": "Collection 12", "caption": "완성된 결과물의 비율과 광택을 보여줄 자료 자리입니다.", "category": "champion", "categoryLabel": "챔피언", "image": "collection_ring_12.png"}
         ]
       }
     }
