@@ -70,7 +70,7 @@ export function HomeHero({
         <motion.div
           initial="hidden"
           animate="visible"
-          className="max-w-5xl space-y-7 md:space-y-8"
+          className="home-hero-copy max-w-5xl space-y-7 md:space-y-8"
         >
           <motion.p
             variants={copyVariants}
