@@ -224,6 +224,23 @@ select {
   animation: news-shine 2.5s var(--ease) infinite;
 }
 
+.golf-float-a {
+  animation: golf-float-a 7s var(--ease) infinite alternate;
+}
+
+.golf-float-b {
+  animation: golf-float-b 6.4s var(--ease) infinite alternate;
+}
+
+.golf-shadow {
+  animation: golf-shadow 6.8s var(--ease) infinite alternate;
+}
+
+.golf-ken-burns {
+  animation: golf-ken-burns 10s var(--ease) infinite alternate;
+  transform-origin: center;
+}
+
 @keyframes home-scroll-breathe {
   0%,
   100% {
@@ -260,8 +277,57 @@ select {
   }
 }
 
+@keyframes golf-float-a {
+  from {
+    transform: translate3d(0, -6px, 0);
+  }
+
+  to {
+    transform: translate3d(0, 8px, 0);
+  }
+}
+
+@keyframes golf-float-b {
+  from {
+    transform: translate3d(0, 7px, 0);
+  }
+
+  to {
+    transform: translate3d(0, -7px, 0);
+  }
+}
+
+@keyframes golf-shadow {
+  from {
+    opacity: .38;
+    transform: scaleX(.92);
+  }
+
+  to {
+    opacity: .18;
+    transform: scaleX(1.08);
+  }
+}
+
+@keyframes golf-ken-burns {
+  from {
+    transform: translate3d(-1%, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(1.5%, -1%, 0) scale(1.06);
+  }
+}
+
 @media (max-width: 767px) {
   .home-scroll-hint {
+    animation: none;
+  }
+
+  .golf-float-a,
+  .golf-float-b,
+  .golf-shadow,
+  .golf-ken-burns {
     animation: none;
   }
 }
@@ -269,7 +335,11 @@ select {
 @media (prefers-reduced-motion: reduce) {
   .news-rule-line,
   .news-ticker-track,
-  .news-shine::after {
+  .news-shine::after,
+  .golf-float-a,
+  .golf-float-b,
+  .golf-shadow,
+  .golf-ken-burns {
     animation: none;
     transform: none;
   }

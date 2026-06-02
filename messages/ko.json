@@ -507,5 +507,107 @@
         }
       ]
     }
+  },
+  "golf": {
+    "hero": {
+      "eyebrow": "PREMIUM CUSTOMIZED GOLF BRACELET",
+      "titleLines": ["FORM", "OF THE", "GAME"],
+      "subtitle": "골프의 구조를 하나의 오브젝트로 재해석하다.",
+      "image": "golf_hero.png",
+      "specLabel": "Configured bracelet"
+    },
+    "statement": {
+      "titleLines": ["FORM", "OF THE", "GAME"],
+      "body": "라운드의 리듬, 클럽의 선, 손목 위의 감각을 하나의 밝은 형태로 정리합니다.",
+      "image": "golf_hero_2.png"
+    },
+    "heads": {
+      "eyebrow": "CLUB HEAD",
+      "title": "자신의 시그니처 골프채로",
+      "subtitle": "클럽 헤드 형태를 원하는 골프채로 선택합니다.",
+      "items": [
+        {
+          "id": "ball",
+          "label": "Ball + Tee",
+          "kicker": "01",
+          "caption": "볼과 티를 함께 세운 상징적인 헤드.",
+          "image": "golf_head_ball.png"
+        },
+        {
+          "id": "iron",
+          "label": "Iron",
+          "kicker": "02",
+          "caption": "정교한 라인을 살린 클래식 아이언.",
+          "image": "golf_head_iron.png"
+        },
+        {
+          "id": "putter",
+          "label": "Putter",
+          "kicker": "03",
+          "caption": "그린 위의 마지막 감각을 닮은 퍼터.",
+          "image": "golf_head_putter.png"
+        },
+        {
+          "id": "wood",
+          "label": "Wood",
+          "kicker": "04",
+          "caption": "긴 비거리의 곡선을 담은 우드.",
+          "image": "golf_head_wood.png"
+        }
+      ]
+    },
+    "shafts": {
+      "eyebrow": "SHAFT COLOR",
+      "title": "손목 위의 그립 컬러",
+      "subtitle": "컬러는 배경이 아니라 손잡이의 인상입니다. 밝은 화면 안에서 대비와 질감만 바뀝니다.",
+      "items": [
+        {
+          "id": "black",
+          "label": "BLACK",
+          "caption": "가장 선명한 대비의 그립.",
+          "image": "golf_shaft_black.png"
+        },
+        {
+          "id": "white",
+          "label": "WHITE",
+          "caption": "빛에 가장 가볍게 놓이는 그립.",
+          "image": "golf_shaft_white.png"
+        },
+        {
+          "id": "burgundy",
+          "label": "BURGUNDY",
+          "caption": "대호의 포인트 컬러를 닮은 그립.",
+          "image": "golf_shaft_burgundy.png"
+        },
+        {
+          "id": "navy",
+          "label": "NAVY",
+          "caption": "차분한 해군색 감도의 그립.",
+          "image": "golf_shaft_navy.png"
+        }
+      ]
+    },
+    "engraving": {
+      "eyebrow": "PERSONAL ENGRAVING",
+      "title": "이름·날짜·기록을 새깁니다",
+      "body": "스코어, 이니셜, 라운드의 날짜처럼 오래 남기고 싶은 정보를 밝은 금속 위에 정리합니다.",
+      "imagePrimary": "golf_engrave_studio.png",
+      "imageDetail": "golf_engrave_detail.png",
+      "specs": ["Name", "Date", "Record", "Course"]
+    },
+    "lifestyle": {
+      "eyebrow": "OBJECT & LIFESTYLE",
+      "title": "라운드 밖에서도 남는 형태",
+      "body": "박스 안의 오브젝트로, 손목 위의 생활감으로, 골프의 구조는 더 오래 머무릅니다.",
+      "imageBox": "golf_box.png",
+      "imageLifestyle": "golf_lifestyle.png",
+      "closing": "당신의 라운드를 영원히"
+    },
+    "labels": {
+      "selectedHead": "Selected head",
+      "selectedShaft": "Selected shaft",
+      "headGroup": "클럽 헤드 선택",
+      "shaftGroup": "샤프트 컬러 선택"
+    }
   }
 }

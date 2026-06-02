@@ -507,5 +507,107 @@
         }
       ]
     }
+  },
+  "golf": {
+    "hero": {
+      "eyebrow": "PREMIUM CUSTOMIZED GOLF BRACELET",
+      "titleLines": ["FORM", "OF THE", "GAME"],
+      "subtitle": "Reinterpreting the structure of golf as a singular object.",
+      "image": "golf_hero.png",
+      "specLabel": "Configured bracelet"
+    },
+    "statement": {
+      "titleLines": ["FORM", "OF THE", "GAME"],
+      "body": "The rhythm of a round, the line of a club, and the feeling on the wrist are arranged into one bright object.",
+      "image": "golf_hero_2.png"
+    },
+    "heads": {
+      "eyebrow": "CLUB HEAD",
+      "title": "Choose your signature club",
+      "subtitle": "Select the club head form that best carries your playing identity.",
+      "items": [
+        {
+          "id": "ball",
+          "label": "Ball + Tee",
+          "kicker": "01",
+          "caption": "A symbolic head with ball and tee held together.",
+          "image": "golf_head_ball.png"
+        },
+        {
+          "id": "iron",
+          "label": "Iron",
+          "kicker": "02",
+          "caption": "A classic iron with a precise club line.",
+          "image": "golf_head_iron.png"
+        },
+        {
+          "id": "putter",
+          "label": "Putter",
+          "kicker": "03",
+          "caption": "A putter form shaped by the final touch on the green.",
+          "image": "golf_head_putter.png"
+        },
+        {
+          "id": "wood",
+          "label": "Wood",
+          "kicker": "04",
+          "caption": "A wood profile carrying the curve of distance.",
+          "image": "golf_head_wood.png"
+        }
+      ]
+    },
+    "shafts": {
+      "eyebrow": "SHAFT COLOR",
+      "title": "Grip color on the wrist",
+      "subtitle": "The color belongs to the bracelet grip, not the page background. Only contrast and texture shift inside the bright field.",
+      "items": [
+        {
+          "id": "black",
+          "label": "BLACK",
+          "caption": "The grip with the clearest contrast.",
+          "image": "golf_shaft_black.png"
+        },
+        {
+          "id": "white",
+          "label": "WHITE",
+          "caption": "The lightest grip in the brightest setting.",
+          "image": "golf_shaft_white.png"
+        },
+        {
+          "id": "burgundy",
+          "label": "BURGUNDY",
+          "caption": "A grip echoing DEAHO's accent color.",
+          "image": "golf_shaft_burgundy.png"
+        },
+        {
+          "id": "navy",
+          "label": "NAVY",
+          "caption": "A calm grip with a navy sensibility.",
+          "image": "golf_shaft_navy.png"
+        }
+      ]
+    },
+    "engraving": {
+      "eyebrow": "PERSONAL ENGRAVING",
+      "title": "Engrave names, dates, and records",
+      "body": "Scores, initials, dates, and course memories can be arranged on bright metal for a longer life.",
+      "imagePrimary": "golf_engrave_studio.png",
+      "imageDetail": "golf_engrave_detail.png",
+      "specs": ["Name", "Date", "Record", "Course"]
+    },
+    "lifestyle": {
+      "eyebrow": "OBJECT & LIFESTYLE",
+      "title": "A form beyond the round",
+      "body": "As an object in its box and as a living piece on the wrist, the structure of golf remains longer.",
+      "imageBox": "golf_box.png",
+      "imageLifestyle": "golf_lifestyle.png",
+      "closing": "Your round, held for eternity"
+    },
+    "labels": {
+      "selectedHead": "Selected head",
+      "selectedShaft": "Selected shaft",
+      "headGroup": "Club head selection",
+      "shaftGroup": "Shaft color selection"
+    }
   }
 }
