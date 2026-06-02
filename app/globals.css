@@ -154,7 +154,7 @@ select {
   font-size: 13px;
   font-weight: 600;
   letter-spacing: .12em;
-  color: var(--primary);
+  color: inherit;
   text-transform: uppercase;
 }
 
@@ -179,6 +179,12 @@ select {
   .site-nav-link:hover::after {
     transform: scaleX(1);
   }
+}
+
+.site-nav-link:focus-visible,
+.footer-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
 }
 
 .home-hero-mask {
@@ -250,7 +256,7 @@ select {
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 600;
-  color: var(--primary);
+  color: inherit;
   text-transform: uppercase;
   letter-spacing: .12em;
 }

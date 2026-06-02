@@ -28,7 +28,10 @@ export async function generateMetadata({params}: Omit<Props, 'children'>): Promi
 
   return {
     title: t('title'),
-    description: t('description')
+    description: t('description'),
+    icons: {
+      icon: '/favicon.svg'
+    }
   };
 }
 

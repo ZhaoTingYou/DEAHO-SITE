@@ -12,7 +12,7 @@ type SiteFooterProps = {
 
 export function SiteFooter({locale}: SiteFooterProps) {
   return (
-    <footer className="border-t border-hairline bg-bg px-container py-14">
+    <footer className="border-t border-hairline bg-bg px-container py-14 text-primary">
       <div className="mx-auto grid max-w-[1440px] gap-10 md:grid-cols-[1fr_2fr]">
         <div className="space-y-4">
           <Link href={withLocale(locale, '/')} className="font-heading text-4xl font-semibold text-primary">
@@ -38,6 +38,7 @@ export function SiteFooter({locale}: SiteFooterProps) {
           <div>
             <p className="footer-label">Other sites</p>
             <div className="mt-4 grid gap-3">
+              <ExternalSiteLink label="대호" href={externalLinks.daeho} className="footer-link" />
               <ExternalSiteLink label="OH" href={externalLinks.oh} className="footer-link" />
               <ExternalSiteLink label="VULCAN" href={externalLinks.vulcan} className="footer-link" />
             </div>

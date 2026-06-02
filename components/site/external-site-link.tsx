@@ -21,7 +21,7 @@ export function ExternalSiteLink({label, href, className = ''}: ExternalSiteLink
           event.preventDefault();
         }
       }}
-      className={`${className} ${isEnabled ? 'text-primary' : 'cursor-default text-primary/70'}`}
+      className={`${className} ${isEnabled ? '' : 'cursor-default opacity-70'}`}
     >
       {label}
     </a>
