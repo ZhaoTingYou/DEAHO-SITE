@@ -106,7 +106,12 @@ export function GolfConfigurator({assets, content, locale}: GolfConfiguratorProp
     <main className="bg-bg text-text">
       <section className="relative min-h-dvh overflow-hidden bg-white pt-32">
         <div className="mx-auto grid min-h-[calc(100dvh-128px)] max-w-[1440px] gap-12 px-container pb-16 lg:grid-cols-[0.76fr_1.24fr] lg:items-center">
-          <Reveal className="relative z-10 space-y-8">
+          <motion.div
+            initial={{opacity: 0, y: prefersReducedMotion ? 0 : 24}}
+            animate={{opacity: 1, y: 0}}
+            transition={{duration: prefersReducedMotion ? 0 : 0.72, ease: [0.16, 1, 0.3, 1]}}
+            className="relative z-10 space-y-8"
+          >
             <div className="space-y-4">
               <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-subtext">
                 {content.hero.eyebrow}
@@ -134,7 +139,7 @@ export function GolfConfigurator({assets, content, locale}: GolfConfiguratorProp
             >
               <span className="consult-cta__label">{content.labels.inquiryCta}</span>
             </Link>
-          </Reveal>
+          </motion.div>
 
           <div className="relative min-h-[440px] lg:min-h-[650px]">
             <div className="golf-float-a absolute inset-x-0 top-4 overflow-hidden bg-white shadow-[0_32px_110px_rgba(16,29,48,0.08)]">
