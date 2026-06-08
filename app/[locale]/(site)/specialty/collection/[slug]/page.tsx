@@ -179,13 +179,23 @@ export default async function CollectionDetailPage({params}: Props) {
 
       <section className="bg-bg py-section">
         <div className="mx-auto max-w-[1440px] space-y-10 px-container">
-          <Reveal className="grid gap-6 bg-white p-6 shadow-[0_24px_88px_rgba(16,29,48,0.07)] md:grid-cols-[1fr_auto] md:items-center">
-            <p className="font-heading text-[clamp(36px,5vw,68px)] font-semibold leading-tight text-primary">
-              {text.ctaTitle}
-            </p>
-            <Link href={withLocale(locale, `/contact?type=bespoke&source=collection&item=${slug}`)} className="min-h-12 border border-accent bg-accent px-6 py-3 text-center font-body text-sm font-semibold uppercase tracking-[0.14em] text-white transition duration-hover ease-brand hover:bg-primary">
-              {text.cta}
-            </Link>
+          <Reveal className="border-y border-hairline bg-white px-5 py-10 md:px-8 md:py-12">
+            <div className="max-w-4xl space-y-7">
+              <div className="space-y-4">
+                <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-accent">
+                  COMMISSION
+                </p>
+                <p className="font-heading text-[clamp(32px,5vw,62px)] font-semibold leading-tight text-primary [text-wrap:balance]">
+                  {text.ctaTitle}
+                </p>
+              </div>
+              <Link
+                href={withLocale(locale, `/contact?type=bespoke&source=collection&item=${slug}`)}
+                className="consult-cta consult-cta--accent consult-cta--large w-fit shrink-0"
+              >
+                <span className="consult-cta__label">{text.cta}</span>
+              </Link>
+            </div>
           </Reveal>
           <Reveal>
             <h2 className="font-heading text-[clamp(38px,6vw,74px)] font-semibold leading-none text-primary">

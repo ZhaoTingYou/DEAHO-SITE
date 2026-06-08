@@ -72,6 +72,8 @@ const instantItemVariants = {
   visible: {opacity: 1, y: 0}
 };
 
+const showExternalHeaderLinks = false;
+
 export function SiteHeader({locale}: SiteHeaderProps) {
   const pathname = usePathname();
   const prefersReducedMotion = usePrefersReducedMotion();
@@ -288,13 +290,17 @@ export function SiteHeader({locale}: SiteHeaderProps) {
 
             <span className="h-3 w-px bg-current opacity-25" aria-hidden="true" />
 
-            <div className="flex items-center gap-4">
-              <ExternalSiteLink label="대호" href={externalLinks.daeho} className="site-nav-link no-underline" />
-              <ExternalSiteLink label="OH" href={externalLinks.oh} className="site-nav-link no-underline" />
-              <ExternalSiteLink label="VULCAN" href={externalLinks.vulcan} className="site-nav-link no-underline" />
-            </div>
+            {showExternalHeaderLinks ? (
+              <>
+                <div className="flex items-center gap-4">
+                  <ExternalSiteLink label="대호" href={externalLinks.daeho} className="site-nav-link no-underline" />
+                  <ExternalSiteLink label="OH" href={externalLinks.oh} className="site-nav-link no-underline" />
+                  <ExternalSiteLink label="VULCAN" href={externalLinks.vulcan} className="site-nav-link no-underline" />
+                </div>
 
-            <span className="h-3 w-px bg-current opacity-25" aria-hidden="true" />
+                <span className="h-3 w-px bg-current opacity-25" aria-hidden="true" />
+              </>
+            ) : null}
 
             <Link
               href={withLocale(locale, '/contact')}
@@ -580,16 +586,18 @@ export function SiteHeader({locale}: SiteHeaderProps) {
               <span className="consult-cta__label">{contactLabel}</span>
             </Link>
 
-            <div className="mt-12 border-t border-hairline pt-8">
-              <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-subtext">
-                Other sites
-              </p>
-              <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-primary">
-                <ExternalSiteLink label="대호" href={externalLinks.daeho} className="site-nav-link no-underline" />
-                <ExternalSiteLink label="OH" href={externalLinks.oh} className="site-nav-link no-underline" />
-                <ExternalSiteLink label="VULCAN" href={externalLinks.vulcan} className="site-nav-link no-underline" />
+            {showExternalHeaderLinks ? (
+              <div className="mt-12 border-t border-hairline pt-8">
+                <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-subtext">
+                  Other sites
+                </p>
+                <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-primary">
+                  <ExternalSiteLink label="대호" href={externalLinks.daeho} className="site-nav-link no-underline" />
+                  <ExternalSiteLink label="OH" href={externalLinks.oh} className="site-nav-link no-underline" />
+                  <ExternalSiteLink label="VULCAN" href={externalLinks.vulcan} className="site-nav-link no-underline" />
+                </div>
               </div>
-            </div>
+            ) : null}
           </motion.div>
         ) : null}
       </AnimatePresence>

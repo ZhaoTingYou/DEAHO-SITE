@@ -162,6 +162,7 @@ select {
   letter-spacing: .14em;
   color: var(--consult-fg);
   text-transform: uppercase;
+  white-space: nowrap;
   transition:
     color var(--dur-hover) var(--ease),
     transform var(--dur-hover) var(--ease);
