@@ -8,7 +8,6 @@ import {setRequestLocale} from 'next-intl/server';
 import {HomeHero} from '@/components/home/home-hero';
 import {Reveal, RevealItem} from '@/components/motion/reveal';
 import {SafeImage} from '@/components/safe-image';
-import {SectionIntro} from '@/components/section-intro';
 import type {Locale} from '@/i18n/routing';
 import {getPageMetadata} from '@/lib/seo';
 import {withLocale} from '@/lib/site-map';
@@ -207,17 +206,22 @@ function HomeContent({content, heroVideo, locale}: HomeContentProps) {
         </div>
       </section>
 
-      <section className="bg-white py-section">
-        <div className="mx-auto max-w-[1440px] space-y-12 px-container">
-          <Reveal>
-            <SectionIntro eyebrow={content.pillars.eyebrow} title={content.pillars.title} />
+      <section className="bg-white py-[clamp(92px,10vw,150px)]">
+        <div className="mx-auto max-w-[1180px] space-y-10 px-container">
+          <Reveal className="max-w-[520px] space-y-5">
+            <p className="font-body text-[11px] font-semibold uppercase tracking-[0.28em] text-subtext">
+              {content.pillars.eyebrow}
+            </p>
+            <h2 className="font-heading text-[clamp(30px,4vw,52px)] font-semibold leading-tight text-primary">
+              {content.pillars.title}
+            </h2>
           </Reveal>
-          <Reveal className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          <Reveal className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
             {content.pillars.items.map((item) => (
               <RevealItem key={item.href}>
                 <Link
                   href={withLocale(locale, item.href)}
-                  className="group block h-full bg-bg p-4 shadow-[0_18px_60px_rgba(16,29,48,0.07)] transition duration-hover ease-brand hover:-translate-y-1 hover:shadow-[0_30px_95px_rgba(16,29,48,0.13)]"
+                  className="group block h-full bg-bg p-3 shadow-[0_16px_54px_rgba(16,29,48,0.055)] transition duration-hover ease-brand hover:-translate-y-1 hover:shadow-[0_24px_78px_rgba(16,29,48,0.10)]"
                 >
                   <div className="hover-zoom">
                     <div className="hover-zoom-media">
@@ -229,11 +233,11 @@ function HomeContent({content, heroVideo, locale}: HomeContentProps) {
                       />
                     </div>
                   </div>
-                  <div className="space-y-3 px-1 py-6">
-                    <h3 className="font-heading text-[clamp(30px,3vw,42px)] font-semibold leading-none text-primary">
+                  <div className="space-y-2 px-1 py-5">
+                    <h3 className="font-heading text-[clamp(22px,2vw,30px)] font-semibold leading-tight text-primary">
                       {item.title}
                     </h3>
-                    <p className="font-body text-[15px] leading-7 text-text">{item.caption}</p>
+                    <p className="font-body text-[13px] leading-6 text-text">{item.caption}</p>
                   </div>
                 </Link>
               </RevealItem>
