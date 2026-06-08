@@ -258,7 +258,7 @@ export function SiteHeader({locale}: SiteHeaderProps) {
       }`}
     >
       <div className="hidden lg:block">
-        <div className="mx-auto flex h-12 max-w-[1440px] items-center justify-between px-container">
+        <div className="mx-auto grid h-20 max-w-[1440px] grid-cols-[minmax(150px,1fr)_auto_minmax(150px,1fr)] items-center gap-6 px-container">
           <Link
             href={withLocale(locale, '/')}
             className="inline-flex min-h-11 items-center font-heading text-[28px] font-semibold tracking-[0.18em]"
@@ -267,7 +267,63 @@ export function SiteHeader({locale}: SiteHeaderProps) {
             DAEHO
           </Link>
 
-          <div className="flex items-center gap-5 font-body text-[12px] font-semibold uppercase tracking-[0.12em]">
+          <motion.nav
+            aria-label="Primary navigation"
+            initial="hidden"
+            animate="visible"
+            variants={navVariants}
+            className="flex items-center justify-center gap-6 xl:gap-8"
+          >
+            {navItems.map((item) => {
+              const megaKey = isMegaMenuKey(item.label) ? item.label : null;
+              const hasMega = megaKey !== null;
+              const active = isActivePath(relativePath, item.href);
+
+              return (
+                <motion.div key={item.href} variants={itemVariants}>
+                  <Link
+                    href={withLocale(locale, item.href)}
+                    className={`site-nav-link ${active ? 'is-active' : ''}`}
+                    aria-current={active ? 'page' : undefined}
+                    aria-haspopup={hasMega ? 'true' : undefined}
+                    aria-expanded={hasMega ? openMenu === megaKey : undefined}
+                    onMouseEnter={() => {
+                      if (megaKey) {
+                        openMegaMenu(megaKey);
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      if (hasMega) {
+                        scheduleMegaClose();
+                      }
+                    }}
+                    onFocus={() => {
+                      if (megaKey) {
+                        openMegaMenu(megaKey);
+                      }
+                    }}
+                    onClick={(event) => {
+                      if (
+                        megaKey &&
+                        window.matchMedia('(hover: none)').matches &&
+                        openMenu !== megaKey
+                      ) {
+                        event.preventDefault();
+                        openMegaMenu(megaKey);
+                        return;
+                      }
+
+                      setOpenMenu(null);
+                    }}
+                  >
+                    {item.label}
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </motion.nav>
+
+          <div className="flex items-center justify-end gap-5 font-body text-[12px] font-semibold uppercase tracking-[0.12em]">
             <div className="flex items-center gap-3" aria-label="Language switcher">
               <Link
                 href={koLocalePath}
@@ -308,66 +364,6 @@ export function SiteHeader({locale}: SiteHeaderProps) {
             >
               <span className="consult-cta__label">{contactLabel}</span>
             </Link>
-          </div>
-        </div>
-
-        <div className={`border-t transition-colors duration-300 ${isSolid ? 'border-hairline' : 'border-transparent'}`}>
-          <div className="mx-auto flex h-14 max-w-[1440px] items-center px-container">
-            <motion.nav
-              aria-label="Primary navigation"
-              initial="hidden"
-              animate="visible"
-              variants={navVariants}
-              className="flex items-center gap-8"
-            >
-              {navItems.map((item) => {
-                const megaKey = isMegaMenuKey(item.label) ? item.label : null;
-                const hasMega = megaKey !== null;
-                const active = isActivePath(relativePath, item.href);
-
-                return (
-                  <motion.div key={item.href} variants={itemVariants}>
-                    <Link
-                      href={withLocale(locale, item.href)}
-                      className={`site-nav-link ${active ? 'is-active' : ''}`}
-                      aria-current={active ? 'page' : undefined}
-                      aria-haspopup={hasMega ? 'true' : undefined}
-                      aria-expanded={hasMega ? openMenu === megaKey : undefined}
-                      onMouseEnter={() => {
-                        if (megaKey) {
-                          openMegaMenu(megaKey);
-                        }
-                      }}
-                      onMouseLeave={() => {
-                        if (hasMega) {
-                          scheduleMegaClose();
-                        }
-                      }}
-                      onFocus={() => {
-                        if (megaKey) {
-                          openMegaMenu(megaKey);
-                        }
-                      }}
-                      onClick={(event) => {
-                        if (
-                          megaKey &&
-                          window.matchMedia('(hover: none)').matches &&
-                          openMenu !== megaKey
-                        ) {
-                          event.preventDefault();
-                          openMegaMenu(megaKey);
-                          return;
-                        }
-
-                        setOpenMenu(null);
-                      }}
-                    >
-                      {item.label}
-                    </Link>
-                  </motion.div>
-                );
-              })}
-            </motion.nav>
           </div>
         </div>
       </div>

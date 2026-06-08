@@ -1,5 +1,47 @@
 import type {Metadata} from 'next';
 import {setRequestLocale} from 'next-intl/server';
+
+import {ChronicleHorizontal} from '@/components/chronicle/chronicle-horizontal';
+import type {Locale} from '@/i18n/routing';
+import {getPageMetadata} from '@/lib/seo';
+import enMessages from '@/messages/en.json';
+import koMessages from '@/messages/ko.json';
+
+type Props = {
+  params: Promise<{locale: Locale}>;
+};
+
+export async function generateMetadata({params}: Props): Promise<Metadata> {
+  const {locale} = await params;
+  return getPageMetadata(locale, 'chronicle');
+}
+
+export default async function ChroniclePage({params}: Props) {
+  const {locale} = await params;
+  setRequestLocale(locale);
+  const content = locale === 'en' ? enMessages.chronicle : koMessages.chronicle;
+  const slides = content.timeline.items.map((item) => ({
+    year: item.year,
+    label: item.kicker,
+    title: item.title,
+    desc: item.body,
+    image: `/images/${item.image}`
+  }));
+
+  return (
+    <ChronicleHorizontal
+      ariaLabel={locale === 'ko' ? '대호 크로니클 가로 타임라인' : 'DEAHO chronicle horizontal timeline'}
+      introLabel="DAEHO"
+      slides={slides}
+    />
+  );
+}
+
+/*
+Previous Chronicle implementation kept for reference.
+
+import type {Metadata} from 'next';
+import {setRequestLocale} from 'next-intl/server';
 import Link from 'next/link';
 
 import {ChronicleTimeline} from '@/components/chronicle/chronicle-timeline';
@@ -101,3 +143,4 @@ export default async function ChroniclePage({params}: Props) {
     </main>
   );
 }
+*/
