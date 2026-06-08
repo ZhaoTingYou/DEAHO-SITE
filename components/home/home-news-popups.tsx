@@ -84,16 +84,16 @@ export function HomeNewsPopups({cards, locale}: HomeNewsPopupsProps) {
                 <NewsImage card={card} />
               </div>
             </div>
-            <div className="grid min-h-[190px] grid-rows-[auto_1fr_auto] gap-4 px-1 py-5">
-              <p className="flex flex-wrap items-center gap-x-3 gap-y-1 font-body text-[11px] font-semibold uppercase tracking-[0.16em] text-subtext">
+            <div className="grid min-h-[166px] grid-rows-[auto_1fr_auto] gap-3 px-1 py-4">
+              <p className="flex flex-wrap items-center gap-x-3 gap-y-1 font-body text-[10px] font-semibold uppercase tracking-[0.15em] text-subtext">
                 <span className="text-accent">{card.categoryLabel}</span>
                 <span className="h-3 w-px bg-hairline" aria-hidden="true" />
                 <span>{card.date}</span>
               </p>
-              <h3 className="font-heading text-[clamp(23px,2.15vw,32px)] font-semibold leading-tight text-primary">
+              <h3 className="font-heading text-[clamp(20px,1.65vw,26px)] font-semibold leading-tight text-primary">
                 {card.title}
               </h3>
-              <span className="w-fit border-b border-primary/30 pb-1 font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-primary transition duration-hover ease-brand group-hover:border-accent group-hover:text-accent">
+              <span className="w-fit border-b border-primary/30 pb-1 font-body text-[10px] font-semibold uppercase tracking-[0.16em] text-primary transition duration-hover ease-brand group-hover:border-accent group-hover:text-accent">
                 {localeCopy.open}
               </span>
             </div>
@@ -129,29 +129,30 @@ export function HomeNewsPopups({cards, locale}: HomeNewsPopupsProps) {
               <button
                 ref={closeButtonRef}
                 type="button"
+                aria-label={localeCopy.close}
                 onClick={() => setActiveCard(null)}
-                className="absolute right-5 top-5 z-10 min-h-11 cursor-pointer bg-white/80 px-1 font-body text-[11px] font-semibold uppercase tracking-[0.2em] text-primary backdrop-blur transition duration-hover ease-brand after:block after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-accent after:transition after:duration-hover after:ease-brand hover:text-accent hover:after:scale-x-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                className="absolute right-4 top-4 z-10 flex h-11 w-11 cursor-pointer items-center justify-center bg-white/80 font-body text-[22px] font-light leading-none text-primary backdrop-blur transition duration-hover ease-brand hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
               >
-                {localeCopy.close}
+                <span aria-hidden="true">×</span>
               </button>
 
               <NewsImage card={activeCard} priority fillFrame fallbackLabel={localeCopy.fallback} />
 
-              <div className="flex flex-col justify-end gap-8 px-2 pb-2 pt-16 md:px-8 md:py-10">
-                <div className="space-y-5">
-                  <p className="flex flex-wrap items-center gap-x-3 gap-y-1 font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-subtext">
+              <div className="flex flex-col justify-start gap-6 px-2 pb-2 pt-14 md:px-8 md:py-10">
+                <div className="space-y-4">
+                  <p className="flex flex-wrap items-center gap-x-3 gap-y-1 font-body text-[10px] font-semibold uppercase tracking-[0.16em] text-subtext">
                     <span className="text-accent">{activeCard.categoryLabel}</span>
                     <span className="h-3 w-px bg-hairline" aria-hidden="true" />
                     <span>{activeCard.date}</span>
                   </p>
                   <h3
                     id={titleId}
-                    className="font-heading text-[clamp(31px,4.2vw,54px)] font-semibold leading-tight text-primary"
+                    className="font-heading text-[clamp(25px,3.2vw,40px)] font-semibold leading-tight text-primary"
                   >
                     {activeCard.title}
                   </h3>
                 </div>
-                <p className="font-body text-[15px] leading-8 text-text">
+                <p className="font-body text-[13px] leading-7 text-text">
                   {localeCopy.body}
                 </p>
               </div>

@@ -159,9 +159,9 @@ function HomeContent({content, heroVideo, latestNews, locale}: HomeContentProps)
         </div>
       </section>
 
-      <section className="bg-white pb-[clamp(108px,10vw,168px)] pt-[clamp(36px,5vw,72px)]">
-        <div className="mx-auto grid max-w-[1180px] gap-12 px-container lg:grid-cols-[minmax(260px,0.42fr)_minmax(0,0.58fr)] lg:items-center xl:gap-20">
-          <Reveal className="max-w-[440px] space-y-7">
+      <section className="bg-white pb-[clamp(54px,5.5vw,88px)] pt-[clamp(36px,5vw,72px)]">
+        <div className="mx-auto grid max-w-[1180px] gap-10 px-container lg:grid-cols-[minmax(240px,0.34fr)_minmax(0,0.66fr)] lg:items-center xl:gap-16">
+          <Reveal className="max-w-[390px] space-y-7">
             <div className="space-y-5">
               <p className="font-body text-[11px] font-semibold uppercase tracking-[0.28em] text-subtext">
                 {content.signature.eyebrow}
@@ -180,20 +180,20 @@ function HomeContent({content, heroVideo, latestNews, locale}: HomeContentProps)
               <RevealItem key={item.image} className="h-full">
                 <Link
                   href={withLocale(locale, '/specialty/collection')}
-                  className="group grid h-full grid-rows-[auto_1fr] bg-white p-3 shadow-[0_18px_70px_rgba(16,29,48,0.055)] transition duration-hover ease-brand hover:-translate-y-1 hover:shadow-[0_28px_90px_rgba(16,29,48,0.10)]"
+                  className="group grid h-full grid-rows-[auto_1fr] bg-white p-2.5 shadow-[0_18px_70px_rgba(16,29,48,0.055)] transition duration-hover ease-brand hover:-translate-y-1 hover:shadow-[0_28px_90px_rgba(16,29,48,0.10)]"
                 >
                   <div className="hover-zoom">
                     <div className="hover-zoom-media">
                       <SafeImage
                         filename={item.image}
                         alt={item.caption}
-                        aspect="aspect-square"
+                        aspect="aspect-[4/3]"
                         variant="plain"
                       />
                     </div>
                   </div>
-                  <div className="grid min-h-[142px] grid-rows-[auto_1fr] gap-2 px-1 pb-2 pt-5">
-                    <h3 className="min-h-[2.4em] font-heading text-[clamp(22px,2vw,30px)] font-semibold leading-tight text-primary">
+                  <div className="grid min-h-[104px] grid-rows-[auto_1fr] gap-2 px-1 pb-2 pt-4">
+                    <h3 className="font-heading text-[clamp(20px,1.65vw,26px)] font-semibold leading-tight text-primary">
                       {item.title}
                     </h3>
                     <p className="self-end font-body text-[12px] leading-5 text-subtext">
@@ -207,13 +207,13 @@ function HomeContent({content, heroVideo, latestNews, locale}: HomeContentProps)
         </div>
       </section>
 
-      <section className="bg-white py-[clamp(92px,10vw,150px)]">
+      <section className="bg-white pb-[clamp(92px,10vw,150px)] pt-[clamp(38px,4vw,64px)]">
         <div className="mx-auto max-w-[1180px] space-y-10 px-container">
           <Reveal className="max-w-[760px] space-y-5">
-            <p className="font-body text-[11px] font-semibold uppercase tracking-[0.28em] text-subtext">
+            <p className="font-body text-[10px] font-semibold uppercase tracking-[0.28em] text-subtext">
               LATEST NEWS
             </p>
-            <h2 className="font-heading text-[clamp(30px,3.8vw,52px)] font-semibold leading-tight text-primary">
+            <h2 className="font-heading text-[clamp(26px,3vw,42px)] font-semibold leading-tight text-primary">
               {locale === 'ko' ? '최근 소식' : 'Latest News'}
             </h2>
           </Reveal>
