@@ -208,11 +208,11 @@ function HomeContent({content, heroVideo, locale}: HomeContentProps) {
 
       <section className="bg-white py-[clamp(92px,10vw,150px)]">
         <div className="mx-auto max-w-[1180px] space-y-10 px-container">
-          <Reveal className="max-w-[520px] space-y-5">
+          <Reveal className="max-w-[760px] space-y-5">
             <p className="font-body text-[11px] font-semibold uppercase tracking-[0.28em] text-subtext">
               {content.pillars.eyebrow}
             </p>
-            <h2 className="font-heading text-[clamp(30px,4vw,52px)] font-semibold leading-tight text-primary">
+            <h2 className="whitespace-nowrap font-heading text-[clamp(21px,2.8vw,36px)] font-semibold leading-tight text-primary">
               {content.pillars.title}
             </h2>
           </Reveal>
