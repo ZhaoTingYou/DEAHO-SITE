@@ -388,8 +388,8 @@ select {
   pointer-events: none;
   visibility: hidden;
   background:
-    radial-gradient(ellipse at 100% 42%, rgba(255, 255, 255, .82), transparent 42%),
-    linear-gradient(180deg, #f8fbff 0%, #eef5ff 48%, #fff 100%);
+    radial-gradient(ellipse at 100% 42%, rgba(255, 255, 255, .5), transparent 42%),
+    linear-gradient(180deg, rgba(248, 251, 255, .5) 0%, rgba(238, 245, 255, .5) 48%, rgba(255, 255, 255, .5) 100%);
   border-right: 1px solid rgba(31, 91, 165, .07);
   opacity: 0;
   transform: translate3d(-16px, 0, 0);
@@ -571,7 +571,7 @@ select {
   right: 60px;
   bottom: 45px;
   left: 60px;
-  z-index: 44;
+  z-index: 46;
   height: 1px;
   visibility: hidden;
   background: rgba(31, 91, 165, .14);
@@ -598,7 +598,8 @@ select {
   height: 2px;
   margin-top: -.5px;
   background: var(--chronicle-day-accent);
-  transition: width 120ms linear;
+  transition: none;
+  will-change: width;
 }
 
 .chronicle-intro {
@@ -1089,8 +1090,8 @@ select {
     padding: 12px 10px;
     align-content: start;
     background:
-      radial-gradient(ellipse at 100% 42%, rgba(255, 255, 255, .86), transparent 52%),
-      linear-gradient(180deg, #f8fbff 0%, #eef5ff 48%, #fff 100%);
+      radial-gradient(ellipse at 100% 42%, rgba(255, 255, 255, .5), transparent 52%),
+      linear-gradient(180deg, rgba(248, 251, 255, .5) 0%, rgba(238, 245, 255, .5) 48%, rgba(255, 255, 255, .5) 100%);
     border: 1px solid rgba(31, 91, 165, .08);
     transform: translate3d(-8px, 0, 0);
   }

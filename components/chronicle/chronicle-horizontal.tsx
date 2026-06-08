@@ -35,10 +35,12 @@ export function ChronicleHorizontal({ariaLabel, introLabel, slides}: ChronicleHo
   const frameRef = useRef<number | null>(null);
   const targetProgressRef = useRef(0);
   const smoothProgressRef = useRef(0);
+  const lineProgressRef = useRef(0);
   const yearResetRef = useRef<number | null>(null);
   const firstYear = slides[0]?.year ?? '';
   const slideCount = Math.max(1, slides.length);
   const [progress, setProgress] = useState(0);
+  const [lineProgress, setLineProgress] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [displayYear, setDisplayYear] = useState(firstYear);
   const [yearSwitching, setYearSwitching] = useState(false);
@@ -87,6 +89,8 @@ export function ChronicleHorizontal({ariaLabel, introLabel, slides}: ChronicleHo
         frame = 0;
         targetProgressRef.current = 0;
         smoothProgressRef.current = 0;
+        lineProgressRef.current = 0;
+        setLineProgress(0);
         window.scrollTo(0, 0);
       });
     };
@@ -156,11 +160,21 @@ export function ChronicleHorizontal({ariaLabel, introLabel, slides}: ChronicleHo
 
     let frame = 0;
 
-    const update = () => {
-      frame = 0;
+    const syncProgressFromStage = () => {
       const rect = stage.getBoundingClientRect();
       const travel = Math.max(1, rect.height - window.innerHeight);
-      targetProgressRef.current = clamp(-rect.top / travel);
+      const nextProgress = clamp(-rect.top / travel);
+      targetProgressRef.current = nextProgress;
+
+      if (Math.abs(lineProgressRef.current - nextProgress) > 0.0005) {
+        lineProgressRef.current = nextProgress;
+        setLineProgress(nextProgress);
+      }
+    };
+
+    const update = () => {
+      frame = 0;
+      syncProgressFromStage();
     };
 
     const requestUpdate = () => {
@@ -172,6 +186,7 @@ export function ChronicleHorizontal({ariaLabel, introLabel, slides}: ChronicleHo
     };
 
     const animateProgress = () => {
+      syncProgressFromStage();
       const target = targetProgressRef.current;
       const current = smoothProgressRef.current;
       const isMobile =
@@ -341,7 +356,7 @@ export function ChronicleHorizontal({ariaLabel, introLabel, slides}: ChronicleHo
       </section>
 
       <div className="chronicle-progress" aria-hidden="true">
-        <i style={{width: `${progress * 100}%`}} />
+        <i style={{width: `${lineProgress * 100}%`}} />
       </div>
 
       <div
