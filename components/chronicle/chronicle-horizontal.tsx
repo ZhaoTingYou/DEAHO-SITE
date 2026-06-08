@@ -36,6 +36,7 @@ export function ChronicleHorizontal({ariaLabel, introLabel, slides}: ChronicleHo
   const targetProgressRef = useRef(0);
   const smoothProgressRef = useRef(0);
   const lineProgressRef = useRef(0);
+  const controlsVisibleRef = useRef(false);
   const yearResetRef = useRef<number | null>(null);
   const firstYear = slides[0]?.year ?? '';
   const slideCount = Math.max(1, slides.length);
@@ -45,6 +46,7 @@ export function ChronicleHorizontal({ariaLabel, introLabel, slides}: ChronicleHo
   const [displayYear, setDisplayYear] = useState(firstYear);
   const [yearSwitching, setYearSwitching] = useState(false);
   const [stageVisible, setStageVisible] = useState(false);
+  const [controlsVisible, setControlsVisible] = useState(false);
   const [introExiting, setIntroExiting] = useState(false);
   const [introComplete, setIntroComplete] = useState(false);
 
@@ -90,7 +92,9 @@ export function ChronicleHorizontal({ariaLabel, introLabel, slides}: ChronicleHo
         targetProgressRef.current = 0;
         smoothProgressRef.current = 0;
         lineProgressRef.current = 0;
+        controlsVisibleRef.current = false;
         setLineProgress(0);
+        setControlsVisible(false);
         window.scrollTo(0, 0);
       });
     };
@@ -164,7 +168,13 @@ export function ChronicleHorizontal({ariaLabel, introLabel, slides}: ChronicleHo
       const rect = stage.getBoundingClientRect();
       const travel = Math.max(1, rect.height - window.innerHeight);
       const nextProgress = clamp(-rect.top / travel);
+      const nextControlsVisible = rect.top <= 1 && rect.bottom > window.innerHeight;
       targetProgressRef.current = nextProgress;
+
+      if (controlsVisibleRef.current !== nextControlsVisible) {
+        controlsVisibleRef.current = nextControlsVisible;
+        setControlsVisible(nextControlsVisible);
+      }
 
       if (Math.abs(lineProgressRef.current - nextProgress) > 0.0005) {
         lineProgressRef.current = nextProgress;
@@ -286,7 +296,9 @@ export function ChronicleHorizontal({ariaLabel, introLabel, slides}: ChronicleHo
 
   return (
     <main
-      className={`chronicle-page is-day-theme ${stageVisible ? 'is-stage-visible' : ''}`}
+      className={`chronicle-page is-day-theme ${stageVisible ? 'is-stage-visible' : ''} ${
+        controlsVisible ? 'is-controls-visible' : ''
+      }`}
     >
       <nav className="chronicle-year-nav" aria-label="Chronicle year navigation">
         {yearStops.map((stop) => (

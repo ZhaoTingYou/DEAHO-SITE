@@ -1,0 +1,203 @@
+'use client';
+
+import {AnimatePresence, motion} from 'framer-motion';
+import Image from 'next/image';
+import {useEffect, useId, useRef, useState} from 'react';
+
+import type {Locale} from '@/i18n/routing';
+
+export type HomeNewsPopupCard = {
+  id: string;
+  category: string;
+  categoryLabel: string;
+  date: string;
+  title: string;
+  image: string;
+  hasImage: boolean;
+};
+
+type HomeNewsPopupsProps = {
+  cards: HomeNewsPopupCard[];
+  locale: Locale;
+};
+
+const copy = {
+  ko: {
+    open: '자세히 보기',
+    close: '닫기',
+    label: '최근 소식 팝업',
+    fallback: '이미지 준비 중',
+    body:
+      '확인된 자료가 도착하면 실제 기사 본문으로 교체됩니다. 현재는 대호의 최근 제작 흐름과 프로젝트 맥락을 정리하는 뉴스 팝업으로 유지합니다.'
+  },
+  en: {
+    open: 'Read more',
+    close: 'Close',
+    label: 'Latest news popup',
+    fallback: 'Image pending',
+    body:
+      'Verified source material will replace this article body when it arrives. For now, this popup keeps DEAHO’s recent production rhythm and project context in place.'
+  }
+};
+
+export function HomeNewsPopups({cards, locale}: HomeNewsPopupsProps) {
+  const [activeCard, setActiveCard] = useState<HomeNewsPopupCard | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const titleId = useId();
+  const localeCopy = copy[locale];
+
+  useEffect(() => {
+    if (!activeCard) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    closeButtonRef.current?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setActiveCard(null);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [activeCard]);
+
+  return (
+    <>
+      <div className="grid items-stretch gap-4 md:grid-cols-2 xl:grid-cols-4">
+        {cards.map((card) => (
+          <button
+            key={card.id}
+            type="button"
+            onClick={() => setActiveCard(card)}
+            className="group grid h-full cursor-pointer grid-rows-[auto_1fr] bg-bg p-3 text-left shadow-[0_16px_54px_rgba(16,29,48,0.055)] transition duration-hover ease-brand hover:-translate-y-1 hover:shadow-[0_24px_78px_rgba(16,29,48,0.10)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+          >
+            <div className="hover-zoom">
+              <div className="hover-zoom-media">
+                <NewsImage card={card} />
+              </div>
+            </div>
+            <div className="grid min-h-[190px] grid-rows-[auto_1fr_auto] gap-4 px-1 py-5">
+              <p className="flex flex-wrap items-center gap-x-3 gap-y-1 font-body text-[11px] font-semibold uppercase tracking-[0.16em] text-subtext">
+                <span className="text-accent">{card.categoryLabel}</span>
+                <span className="h-3 w-px bg-hairline" aria-hidden="true" />
+                <span>{card.date}</span>
+              </p>
+              <h3 className="font-heading text-[clamp(23px,2.15vw,32px)] font-semibold leading-tight text-primary">
+                {card.title}
+              </h3>
+              <span className="w-fit border-b border-primary/30 pb-1 font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-primary transition duration-hover ease-brand group-hover:border-accent group-hover:text-accent">
+                {localeCopy.open}
+              </span>
+            </div>
+          </button>
+        ))}
+      </div>
+
+      <AnimatePresence>
+        {activeCard ? (
+          <motion.div
+            className="fixed inset-0 z-[120] grid place-items-center bg-primary/45 px-container py-8 backdrop-blur-[2px]"
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            transition={{duration: 0.22, ease: [0.16, 1, 0.3, 1]}}
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget) {
+                setActiveCard(null);
+              }
+            }}
+          >
+            <motion.article
+              role="dialog"
+              aria-modal="true"
+              aria-label={localeCopy.label}
+              aria-labelledby={titleId}
+              className="relative grid max-h-[calc(100dvh-64px)] w-full max-w-[920px] overflow-y-auto bg-white p-4 shadow-[0_32px_120px_rgba(16,29,48,0.22)] md:grid-cols-[0.9fr_1fr] md:p-6"
+              initial={{opacity: 0, y: 18, scale: 0.98}}
+              animate={{opacity: 1, y: 0, scale: 1}}
+              exit={{opacity: 0, y: 12, scale: 0.98}}
+              transition={{duration: 0.32, ease: [0.16, 1, 0.3, 1]}}
+            >
+              <button
+                ref={closeButtonRef}
+                type="button"
+                onClick={() => setActiveCard(null)}
+                className="absolute right-5 top-5 z-10 min-h-11 cursor-pointer bg-white/80 px-1 font-body text-[11px] font-semibold uppercase tracking-[0.2em] text-primary backdrop-blur transition duration-hover ease-brand after:block after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-accent after:transition after:duration-hover after:ease-brand hover:text-accent hover:after:scale-x-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+              >
+                {localeCopy.close}
+              </button>
+
+              <NewsImage card={activeCard} priority fillFrame fallbackLabel={localeCopy.fallback} />
+
+              <div className="flex flex-col justify-end gap-8 px-2 pb-2 pt-16 md:px-8 md:py-10">
+                <div className="space-y-5">
+                  <p className="flex flex-wrap items-center gap-x-3 gap-y-1 font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-subtext">
+                    <span className="text-accent">{activeCard.categoryLabel}</span>
+                    <span className="h-3 w-px bg-hairline" aria-hidden="true" />
+                    <span>{activeCard.date}</span>
+                  </p>
+                  <h3
+                    id={titleId}
+                    className="font-heading text-[clamp(31px,4.2vw,54px)] font-semibold leading-tight text-primary"
+                  >
+                    {activeCard.title}
+                  </h3>
+                </div>
+                <p className="font-body text-[15px] leading-8 text-text">
+                  {localeCopy.body}
+                </p>
+              </div>
+            </motion.article>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
+    </>
+  );
+}
+
+function NewsImage({
+  card,
+  priority = false,
+  fillFrame = false,
+  fallbackLabel = copy.ko.fallback
+}: {
+  card: HomeNewsPopupCard;
+  priority?: boolean;
+  fillFrame?: boolean;
+  fallbackLabel?: string;
+}) {
+  if (!card.hasImage) {
+    return (
+      <div
+        className={`flex w-full items-center justify-center break-all border border-hairline bg-white p-5 text-center font-body text-xs font-semibold leading-5 tracking-[0.08em] text-subtext ${
+          fillFrame ? 'min-h-[300px] md:min-h-[520px]' : 'aspect-[3/4]'
+        }`}
+        role="img"
+        aria-label={card.image}
+      >
+        {fallbackLabel}
+      </div>
+    );
+  }
+
+  return (
+    <div className={`relative w-full overflow-hidden bg-bg ${fillFrame ? 'min-h-[300px] md:min-h-[520px]' : 'aspect-[3/4]'}`}>
+      <Image
+        src={`/images/${card.image}`}
+        alt={`${card.categoryLabel} ${card.title}`}
+        fill
+        priority={priority}
+        sizes="(min-width: 1280px) 290px, (min-width: 768px) 50vw, 100vw"
+        className="object-cover"
+      />
+    </div>
+  );
+}

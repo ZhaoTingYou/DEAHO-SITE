@@ -6,6 +6,7 @@ import Link from 'next/link';
 import {setRequestLocale} from 'next-intl/server';
 
 import {HomeHero} from '@/components/home/home-hero';
+import {HomeNewsPopups, type HomeNewsPopupCard} from '@/components/home/home-news-popups';
 import {Reveal, RevealItem} from '@/components/motion/reveal';
 import {SafeImage} from '@/components/safe-image';
 import type {Locale} from '@/i18n/routing';
@@ -33,10 +34,15 @@ export default async function HomePage({params}: Props) {
   const {locale} = await params;
   setRequestLocale(locale);
 
-  const content = locale === 'en' ? enMessages.home : koMessages.home;
+  const messages = locale === 'en' ? enMessages : koMessages;
+  const content = messages.home;
   const heroVideo = getHomeHeroVideo();
+  const latestNews: HomeNewsPopupCard[] = messages.news.grid.cards.slice(0, 4).map((card) => ({
+    ...card,
+    hasImage: existsSync(path.join(process.cwd(), 'public', 'images', card.image))
+  }));
 
-  return <HomeContent content={content} heroVideo={heroVideo} locale={locale} />;
+  return <HomeContent content={content} heroVideo={heroVideo} latestNews={latestNews} locale={locale} />;
 }
 
 function getHomeHeroVideo() {
@@ -63,10 +69,11 @@ type HomeContentProps = {
     webmSrc?: string;
     videoPoster?: string;
   };
+  latestNews: HomeNewsPopupCard[];
   locale: Locale;
 };
 
-function HomeContent({content, heroVideo, locale}: HomeContentProps) {
+function HomeContent({content, heroVideo, latestNews, locale}: HomeContentProps) {
   const currentPulse = {
     eyebrow: 'THE CURRENT PULSE',
     title: locale === 'ko' ? '지금, 대호' : 'DEAHO, Now',
@@ -102,12 +109,6 @@ function HomeContent({content, heroVideo, locale}: HomeContentProps) {
               <p className="font-body text-[14px] leading-6 text-text">
                 {currentPulse.body}
               </p>
-              <Link
-                href={withLocale(locale, '/news')}
-                className="link-sweep font-body text-[12px] font-semibold uppercase tracking-[0.12em]"
-              >
-                {locale === 'ko' ? 'News 보기' : 'View news'}
-              </Link>
             </div>
 
             <Link href={withLocale(locale, '/news')} className="group block">
@@ -174,12 +175,12 @@ function HomeContent({content, heroVideo, locale}: HomeContentProps) {
             </p>
           </Reveal>
 
-          <Reveal className="grid gap-5 sm:grid-cols-3">
+          <Reveal className="grid items-stretch gap-5 sm:grid-cols-3">
             {content.rings.slice(2, 5).map((item) => (
-              <RevealItem key={item.image}>
+              <RevealItem key={item.image} className="h-full">
                 <Link
                   href={withLocale(locale, '/specialty/collection')}
-                  className="group block bg-white p-3 shadow-[0_18px_70px_rgba(16,29,48,0.055)] transition duration-hover ease-brand hover:-translate-y-1 hover:shadow-[0_28px_90px_rgba(16,29,48,0.10)]"
+                  className="group grid h-full grid-rows-[auto_1fr] bg-white p-3 shadow-[0_18px_70px_rgba(16,29,48,0.055)] transition duration-hover ease-brand hover:-translate-y-1 hover:shadow-[0_28px_90px_rgba(16,29,48,0.10)]"
                 >
                   <div className="hover-zoom">
                     <div className="hover-zoom-media">
@@ -191,11 +192,11 @@ function HomeContent({content, heroVideo, locale}: HomeContentProps) {
                       />
                     </div>
                   </div>
-                  <div className="space-y-2 px-1 pb-2 pt-5">
-                    <h3 className="font-heading text-[clamp(22px,2vw,30px)] font-semibold leading-tight text-primary">
+                  <div className="grid min-h-[142px] grid-rows-[auto_1fr] gap-2 px-1 pb-2 pt-5">
+                    <h3 className="min-h-[2.4em] font-heading text-[clamp(22px,2vw,30px)] font-semibold leading-tight text-primary">
                       {item.title}
                     </h3>
-                    <p className="font-body text-[12px] leading-5 text-subtext">
+                    <p className="self-end font-body text-[12px] leading-5 text-subtext">
                       {item.caption}
                     </p>
                   </div>
@@ -210,60 +211,20 @@ function HomeContent({content, heroVideo, locale}: HomeContentProps) {
         <div className="mx-auto max-w-[1180px] space-y-10 px-container">
           <Reveal className="max-w-[760px] space-y-5">
             <p className="font-body text-[11px] font-semibold uppercase tracking-[0.28em] text-subtext">
-              {content.pillars.eyebrow}
+              LATEST NEWS
             </p>
-            <h2 className="whitespace-nowrap font-heading text-[clamp(21px,2.8vw,36px)] font-semibold leading-tight text-primary">
-              {content.pillars.title}
+            <h2 className="font-heading text-[clamp(30px,3.8vw,52px)] font-semibold leading-tight text-primary">
+              {locale === 'ko' ? '최근 소식' : 'Latest News'}
             </h2>
           </Reveal>
-          <Reveal className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {content.pillars.items.map((item) => (
-              <RevealItem key={item.href}>
-                <Link
-                  href={withLocale(locale, item.href)}
-                  className="group block h-full bg-bg p-3 shadow-[0_16px_54px_rgba(16,29,48,0.055)] transition duration-hover ease-brand hover:-translate-y-1 hover:shadow-[0_24px_78px_rgba(16,29,48,0.10)]"
-                >
-                  <div className="hover-zoom">
-                    <div className="hover-zoom-media">
-                      <SafeImage
-                        filename={item.image}
-                        alt={item.caption}
-                        aspect="aspect-[3/4]"
-                        variant="plain"
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-2 px-1 py-5">
-                    <h3 className="font-heading text-[clamp(22px,2vw,30px)] font-semibold leading-tight text-primary">
-                      {item.title}
-                    </h3>
-                    <p className="font-body text-[13px] leading-6 text-text">{item.caption}</p>
-                  </div>
-                </Link>
-              </RevealItem>
-            ))}
+          <Reveal>
+            <HomeNewsPopups cards={latestNews} locale={locale} />
           </Reveal>
         </div>
       </section>
 
-      <section className="overflow-hidden bg-white pb-section pt-[clamp(54px,7vw,110px)]" aria-labelledby="home-partners-title">
-        <div className="mx-auto max-w-[1180px] px-container">
-          <Reveal className="mx-auto max-w-xl space-y-4 text-center">
-            <p className="font-body text-[11px] font-semibold uppercase tracking-[0.28em] text-subtext">
-              {locale === 'ko' ? 'COOPERATION / SPONSORSHIP' : 'COOPERATION / SPONSORSHIP'}
-            </p>
-            <h2 id="home-partners-title" className="font-heading text-[clamp(32px,4vw,54px)] font-semibold leading-tight text-primary">
-              {locale === 'ko' ? '함께 만든 기록들' : 'Records Made Together'}
-            </h2>
-            <p className="font-body text-[15px] leading-7 text-text">
-              {locale === 'ko'
-                ? '협업과 후원의 이름들이 조용한 증명의 흐름으로 이어집니다.'
-                : 'Names of collaboration and sponsorship move as a quiet proof strip.'}
-            </p>
-          </Reveal>
-        </div>
-
-        <div className="home-brand-marquee mt-14" aria-label={locale === 'ko' ? '협업 및 후원 브랜드' : 'Collaboration and sponsorship brands'}>
+      <section className="overflow-hidden bg-white pb-section pt-[clamp(42px,6vw,90px)]">
+        <div className="home-brand-marquee" aria-label={locale === 'ko' ? '협업 및 후원 브랜드' : 'Collaboration and sponsorship brands'}>
           {brandRows.map((row, rowIndex) => (
             <div className="home-brand-row" key={rowIndex}>
               {[...row, ...row].map((brand, brandIndex) => (

@@ -396,10 +396,10 @@ select {
   transition:
     opacity 760ms var(--chronicle-intro-ease),
     transform 760ms var(--chronicle-intro-ease),
-    visibility 0ms linear 760ms;
+    visibility 0ms linear 0ms;
 }
 
-.chronicle-page.is-stage-visible .chronicle-year-nav {
+.chronicle-page.is-controls-visible .chronicle-year-nav {
   pointer-events: auto;
   visibility: visible;
   opacity: 1;
@@ -580,10 +580,10 @@ select {
   transition:
     opacity 760ms var(--chronicle-intro-ease),
     transform 760ms var(--chronicle-intro-ease),
-    visibility 0ms linear 760ms;
+    visibility 0ms linear 0ms;
 }
 
-.chronicle-page.is-stage-visible .chronicle-progress {
+.chronicle-page.is-controls-visible .chronicle-progress {
   visibility: visible;
   opacity: 1;
   transform: translate3d(0, 0, 0);
@@ -1096,7 +1096,7 @@ select {
     transform: translate3d(-8px, 0, 0);
   }
 
-  .chronicle-page.is-stage-visible .chronicle-year-nav {
+  .chronicle-page.is-controls-visible .chronicle-year-nav {
     transform: translate3d(0, 0, 0);
   }
 
