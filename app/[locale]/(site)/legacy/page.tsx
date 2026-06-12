@@ -8,10 +8,9 @@ import {Reveal, RevealItem} from '@/components/motion/reveal';
 import {SafeImage} from '@/components/safe-image';
 import {SectionIntro} from '@/components/section-intro';
 import type {Locale} from '@/i18n/routing';
+import {getLocaleMessages} from '@/lib/locale-messages';
 import {getPageMetadata} from '@/lib/seo';
 import {withLocale} from '@/lib/site-map';
-import enMessages from '@/messages/en.json';
-import koMessages from '@/messages/ko.json';
 
 type Props = {
   params: Promise<{locale: Locale}>;
@@ -25,7 +24,7 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
 export default async function LegacyPage({params}: Props) {
   const {locale} = await params;
   setRequestLocale(locale);
-  const content = locale === 'en' ? enMessages.legacy : koMessages.legacy;
+  const content = getLocaleMessages(locale).legacy;
 
   return (
     <main className="bg-bg text-text">
@@ -41,12 +40,12 @@ export default async function LegacyPage({params}: Props) {
             <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-subtext">
               {content.hero.eyebrow}
             </p>
-            <h1 className="font-heading text-[clamp(44px,9vw,126px)] font-semibold leading-none text-primary">
+            <h1 className="font-heading text-[clamp(36px,6.6vw,80px)] font-semibold leading-none text-primary">
               {content.hero.title}
             </h1>
             <LegacyLightSweepText
               lines={content.hero.lines}
-              className="mx-auto max-w-5xl space-y-3 font-heading text-[clamp(28px,5.8vw,82px)] font-semibold leading-[1.18] text-primary"
+              className="mx-auto max-w-5xl space-y-3 font-heading text-[clamp(24px,4.2vw,52px)] font-semibold leading-[1.18] text-primary"
             />
           </Reveal>
           <Reveal className="w-full max-w-5xl">
@@ -90,10 +89,10 @@ export default async function LegacyPage({params}: Props) {
                     <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-subtext">
                       {item.eyebrow}
                     </p>
-                    <h2 className="font-heading text-[clamp(34px,4vw,58px)] font-semibold leading-none text-primary">
+                    <h2 className="font-heading text-[clamp(26px,3vw,40px)] font-semibold leading-none text-primary">
                       {item.title}
                     </h2>
-                    <p className="mx-auto max-w-sm font-body text-[16px] leading-7 text-text">
+                    <p className="mx-auto max-w-sm font-body text-[14px] leading-7 text-text">
                       {item.body}
                     </p>
                     <span className="link-sweep inline-flex font-body text-sm font-semibold uppercase tracking-[0.12em]">
@@ -128,7 +127,7 @@ export default async function LegacyPage({params}: Props) {
 
       <section className="bg-bg py-section">
         <Reveal className="mx-auto max-w-5xl space-y-8 px-container text-center">
-          <h2 className="font-heading text-[clamp(42px,7vw,92px)] font-semibold leading-tight text-primary">
+          <h2 className="font-heading text-[clamp(32px,5vw,60px)] font-semibold leading-tight text-primary">
             {content.closing.title}
           </h2>
           <Link

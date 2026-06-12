@@ -10,20 +10,14 @@ import {HomeNewsPopups, type HomeNewsPopupCard} from '@/components/home/home-new
 import {Reveal, RevealItem} from '@/components/motion/reveal';
 import {SafeImage} from '@/components/safe-image';
 import type {Locale} from '@/i18n/routing';
+import {getLocaleMessages} from '@/lib/locale-messages';
 import {getPageMetadata} from '@/lib/seo';
 import {withLocale} from '@/lib/site-map';
-import enMessages from '@/messages/en.json';
 import koMessages from '@/messages/ko.json';
 
 type Props = {
   params: Promise<{locale: Locale}>;
 };
-
-const brandRows = [
-  ['pcn', 'KB 국민은행', 'NH농협은행', 'DOYAK', 'BHL', 'SHIFT UP', '신한은행', 'IPARTNERS', '우리은행', 'INNORED'],
-  ['NC Entertainment', 'YeonSung Apparel', '전북은행', 'SC 제일은행', 'JK 프렌즈', 'Charm Technology', 'kakaobank', 'KREITs', 'Kbank', 'KRAFTON'],
-  ['toss bank', 'KEB 하나은행', 'A Partners', '우리은행', 'INNORED', 'SHIFT UP', '신한은행', 'KRAFTON', 'Kbank', 'KB 국민은행']
-];
 
 export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale} = await params;
@@ -34,15 +28,16 @@ export default async function HomePage({params}: Props) {
   const {locale} = await params;
   setRequestLocale(locale);
 
-  const messages = locale === 'en' ? enMessages : koMessages;
+  const messages = getLocaleMessages(locale);
   const content = messages.home;
+  const homeUi = messages.homeUi;
   const heroVideo = getHomeHeroVideo();
   const latestNews: HomeNewsPopupCard[] = messages.news.grid.cards.slice(0, 4).map((card) => ({
     ...card,
     hasImage: existsSync(path.join(process.cwd(), 'public', 'images', card.image))
   }));
 
-  return <HomeContent content={content} heroVideo={heroVideo} latestNews={latestNews} locale={locale} />;
+  return <HomeContent content={content} heroVideo={heroVideo} homeUi={homeUi} latestNews={latestNews} locale={locale} />;
 }
 
 function getHomeHeroVideo() {
@@ -64,6 +59,7 @@ function getHomeHeroVideo() {
 
 type HomeContentProps = {
   content: typeof koMessages.home;
+  homeUi: typeof koMessages.homeUi;
   heroVideo: {
     videoSrc?: string;
     webmSrc?: string;
@@ -73,16 +69,8 @@ type HomeContentProps = {
   locale: Locale;
 };
 
-function HomeContent({content, heroVideo, latestNews, locale}: HomeContentProps) {
-  const currentPulse = {
-    eyebrow: 'THE CURRENT PULSE',
-    title: locale === 'ko' ? '지금, 대호' : 'DEAHO, Now',
-    body: locale === 'ko' ? '그리고 지금도 만들고 있다.' : 'And we are still creating now.',
-    question:
-      locale === 'ko'
-        ? '가장 자랑하고 싶은 아이템? 프로젝트?'
-        : 'A piece or project worth remembering?'
-  };
+function HomeContent({content, heroVideo, homeUi, latestNews, locale}: HomeContentProps) {
+  const {currentPulse, latestNews: latestNewsText, partners} = homeUi;
 
   return (
     <main className="min-h-screen bg-bg">
@@ -170,7 +158,7 @@ function HomeContent({content, heroVideo, latestNews, locale}: HomeContentProps)
                 {content.signature.title}
               </h2>
             </div>
-            <p className="max-w-sm font-body text-[15px] leading-7 text-text">
+            <p className="max-w-sm font-body text-[14px] leading-7 text-text">
               {content.signature.body}
             </p>
           </Reveal>
@@ -193,7 +181,7 @@ function HomeContent({content, heroVideo, latestNews, locale}: HomeContentProps)
                     </div>
                   </div>
                   <div className="grid min-h-[104px] grid-rows-[auto_1fr] gap-2 px-1 pb-2 pt-4">
-                    <h3 className="font-heading text-[clamp(20px,1.65vw,26px)] font-semibold leading-tight text-primary">
+                    <h3 className="font-heading text-[clamp(18px,1.35vw,22px)] font-semibold leading-tight text-primary">
                       {item.title}
                     </h3>
                     <p className="self-end font-body text-[12px] leading-5 text-subtext">
@@ -211,21 +199,21 @@ function HomeContent({content, heroVideo, latestNews, locale}: HomeContentProps)
         <div className="mx-auto max-w-[1180px] space-y-10 px-container">
           <Reveal className="max-w-[760px] space-y-5">
             <p className="font-body text-[10px] font-semibold uppercase tracking-[0.28em] text-subtext">
-              LATEST NEWS
+              {latestNewsText.eyebrow}
             </p>
-            <h2 className="font-heading text-[clamp(26px,3vw,42px)] font-semibold leading-tight text-primary">
-              {locale === 'ko' ? '최근 소식' : 'Latest News'}
+            <h2 className="font-heading text-[clamp(22px,2.4vw,34px)] font-semibold leading-tight text-primary">
+              {latestNewsText.title}
             </h2>
           </Reveal>
           <Reveal>
-            <HomeNewsPopups cards={latestNews} locale={locale} />
+            <HomeNewsPopups cards={latestNews} text={latestNewsText} />
           </Reveal>
         </div>
       </section>
 
       <section className="overflow-hidden bg-white pb-section pt-[clamp(42px,6vw,90px)]">
-        <div className="home-brand-marquee" aria-label={locale === 'ko' ? '협업 및 후원 브랜드' : 'Collaboration and sponsorship brands'}>
-          {brandRows.map((row, rowIndex) => (
+        <div className="home-brand-marquee" aria-label={partners.ariaLabel}>
+          {partners.rows.map((row, rowIndex) => (
             <div className="home-brand-row" key={rowIndex}>
               {[...row, ...row].map((brand, brandIndex) => (
                 <span key={`${brand}-${brandIndex}`}>{brand}</span>

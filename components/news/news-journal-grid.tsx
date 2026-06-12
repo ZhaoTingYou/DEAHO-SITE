@@ -26,22 +26,15 @@ export type NewsCard = {
 type NewsJournalGridProps = {
   filters: NewsFilter[];
   cards: NewsCard[];
+  empty: {
+    title: string;
+    body: string;
+  };
   filterLabel: string;
   locale: Locale;
 };
 
-const emptyCopy = {
-  ko: {
-    title: '아직 등록된 소식이 없습니다',
-    body: '검증된 자료가 준비되면 이 지면에 새로운 소식이 추가됩니다.'
-  },
-  en: {
-    title: 'No stories yet',
-    body: 'New verified journal entries will appear here when they are ready.'
-  }
-};
-
-export function NewsJournalGrid({filters, cards, filterLabel, locale}: NewsJournalGridProps) {
+export function NewsJournalGrid({filters, cards, empty, filterLabel, locale}: NewsJournalGridProps) {
   const [activeFilter, setActiveFilter] = useState(filters[0]?.id ?? 'all');
   const visibleCards = useMemo(
     () => (activeFilter === 'all' ? cards : cards.filter((card) => card.category === activeFilter)),
@@ -84,7 +77,7 @@ export function NewsJournalGrid({filters, cards, filterLabel, locale}: NewsJourn
         </div>
 
         {visibleCards.length === 0 ? (
-          <EmptyState title={emptyCopy[locale].title} body={emptyCopy[locale].body} />
+          <EmptyState title={empty.title} body={empty.body} />
         ) : (
           <motion.div layout className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             <AnimatePresence mode="popLayout">
@@ -124,7 +117,7 @@ export function NewsJournalGrid({filters, cards, filterLabel, locale}: NewsJourn
                         <span className="h-3 w-px bg-hairline" aria-hidden="true" />
                         <span>{card.date}</span>
                       </motion.div>
-                      <h3 className="font-heading text-[clamp(28px,3vw,40px)] font-semibold leading-tight text-primary">
+                      <h3 className="font-heading text-[clamp(23px,2.2vw,31px)] font-semibold leading-tight text-primary">
                         {card.title}
                       </h3>
                     </div>

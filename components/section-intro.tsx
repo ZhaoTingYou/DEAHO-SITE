@@ -23,9 +23,9 @@ export function SectionIntro({
   const alignment = align === 'center' && variant === 'default' ? 'mx-auto text-center' : '';
   const titleClass =
     variant === 'legacy'
-      ? 'font-heading text-[clamp(44px,7vw,92px)] font-semibold leading-none text-primary'
+      ? 'font-heading text-[clamp(34px,5vw,64px)] font-semibold leading-none text-primary'
       : variant === 'news'
-        ? 'font-heading text-[clamp(48px,8vw,96px)] font-bold leading-none text-primary'
+        ? 'font-heading text-[clamp(36px,5.8vw,68px)] font-bold leading-none text-primary'
         : 'font-heading text-h1 font-semibold text-primary';
 
   return (

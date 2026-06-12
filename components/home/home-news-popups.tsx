@@ -4,8 +4,6 @@ import {AnimatePresence, motion} from 'framer-motion';
 import Image from 'next/image';
 import {useEffect, useId, useRef, useState} from 'react';
 
-import type {Locale} from '@/i18n/routing';
-
 export type HomeNewsPopupCard = {
   id: string;
   category: string;
@@ -18,33 +16,19 @@ export type HomeNewsPopupCard = {
 
 type HomeNewsPopupsProps = {
   cards: HomeNewsPopupCard[];
-  locale: Locale;
+  text: {
+    open: string;
+    close: string;
+    label: string;
+    fallback: string;
+    body: string;
+  };
 };
 
-const copy = {
-  ko: {
-    open: '자세히 보기',
-    close: '닫기',
-    label: '최근 소식 팝업',
-    fallback: '이미지 준비 중',
-    body:
-      '확인된 자료가 도착하면 실제 기사 본문으로 교체됩니다. 현재는 대호의 최근 제작 흐름과 프로젝트 맥락을 정리하는 뉴스 팝업으로 유지합니다.'
-  },
-  en: {
-    open: 'Read more',
-    close: 'Close',
-    label: 'Latest news popup',
-    fallback: 'Image pending',
-    body:
-      'Verified source material will replace this article body when it arrives. For now, this popup keeps DEAHO’s recent production rhythm and project context in place.'
-  }
-};
-
-export function HomeNewsPopups({cards, locale}: HomeNewsPopupsProps) {
+export function HomeNewsPopups({cards, text}: HomeNewsPopupsProps) {
   const [activeCard, setActiveCard] = useState<HomeNewsPopupCard | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const titleId = useId();
-  const localeCopy = copy[locale];
 
   useEffect(() => {
     if (!activeCard) {
@@ -90,11 +74,11 @@ export function HomeNewsPopups({cards, locale}: HomeNewsPopupsProps) {
                 <span className="h-3 w-px bg-hairline" aria-hidden="true" />
                 <span>{card.date}</span>
               </p>
-              <h3 className="font-heading text-[clamp(20px,1.65vw,26px)] font-semibold leading-tight text-primary">
+              <h3 className="font-heading text-[clamp(18px,1.35vw,22px)] font-semibold leading-tight text-primary">
                 {card.title}
               </h3>
               <span className="w-fit border-b border-primary/30 pb-1 font-body text-[10px] font-semibold uppercase tracking-[0.16em] text-primary transition duration-hover ease-brand group-hover:border-accent group-hover:text-accent">
-                {localeCopy.open}
+                {text.open}
               </span>
             </div>
           </button>
@@ -118,7 +102,7 @@ export function HomeNewsPopups({cards, locale}: HomeNewsPopupsProps) {
             <motion.article
               role="dialog"
               aria-modal="true"
-              aria-label={localeCopy.label}
+              aria-label={text.label}
               aria-labelledby={titleId}
               className="relative grid max-h-[calc(100dvh-64px)] w-full max-w-[920px] overflow-y-auto bg-white p-4 shadow-[0_32px_120px_rgba(16,29,48,0.22)] md:grid-cols-[0.9fr_1fr] md:p-6"
               initial={{opacity: 0, y: 18, scale: 0.98}}
@@ -129,14 +113,14 @@ export function HomeNewsPopups({cards, locale}: HomeNewsPopupsProps) {
               <button
                 ref={closeButtonRef}
                 type="button"
-                aria-label={localeCopy.close}
+                aria-label={text.close}
                 onClick={() => setActiveCard(null)}
                 className="absolute right-4 top-4 z-10 flex h-11 w-11 cursor-pointer items-center justify-center bg-white/80 font-body text-[22px] font-light leading-none text-primary backdrop-blur transition duration-hover ease-brand hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
               >
                 <span aria-hidden="true">×</span>
               </button>
 
-              <NewsImage card={activeCard} priority fillFrame fallbackLabel={localeCopy.fallback} />
+              <NewsImage card={activeCard} priority fillFrame fallbackLabel={text.fallback} />
 
               <div className="flex flex-col justify-start gap-6 px-2 pb-2 pt-14 md:px-8 md:py-10">
                 <div className="space-y-4">
@@ -147,13 +131,13 @@ export function HomeNewsPopups({cards, locale}: HomeNewsPopupsProps) {
                   </p>
                   <h3
                     id={titleId}
-                    className="font-heading text-[clamp(25px,3.2vw,40px)] font-semibold leading-tight text-primary"
+                    className="font-heading text-[clamp(22px,2.6vw,32px)] font-semibold leading-tight text-primary"
                   >
                     {activeCard.title}
                   </h3>
                 </div>
                 <p className="font-body text-[13px] leading-7 text-text">
-                  {localeCopy.body}
+                  {text.body}
                 </p>
               </div>
             </motion.article>
@@ -168,7 +152,7 @@ function NewsImage({
   card,
   priority = false,
   fillFrame = false,
-  fallbackLabel = copy.ko.fallback
+  fallbackLabel
 }: {
   card: HomeNewsPopupCard;
   priority?: boolean;
@@ -184,7 +168,7 @@ function NewsImage({
         role="img"
         aria-label={card.image}
       >
-        {fallbackLabel}
+        {fallbackLabel ?? card.image}
       </div>
     );
   }

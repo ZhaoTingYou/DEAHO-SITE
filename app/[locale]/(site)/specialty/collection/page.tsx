@@ -7,9 +7,8 @@ import {SectionIntro} from '@/components/section-intro';
 import {SpecialtyCollectionGallery} from '@/components/specialty/specialty-collection-gallery';
 import type {Locale} from '@/i18n/routing';
 import {imageExists} from '@/lib/image-exists';
+import {getLocaleMessages} from '@/lib/locale-messages';
 import {getPageMetadata} from '@/lib/seo';
-import enMessages from '@/messages/en.json';
-import koMessages from '@/messages/ko.json';
 
 type Props = {
   params: Promise<{locale: Locale}>;
@@ -23,8 +22,9 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
 export default async function CollectionPage({params}: Props) {
   const {locale} = await params;
   setRequestLocale(locale);
-  const content =
-    locale === 'en' ? enMessages.specialtyPages.collection : koMessages.specialtyPages.collection;
+  const messages = getLocaleMessages(locale);
+  const content = messages.specialtyPages.collection;
+  const text = messages.collectionUi;
   const items = content.gallery.items.map((item) => ({
     ...item,
     hasImage: imageExists(item.image)
@@ -44,7 +44,7 @@ export default async function CollectionPage({params}: Props) {
             <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-subtext">
               {content.hero.eyebrow}
             </p>
-            <h1 className="font-heading text-[clamp(58px,9vw,126px)] font-semibold leading-none text-primary">
+            <h1 className="font-heading text-[clamp(42px,6.6vw,80px)] font-semibold leading-none text-primary">
               {content.hero.title}
             </h1>
             <p className="max-w-2xl font-body text-body leading-[1.75] text-text">
@@ -74,7 +74,8 @@ export default async function CollectionPage({params}: Props) {
           <SpecialtyCollectionGallery
             filters={content.gallery.filters}
             items={items}
-            filterLabel={locale === 'ko' ? '작품 필터' : 'Collection filters'}
+            empty={text.empty}
+            filterLabel={text.filtersLabel}
             locale={locale}
           />
         </div>

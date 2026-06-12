@@ -26,24 +26,18 @@ export type SpecialtyCollectionItem = {
 type SpecialtyCollectionGalleryProps = {
   filters: SpecialtyCollectionFilter[];
   items: SpecialtyCollectionItem[];
+  empty: {
+    title: string;
+    body: string;
+  };
   filterLabel: string;
   locale: Locale;
-};
-
-const emptyCopy = {
-  ko: {
-    title: '등록된 작품이 없습니다',
-    body: '선택한 분류의 작품 자료가 준비되면 이곳에 추가됩니다.'
-  },
-  en: {
-    title: 'No works in this category',
-    body: 'Works in the selected category will appear here once the archive is ready.'
-  }
 };
 
 export function SpecialtyCollectionGallery({
   filters,
   items,
+  empty,
   filterLabel,
   locale
 }: SpecialtyCollectionGalleryProps) {
@@ -79,7 +73,7 @@ export function SpecialtyCollectionGallery({
         </div>
 
         {visibleItems.length === 0 ? (
-          <EmptyState title={emptyCopy[locale].title} body={emptyCopy[locale].body} />
+          <EmptyState title={empty.title} body={empty.body} />
         ) : (
           <motion.div layout className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
             <AnimatePresence mode="popLayout">

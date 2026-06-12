@@ -6,6 +6,7 @@ import {Reveal, RevealItem} from '@/components/motion/reveal';
 import {SafeImage} from '@/components/safe-image';
 import {SectionIntro} from '@/components/section-intro';
 import type {Locale} from '@/i18n/routing';
+import {getLocaleMessages} from '@/lib/locale-messages';
 import {withLocale} from '@/lib/site-map';
 
 type LegacyDetailContent = {
@@ -39,6 +40,8 @@ type LegacyDetailPageProps = {
 };
 
 export function LegacyDetailPage({locale, content}: LegacyDetailPageProps) {
+  const messages = getLocaleMessages(locale);
+
   return (
     <main className="bg-bg text-text">
       <section className="relative overflow-hidden bg-white pt-28">
@@ -53,7 +56,7 @@ export function LegacyDetailPage({locale, content}: LegacyDetailPageProps) {
             <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-subtext">
               {content.hero.eyebrow}
             </p>
-            <h1 className="font-heading text-[clamp(58px,9vw,128px)] font-semibold leading-none text-primary">
+            <h1 className="font-heading text-[clamp(42px,6.6vw,78px)] font-semibold leading-none text-primary">
               {content.hero.title}
             </h1>
             <p className="mx-auto max-w-3xl font-body text-body leading-[1.75] text-text">
@@ -150,7 +153,7 @@ export function LegacyDetailPage({locale, content}: LegacyDetailPageProps) {
             href={withLocale(locale, '/legacy')}
             className="link-sweep font-body text-sm font-semibold uppercase tracking-[0.12em]"
           >
-            {locale === 'ko' ? 'Legacy로 돌아가기' : 'Back to legacy'}
+            {messages.legacyUi.backToLegacy}
           </Link>
         </Reveal>
       </section>

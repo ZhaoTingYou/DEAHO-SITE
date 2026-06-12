@@ -116,7 +116,7 @@ export function GolfConfigurator({assets, content, locale}: GolfConfiguratorProp
               <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-subtext">
                 {content.hero.eyebrow}
               </p>
-              <h1 className="font-heading text-[clamp(64px,11vw,150px)] font-semibold leading-[0.78] text-primary">
+              <h1 className="font-heading text-[clamp(48px,8vw,92px)] font-semibold leading-[0.78] text-primary">
                 {content.hero.titleLines.map((line) => (
                   <span key={line} className="block">
                     {line}
@@ -124,7 +124,7 @@ export function GolfConfigurator({assets, content, locale}: GolfConfiguratorProp
                 ))}
               </h1>
             </div>
-            <p className="max-w-xl font-body text-[18px] leading-8 text-text">
+            <p className="max-w-xl font-body text-[15px] leading-7 text-text">
               {content.hero.subtitle}
             </p>
             <div className="grid max-w-lg grid-cols-2 border-y border-hairline py-4 font-body text-[11px] font-semibold uppercase tracking-[0.16em] text-subtext">
@@ -205,14 +205,14 @@ export function GolfConfigurator({assets, content, locale}: GolfConfiguratorProp
       <section className="overflow-hidden bg-bg py-section">
         <div className="mx-auto grid max-w-[1440px] gap-12 px-container lg:grid-cols-[0.86fr_1.14fr] lg:items-center">
           <Reveal className="space-y-8">
-            <h2 className="font-heading text-[clamp(62px,9vw,128px)] font-semibold leading-[0.78] text-primary">
+            <h2 className="font-heading text-[clamp(44px,7vw,78px)] font-semibold leading-[0.78] text-primary">
               {content.statement.titleLines.map((line) => (
                 <span key={line} className="block">
                   {line}
                 </span>
               ))}
             </h2>
-            <p className="max-w-xl font-body text-[19px] leading-9 text-text">
+            <p className="max-w-xl font-body text-[15px] leading-7 text-text">
               {content.statement.body}
             </p>
           </Reveal>
@@ -261,10 +261,10 @@ export function GolfConfigurator({assets, content, locale}: GolfConfiguratorProp
             <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-subtext">
               {content.heads.eyebrow}
             </p>
-            <h2 className="font-heading text-[clamp(42px,6vw,82px)] font-semibold leading-none text-primary">
+            <h2 className="font-heading text-[clamp(30px,4.4vw,54px)] font-semibold leading-none text-primary">
               {content.heads.title}
             </h2>
-            <p className="font-body text-[17px] leading-8 text-text">
+            <p className="font-body text-[14px] leading-7 text-text">
               {content.heads.subtitle}
             </p>
           </Reveal>
@@ -303,7 +303,7 @@ export function GolfConfigurator({assets, content, locale}: GolfConfiguratorProp
                       <span className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
                         {item.kicker}
                       </span>
-                      <span className="font-heading text-[30px] font-semibold leading-none text-primary">
+                      <span className="font-heading text-[22px] font-semibold leading-none text-primary">
                         {item.label}
                       </span>
                       <span className="font-body text-sm leading-6 text-subtext">
@@ -325,11 +325,11 @@ export function GolfConfigurator({assets, content, locale}: GolfConfiguratorProp
               <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-subtext">
                 {content.shafts.eyebrow}
               </p>
-              <h2 className="mt-4 font-heading text-[clamp(42px,6vw,82px)] font-semibold leading-none text-primary">
+              <h2 className="mt-4 font-heading text-[clamp(30px,4.4vw,54px)] font-semibold leading-none text-primary">
                 {content.shafts.title}
               </h2>
             </div>
-            <p className="max-w-2xl font-body text-[17px] leading-8 text-text lg:justify-self-end">
+            <p className="max-w-2xl font-body text-[14px] leading-7 text-text lg:justify-self-end">
               {content.shafts.subtitle}
             </p>
           </Reveal>
@@ -382,10 +382,10 @@ export function GolfConfigurator({assets, content, locale}: GolfConfiguratorProp
             <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-subtext">
               {content.engraving.eyebrow}
             </p>
-            <h2 className="font-heading text-[clamp(44px,7vw,96px)] font-semibold leading-none text-primary">
+            <h2 className="font-heading text-[clamp(30px,4.4vw,54px)] font-semibold leading-none text-primary">
               {content.engraving.title}
             </h2>
-            <p className="max-w-xl font-body text-[17px] leading-8 text-text">
+            <p className="max-w-xl font-body text-[14px] leading-7 text-text">
               {content.engraving.body}
             </p>
             <div className="grid gap-5 pt-4">
@@ -483,13 +483,13 @@ export function GolfConfigurator({assets, content, locale}: GolfConfiguratorProp
             <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-subtext">
               {content.lifestyle.eyebrow}
             </p>
-            <h2 className="font-heading text-[clamp(46px,7vw,92px)] font-semibold leading-none text-primary">
+            <h2 className="font-heading text-[clamp(32px,5vw,58px)] font-semibold leading-none text-primary">
               {content.lifestyle.title}
             </h2>
-            <p className="max-w-xl font-body text-[17px] leading-8 text-text">
+            <p className="max-w-xl font-body text-[14px] leading-7 text-text">
               {content.lifestyle.body}
             </p>
-            <div className="border-t border-primary/50 pt-8 font-heading text-[clamp(38px,5vw,72px)] font-semibold leading-tight text-primary">
+            <div className="border-t border-primary/50 pt-8 font-heading text-[clamp(28px,4vw,48px)] font-semibold leading-tight text-primary">
               {content.lifestyle.closing}
             </div>
           </Reveal>

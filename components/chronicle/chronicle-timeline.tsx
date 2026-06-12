@@ -5,7 +5,6 @@ import {AnimatePresence, motion, useScroll, useSpring, useTransform, type Motion
 import {useRef, useState} from 'react';
 
 import {PlaceholderImg} from '@/components/placeholder-img';
-import type {Locale} from '@/i18n/routing';
 
 type ChronicleMilestone = {
   year: string;
@@ -18,31 +17,22 @@ type ChronicleMilestone = {
 
 type ChronicleTimelineProps = {
   items: ChronicleMilestone[];
-  locale: Locale;
+  labels: ChronicleTimelineLabels;
 };
 
-const labels = {
-  ko: {
-    open: '이 해의 의미 보기',
-    close: '접기',
-    title: 'ARCHIVE NOTE',
-    next: '다음 기록은 시간축을 따라 이어집니다.',
-    previousYear: '이전 연도',
-    nextYear: '다음 연도'
-  },
-  en: {
-    open: 'Open archive note',
-    close: 'Close',
-    title: 'ARCHIVE NOTE',
-    next: 'The next record continues along the timeline.',
-    previousYear: 'Previous year',
-    nextYear: 'Next year'
-  }
+type ChronicleTimelineLabels = {
+  open: string;
+  close: string;
+  title: string;
+  next: string;
+  previousYear: string;
+  nextYear: string;
+  first: string;
 };
 
 const detailImages = ['chronicle_detail_01.png', 'chronicle_detail_02.png', 'chronicle_detail_03.png'];
 
-export function ChronicleTimeline({items, locale}: ChronicleTimelineProps) {
+export function ChronicleTimeline({items, labels}: ChronicleTimelineProps) {
   const timelineRef = useRef<HTMLElement>(null);
   const {scrollYProgress} = useScroll({
     target: timelineRef,
@@ -79,7 +69,7 @@ export function ChronicleTimeline({items, locale}: ChronicleTimelineProps) {
             index={index}
             total={items.length}
             progress={smoothProgress}
-            locale={locale}
+            labels={labels}
             previousYear={items[index - 1]?.year}
             nextYear={items[index + 1]?.year}
             detailImage={detailImages[index % detailImages.length]}
@@ -95,7 +85,7 @@ function MilestoneEntry({
   index,
   total,
   progress,
-  locale,
+  labels,
   previousYear,
   nextYear,
   detailImage
@@ -104,14 +94,14 @@ function MilestoneEntry({
   index: number;
   total: number;
   progress: MotionValue<number>;
-  locale: Locale;
+  labels: ChronicleTimelineLabels;
   previousYear?: string;
   nextYear?: string;
   detailImage: string;
 }) {
   const [isExpanded, setIsExpanded] = useState(false);
   const isLeft = index % 2 === 1;
-  const text = labels[locale];
+  const text = labels;
   const panelId = `chronicle-note-${index}`;
   const t = total === 1 ? 1 : index / (total - 1);
   const nodeScale = useTransform(progress, [Math.max(0, t - 0.035), t], [0.45, 1]);
@@ -145,15 +135,15 @@ function MilestoneEntry({
           </motion.div>
           <div className="mt-6 space-y-4">
             <div className="flex flex-wrap items-center gap-3">
-              {item.first ? <FirstBadge /> : null}
+              {item.first ? <FirstBadge label={text.first} /> : null}
               <span className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-subtext">
                 {item.kicker}
               </span>
             </div>
-            <h3 className="font-heading text-[clamp(28px,3vw,42px)] font-semibold leading-tight text-primary">
+            <h3 className="font-heading text-[clamp(24px,2.4vw,34px)] font-semibold leading-tight text-primary">
               {item.title}
             </h3>
-            <p className="font-body text-[15px] leading-7 text-text">{item.body}</p>
+            <p className="font-body text-[14px] leading-7 text-text">{item.body}</p>
             <button
               type="button"
               aria-expanded={isExpanded}
@@ -180,7 +170,7 @@ function MilestoneEntry({
                         <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
                           {text.title} · {item.year}
                         </p>
-                        <p className="mt-3 font-body text-[15px] leading-7 text-text">{item.body}</p>
+                        <p className="mt-3 font-body text-[14px] leading-7 text-text">{item.body}</p>
                         <p className="mt-3 font-body text-[13px] leading-6 text-subtext">{text.next}</p>
                         <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 border-t border-hairline pt-4 font-body text-[11px] font-semibold uppercase tracking-[0.14em] text-subtext">
                           {previousYear ? (
@@ -217,7 +207,7 @@ function MilestoneEntry({
         whileInView={{opacity: 1, y: 0, filter: 'blur(0px)'}}
         viewport={{once: true, amount: 0.5}}
         transition={{duration: 0.7, ease: [0.16, 1, 0.3, 1]}}
-        className={`font-numeric text-[clamp(46px,6vw,88px)] font-semibold leading-none text-primary md:row-start-1 ${
+        className={`font-numeric text-[clamp(34px,4.5vw,58px)] font-semibold leading-none text-primary md:row-start-1 ${
           isLeft
             ? 'md:col-start-3 md:pl-8 md:text-left'
             : 'md:col-start-1 md:pr-8 md:text-right'
@@ -229,7 +219,7 @@ function MilestoneEntry({
   );
 }
 
-function FirstBadge() {
+function FirstBadge({label}: {label: string}) {
   return (
     <motion.span
       initial={{scale: 0.8, opacity: 0}}
@@ -238,7 +228,7 @@ function FirstBadge() {
       transition={{duration: 0.5, ease: [0.16, 1, 0.3, 1]}}
       className="inline-flex bg-accent px-3 py-1 font-body text-[10px] font-semibold uppercase tracking-[0.18em] text-on-navy"
     >
-      FIRST
+      {label}
     </motion.span>
   );
 }

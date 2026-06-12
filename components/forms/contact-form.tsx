@@ -2,53 +2,27 @@
 
 import {useState} from 'react';
 
-import type {Locale} from '@/i18n/routing';
-
 type ContactFormProps = {
-  locale: Locale;
+  copy: ContactFormCopy;
   defaultType?: InquiryType;
 };
 
 type InquiryType = 'appointment' | 'championship' | 'bespoke' | 'other';
 
-const copy = {
-  ko: {
-    name: '이름',
-    organization: '회사 / 팀',
-    contact: '연락처',
-    type: '문의 유형',
-    message: '메시지',
-    submit: '문의 보내기',
-    success: '접수되었습니다. 확인 가능한 연락처로 다시 연락드리겠습니다.',
-    fallback: '전송이 원활하지 않으면 직접 연락처로 문의해 주세요.',
-    options: [
-      {value: 'appointment', label: '임관반지'},
-      {value: 'championship', label: '우승반지'},
-      {value: 'bespoke', label: '맞춤제작'},
-      {value: 'other', label: '기타'}
-    ]
-  },
-  en: {
-    name: 'Name',
-    organization: 'Company / Team',
-    contact: 'Contact',
-    type: 'Inquiry type',
-    message: 'Message',
-    submit: 'Send inquiry',
-    success: 'Inquiry received. We will follow up through the contact you provided.',
-    fallback: 'If submission does not go through, use the direct contact details on this page.',
-    options: [
-      {value: 'appointment', label: 'Appointment ring'},
-      {value: 'championship', label: 'Championship ring'},
-      {value: 'bespoke', label: 'Bespoke'},
-      {value: 'other', label: 'Other'}
-    ]
-  }
+type ContactFormCopy = {
+  name: string;
+  organization: string;
+  contact: string;
+  type: string;
+  message: string;
+  submit: string;
+  success: string;
+  fallback: string;
+  options: Array<{value: string; label: string}>;
 };
 
-export function ContactForm({locale, defaultType = 'appointment'}: ContactFormProps) {
+export function ContactForm({copy: text, defaultType = 'appointment'}: ContactFormProps) {
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const text = copy[locale];
 
   return (
     <form

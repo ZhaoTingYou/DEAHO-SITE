@@ -44,11 +44,11 @@ export function SpecialtyDetailTriplet({items}: SpecialtyDetailTripletProps) {
               </span>
             </div>
             <div className="space-y-3 px-1 py-5">
-              <h3 className="font-heading text-[clamp(30px,4vw,44px)] font-semibold leading-tight text-primary">
+              <h3 className="font-heading text-[clamp(24px,3vw,34px)] font-semibold leading-tight text-primary">
                 {item.title}
               </h3>
               {item.body ? (
-                <p className="font-body text-[15px] leading-7 text-text">{item.body}</p>
+                <p className="font-body text-[14px] leading-7 text-text">{item.body}</p>
               ) : null}
             </div>
           </motion.article>

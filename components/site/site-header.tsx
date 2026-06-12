@@ -1,6 +1,7 @@
 'use client';
 
 import {AnimatePresence, motion} from 'framer-motion';
+import {useTranslations} from 'next-intl';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 import {useEffect, useMemo, useRef, useState} from 'react';
@@ -16,37 +17,7 @@ type SiteHeaderProps = {
   locale: Locale;
 };
 
-type MegaMenuKey = 'LEGACY' | 'SPECIALTY';
-
-const megaMenuDetails: Record<
-  MegaMenuKey,
-  {
-    eyebrow: string;
-    title: string;
-    motif: string;
-    descriptions: Record<string, string>;
-  }
-> = {
-  LEGACY: {
-    eyebrow: 'MEMORIAL HALL',
-    title: 'Trust made permanent',
-    motif: '38 / 200,000+',
-    descriptions: {
-      LOYALTY: '신의 · 오래도록 함께한 신뢰',
-      CREDIBILITY: '신뢰 · 숫자로 증명되는 믿음',
-      ACHIEVEMENT: '성취 · 기록으로 남은 인정'
-    }
-  },
-  SPECIALTY: {
-    eyebrow: 'CRAFT ANATOMY',
-    title: 'Seven steps of precision',
-    motif: '01-07',
-    descriptions: {
-      TECHNIQUE: '공정 · 7단계의 정성',
-      COLLECTION: '작품 · 완성된 결과물'
-    }
-  }
-};
+type MegaMenuKey = 'legacy' | 'specialty';
 
 const navListVariants = {
   hidden: {},
@@ -75,6 +46,9 @@ const instantItemVariants = {
 const showExternalHeaderLinks = false;
 
 export function SiteHeader({locale}: SiteHeaderProps) {
+  const navText = useTranslations('common.navigation');
+  const footerText = useTranslations('common.footer');
+  const externalText = useTranslations('common.footer.externalSites');
   const pathname = usePathname();
   const prefersReducedMotion = usePrefersReducedMotion();
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -88,8 +62,8 @@ export function SiteHeader({locale}: SiteHeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState<MegaMenuKey | null>(null);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({
-    LEGACY: false,
-    SPECIALTY: false
+    legacy: false,
+    specialty: false
   });
 
   const relativePath = useMemo(() => {
@@ -105,7 +79,36 @@ export function SiteHeader({locale}: SiteHeaderProps) {
   const koLocalePath = withLocale('ko', relativePath === '/' ? '/' : relativePath);
   const enLocalePath = withLocale('en', relativePath === '/' ? '/' : relativePath);
   const isHome = relativePath === '/';
-  const contactLabel = locale === 'ko' ? 'CONTACT · 문의' : 'CONTACT';
+  const contactLabel = navText('contactCta');
+  const megaMenuDetails: Record<
+    MegaMenuKey,
+    {
+      eyebrow: string;
+      title: string;
+      motif: string;
+      descriptions: Record<string, string>;
+    }
+  > = {
+    legacy: {
+      eyebrow: navText('mega.legacy.eyebrow'),
+      title: navText('mega.legacy.title'),
+      motif: navText('mega.legacy.motif'),
+      descriptions: {
+        loyalty: navText('mega.legacy.descriptions.loyalty'),
+        credibility: navText('mega.legacy.descriptions.credibility'),
+        achievement: navText('mega.legacy.descriptions.achievement')
+      }
+    },
+    specialty: {
+      eyebrow: navText('mega.specialty.eyebrow'),
+      title: navText('mega.specialty.title'),
+      motif: navText('mega.specialty.motif'),
+      descriptions: {
+        technique: navText('mega.specialty.descriptions.technique'),
+        collection: navText('mega.specialty.descriptions.collection')
+      }
+    }
+  };
 
   const clearMegaCloseTimer = () => {
     if (closeTimerRef.current) {
@@ -215,7 +218,7 @@ export function SiteHeader({locale}: SiteHeaderProps) {
     };
   }, []);
 
-  const currentMegaItem = openMenu ? navItems.find((item) => item.label === openMenu) : undefined;
+  const currentMegaItem = openMenu ? navItems.find((item) => item.id === openMenu) : undefined;
   const currentMegaDetails = openMenu ? megaMenuDetails[openMenu] : null;
   const isHeaderInteractive = isHeaderHovered || hasHeaderFocus;
   const isHomeHeroTransparent =
@@ -261,23 +264,24 @@ export function SiteHeader({locale}: SiteHeaderProps) {
         <div className="mx-auto grid h-20 max-w-[1440px] grid-cols-[minmax(150px,1fr)_auto_minmax(150px,1fr)] items-center gap-6 px-container">
           <Link
             href={withLocale(locale, '/')}
-            className="inline-flex min-h-11 items-center font-heading text-[28px] font-semibold tracking-[0.18em]"
-            aria-label="DAEHO home"
+            className="inline-flex min-h-11 items-center font-heading text-[22px] font-semibold tracking-[0.18em]"
+            aria-label={navText('logoHome')}
           >
             DAEHO
           </Link>
 
           <motion.nav
-            aria-label="Primary navigation"
+            aria-label={navText('primaryLabel')}
             initial="hidden"
             animate="visible"
             variants={navVariants}
             className="flex items-center justify-center gap-6 xl:gap-8"
           >
             {navItems.map((item) => {
-              const megaKey = isMegaMenuKey(item.label) ? item.label : null;
+              const megaKey = isMegaMenuKey(item.id) ? item.id : null;
               const hasMega = megaKey !== null;
               const active = isActivePath(relativePath, item.href);
+              const itemLabel = navText(`items.${item.id}`);
 
               return (
                 <motion.div key={item.href} variants={itemVariants}>
@@ -316,7 +320,7 @@ export function SiteHeader({locale}: SiteHeaderProps) {
                       setOpenMenu(null);
                     }}
                   >
-                    {item.label}
+                    {itemLabel}
                   </Link>
                 </motion.div>
               );
@@ -324,7 +328,7 @@ export function SiteHeader({locale}: SiteHeaderProps) {
           </motion.nav>
 
           <div className="flex items-center justify-end gap-5 font-body text-[12px] font-semibold uppercase tracking-[0.12em]">
-            <div className="flex items-center gap-3" aria-label="Language switcher">
+            <div className="flex items-center gap-3" aria-label={navText('languageSwitcherLabel')}>
               <Link
                 href={koLocalePath}
                 className={`site-nav-link no-underline ${locale === 'ko' ? 'opacity-100' : 'opacity-60'}`}
@@ -349,9 +353,9 @@ export function SiteHeader({locale}: SiteHeaderProps) {
             {showExternalHeaderLinks ? (
               <>
                 <div className="flex items-center gap-4">
-                  <ExternalSiteLink label="대호" href={externalLinks.daeho} className="site-nav-link no-underline" />
-                  <ExternalSiteLink label="OH" href={externalLinks.oh} className="site-nav-link no-underline" />
-                  <ExternalSiteLink label="VULCAN" href={externalLinks.vulcan} className="site-nav-link no-underline" />
+                  <ExternalSiteLink label={externalText('daeho')} href={externalLinks.daeho} className="site-nav-link no-underline" />
+                  <ExternalSiteLink label={externalText('oh')} href={externalLinks.oh} className="site-nav-link no-underline" />
+                  <ExternalSiteLink label={externalText('vulcan')} href={externalLinks.vulcan} className="site-nav-link no-underline" />
                 </div>
 
                 <span className="h-3 w-px bg-current opacity-25" aria-hidden="true" />
@@ -372,7 +376,7 @@ export function SiteHeader({locale}: SiteHeaderProps) {
         <button
           type="button"
           className="flex h-11 w-11 items-center justify-center"
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-label={isMenuOpen ? navText('closeMenu') : navText('openMenu')}
           aria-expanded={isMenuOpen}
           onClick={toggleMobileMenu}
         >
@@ -397,8 +401,8 @@ export function SiteHeader({locale}: SiteHeaderProps) {
 
         <Link
           href={withLocale(locale, '/')}
-          className="font-heading text-[28px] font-semibold tracking-[0.14em]"
-          aria-label="DAEHO home"
+          className="font-heading text-[22px] font-semibold tracking-[0.14em]"
+          aria-label={navText('logoHome')}
         >
           DAEHO
         </Link>
@@ -421,7 +425,7 @@ export function SiteHeader({locale}: SiteHeaderProps) {
           <motion.div
             key={currentMegaItem.label}
             role="region"
-            aria-label={`${currentMegaItem.label} submenu`}
+            aria-label={navText('submenuLabel', {label: navText(`items.${currentMegaItem.id}`)})}
             initial={prefersReducedMotion ? {opacity: 1, scaleY: 1} : {opacity: 0, scaleY: 0.96}}
             animate={{opacity: 1, scaleY: 1}}
             exit={prefersReducedMotion ? {opacity: 0, scaleY: 1} : {opacity: 0, scaleY: 0.98}}
@@ -446,7 +450,7 @@ export function SiteHeader({locale}: SiteHeaderProps) {
                 <p className="font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-subtext">
                   {currentMegaDetails.eyebrow}
                 </p>
-                <p className="mt-3 max-w-[16rem] font-heading text-[34px] font-semibold leading-none">
+                <p className="mt-3 max-w-[16rem] font-heading text-[22px] font-semibold leading-none">
                   {currentMegaDetails.title}
                 </p>
               </div>
@@ -472,10 +476,10 @@ export function SiteHeader({locale}: SiteHeaderProps) {
                       onClick={() => setOpenMenu(null)}
                     >
                       <span className="font-body text-sm font-semibold uppercase tracking-[0.14em] transition-colors duration-300 group-hover:text-accent">
-                        {child.label}
+                        {navText(`items.${child.id}`)}
                       </span>
                       <span className="font-body text-sm leading-6 text-subtext">
-                        {currentMegaDetails.descriptions[child.label]}
+                        {currentMegaDetails.descriptions[child.id]}
                       </span>
                     </Link>
                   </motion.div>
@@ -483,7 +487,7 @@ export function SiteHeader({locale}: SiteHeaderProps) {
               </motion.div>
 
               <div className="flex items-center justify-end">
-                <div className="grid h-28 w-36 place-items-center border border-hairline bg-white/80 px-5 text-right font-numeric text-[30px] font-semibold leading-none text-primary/35 shadow-[0_16px_45px_rgba(16,29,48,.08)]">
+                <div className="grid h-28 w-36 place-items-center border border-hairline bg-white/80 px-5 text-right font-numeric text-[22px] font-semibold leading-none text-primary/35 shadow-[0_16px_45px_rgba(16,29,48,.08)]">
                   {currentMegaDetails.motif}
                 </div>
               </div>
@@ -502,7 +506,7 @@ export function SiteHeader({locale}: SiteHeaderProps) {
             className="fixed inset-x-0 top-20 h-[calc(100dvh-80px)] overflow-y-auto bg-bg px-container py-10 text-primary [text-shadow:none] lg:hidden"
           >
             <motion.nav
-              aria-label="Mobile navigation"
+              aria-label={navText('mobileLabel')}
               initial="hidden"
               animate="visible"
               variants={{
@@ -513,8 +517,9 @@ export function SiteHeader({locale}: SiteHeaderProps) {
             >
               {navItems.map((item) => {
                 const hasChildren = Boolean(item.children?.length);
-                const isExpanded = expanded[item.label];
-                const details = isMegaMenuKey(item.label) ? megaMenuDetails[item.label] : null;
+                const isExpanded = expanded[item.id];
+                const details = isMegaMenuKey(item.id) ? megaMenuDetails[item.id] : null;
+                const itemLabel = navText(`items.${item.id}`);
 
                 return (
                   <motion.div
@@ -526,22 +531,22 @@ export function SiteHeader({locale}: SiteHeaderProps) {
                       <Link
                         href={withLocale(locale, item.href)}
                         onClick={() => setIsMenuOpen(false)}
-                        className={`font-heading text-[clamp(32px,10vw,52px)] font-semibold leading-tight ${
+                        className={`font-heading text-[clamp(26px,8vw,40px)] font-semibold leading-tight ${
                           isActivePath(relativePath, item.href) ? 'text-accent' : ''
                         }`}
                       >
-                        {item.label}
+                        {itemLabel}
                       </Link>
                       {hasChildren ? (
                         <button
                           type="button"
                           aria-expanded={isExpanded}
-                          aria-label={`${isExpanded ? 'Collapse' : 'Expand'} ${item.label}`}
-                          className="flex h-11 w-11 items-center justify-center border border-hairline bg-white text-2xl text-primary"
+                          aria-label={navText(isExpanded ? 'collapse' : 'expand', {label: itemLabel})}
+                          className="flex h-11 w-11 items-center justify-center border border-hairline bg-white text-xl text-primary"
                           onClick={() =>
                             setExpanded((current) => ({
                               ...current,
-                              [item.label]: !current[item.label]
+                              [item.id]: !current[item.id]
                             }))
                           }
                         >
@@ -559,10 +564,10 @@ export function SiteHeader({locale}: SiteHeaderProps) {
                             onClick={() => setIsMenuOpen(false)}
                             className="grid min-h-11 gap-1 font-body text-sm font-semibold uppercase tracking-[0.14em] text-subtext"
                           >
-                            <span>{child.label}</span>
+                            <span>{navText(`items.${child.id}`)}</span>
                             {details ? (
                               <span className="normal-case tracking-normal text-subtext/80">
-                                {details.descriptions[child.label]}
+                                {details.descriptions[child.id]}
                               </span>
                             ) : null}
                           </Link>
@@ -585,12 +590,12 @@ export function SiteHeader({locale}: SiteHeaderProps) {
             {showExternalHeaderLinks ? (
               <div className="mt-12 border-t border-hairline pt-8">
                 <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-subtext">
-                  Other sites
+                  {footerText('otherSites')}
                 </p>
                 <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-primary">
-                  <ExternalSiteLink label="대호" href={externalLinks.daeho} className="site-nav-link no-underline" />
-                  <ExternalSiteLink label="OH" href={externalLinks.oh} className="site-nav-link no-underline" />
-                  <ExternalSiteLink label="VULCAN" href={externalLinks.vulcan} className="site-nav-link no-underline" />
+                  <ExternalSiteLink label={externalText('daeho')} href={externalLinks.daeho} className="site-nav-link no-underline" />
+                  <ExternalSiteLink label={externalText('oh')} href={externalLinks.oh} className="site-nav-link no-underline" />
+                  <ExternalSiteLink label={externalText('vulcan')} href={externalLinks.vulcan} className="site-nav-link no-underline" />
                 </div>
               </div>
             ) : null}
@@ -601,6 +606,6 @@ export function SiteHeader({locale}: SiteHeaderProps) {
   );
 }
 
-function isMegaMenuKey(label: string): label is MegaMenuKey {
-  return label === 'LEGACY' || label === 'SPECIALTY';
+function isMegaMenuKey(id: string): id is MegaMenuKey {
+  return id === 'legacy' || id === 'specialty';
 }

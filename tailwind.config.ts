@@ -24,11 +24,11 @@ const config: Config = {
         numeric: 'var(--font-numeric)'
       },
       fontSize: {
-        hero: ['clamp(56px,8vw,100px)', {lineHeight: '1'}],
-        h1: ['clamp(34px,4.5vw,52px)', {lineHeight: '1.12'}],
-        eyebrow: ['clamp(12px,1.1vw,13px)', {lineHeight: '1.4'}],
-        body: ['clamp(18px,1.5vw,20px)', {lineHeight: '1.7'}],
-        stat: ['clamp(44px,6vw,88px)', {lineHeight: '1'}]
+        hero: ['clamp(44px,6.8vw,76px)', {lineHeight: '1'}],
+        h1: ['clamp(28px,3.4vw,42px)', {lineHeight: '1.12'}],
+        eyebrow: ['clamp(10px,0.95vw,12px)', {lineHeight: '1.4'}],
+        body: ['clamp(15px,1.15vw,16px)', {lineHeight: '1.7'}],
+        stat: ['clamp(34px,4.8vw,64px)', {lineHeight: '1'}]
       },
       spacing: {
         section: 'clamp(96px,12vw,180px)',

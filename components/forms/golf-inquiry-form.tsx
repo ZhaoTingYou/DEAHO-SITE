@@ -2,10 +2,8 @@
 
 import {useState} from 'react';
 
-import type {Locale} from '@/i18n/routing';
-
 type GolfInquiryFormProps = {
-  locale: Locale;
+  copy: GolfInquiryFormCopy;
   configuration?: {
     head: string;
     shaft: string;
@@ -13,36 +11,21 @@ type GolfInquiryFormProps = {
   };
 };
 
-const copy = {
-  ko: {
-    name: '이름',
-    contact: '연락처',
-    quantity: '수량',
-    due: '희망 납기',
-    team: '단체 / 팀 명',
-    use: '용도',
-    message: '메시지',
-    submit: '상담 요청하기',
-    success: '접수되었습니다. 영업일 기준 00일 내 연락드리겠습니다.',
-    fallback: '전송이 원활하지 않으면 전화 또는 이메일로 바로 문의해 주세요.'
-  },
-  en: {
-    name: 'Name',
-    contact: 'Contact',
-    quantity: 'Quantity',
-    due: 'Desired delivery',
-    team: 'Group / Team name',
-    use: 'Use',
-    message: 'Message',
-    submit: 'Request consultation',
-    success: 'Inquiry received. We will contact you within 00 business days.',
-    fallback: 'If submission does not go through, contact us directly by phone or email.'
-  }
+type GolfInquiryFormCopy = {
+  name: string;
+  contact: string;
+  quantity: string;
+  due: string;
+  team: string;
+  use: string;
+  message: string;
+  submit: string;
+  success: string;
+  fallback: string;
 };
 
-export function GolfInquiryForm({locale, configuration}: GolfInquiryFormProps) {
+export function GolfInquiryForm({copy: text, configuration}: GolfInquiryFormProps) {
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const text = copy[locale];
 
   return (
     <form

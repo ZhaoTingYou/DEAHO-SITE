@@ -1,8 +1,7 @@
 import type {Metadata} from 'next';
 
 import type {Locale} from '@/i18n/routing';
-import enMessages from '@/messages/en.json';
-import koMessages from '@/messages/ko.json';
+import {getLocaleMessages} from '@/lib/locale-messages';
 
 type PageKey =
   | 'home'
@@ -23,11 +22,6 @@ type PageSeo = {
   path: string;
   title: string;
   description: string;
-};
-
-const messagesByLocale = {
-  ko: koMessages,
-  en: enMessages
 };
 
 export const metadataBase = new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000');
@@ -81,7 +75,7 @@ export function getDetailMetadata(
 }
 
 function getPageSeo(locale: Locale, pageKey: PageKey): PageSeo {
-  const messages = messagesByLocale[locale];
+  const messages = getLocaleMessages(locale);
 
   switch (pageKey) {
     case 'home':
@@ -153,20 +147,14 @@ function getPageSeo(locale: Locale, pageKey: PageKey): PageSeo {
     case 'contact':
       return {
         path: '/contact',
-        title: locale === 'ko' ? 'CONTACT · 문의' : 'CONTACT',
-        description:
-          locale === 'ko'
-            ? '승리의 의미를 형태로 남기는 상담을 시작합니다.'
-            : 'Start a consultation to shape the meaning of victory.'
+        title: messages.contact.hero.eyebrow,
+        description: messages.contact.hero.body
       };
     case 'golfInquiry':
       return {
         path: '/golf/inquiry',
-        title: locale === 'ko' ? 'GOLF INQUIRY' : 'GOLF INQUIRY',
-        description:
-          locale === 'ko'
-            ? '선택한 골프 브레이슬릿 구성을 바탕으로 상담을 요청합니다.'
-            : 'Request a consultation based on your selected golf bracelet configuration.'
+        title: messages.golfInquiry.hero.eyebrow,
+        description: messages.golfInquiry.hero.body
       };
   }
 }

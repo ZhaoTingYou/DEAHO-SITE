@@ -7,6 +7,7 @@ import '@/app/globals.css';
 import {LenisProvider} from '@/components/motion/lenis-provider';
 import {ReducedMotionProvider} from '@/components/motion/reduced-motion-provider';
 import {routing, type Locale} from '@/i18n/routing';
+import type {LocaleMessages} from '@/lib/locale-messages';
 import {metadataBase} from '@/lib/seo';
 
 type Props = {
@@ -52,14 +53,14 @@ export default async function LocaleLayout({children, params}: Props) {
   }
 
   setRequestLocale(locale);
-  const messages = await getMessages();
+  const messages = (await getMessages()) as LocaleMessages;
   const localeClass = locale === 'ko' ? 'locale-ko' : 'locale-en';
 
   return (
     <html lang={locale} className={localeClass}>
       <body className="bg-bg text-text font-body">
         <a href="#main-content" className="skip-link">
-          Skip to main content
+          {messages.common.skipLink}
         </a>
         <NextIntlClientProvider messages={messages} locale={locale as Locale}>
           <ReducedMotionProvider>

@@ -9,9 +9,9 @@ import {CollectionDetailGallery} from '@/components/specialty/collection-detail-
 import type {Locale} from '@/i18n/routing';
 import {routing} from '@/i18n/routing';
 import {imageExists} from '@/lib/image-exists';
+import {getLocaleMessages} from '@/lib/locale-messages';
 import {getDetailMetadata} from '@/lib/seo';
 import {withLocale} from '@/lib/site-map';
-import enMessages from '@/messages/en.json';
 import koMessages from '@/messages/ko.json';
 
 type Props = {
@@ -25,43 +25,6 @@ const detailImages = [
   'collection_detail_04.png',
   'collection_detail_05.png'
 ];
-
-const copy = {
-  ko: {
-    back: '작품 목록',
-    specs: '작품 정보',
-    story: '작품 이야기',
-    material: '소재',
-    stones: '보석',
-    year: '연도',
-    madeFor: '제작 대상',
-    placeholder: '확인 예정',
-    detailStrip: '세부 미감',
-    processTitle: '본 작품에 적용된 공정',
-    processCta: '공정 보기',
-    ctaTitle: '이와 같은 작품을 의뢰하고 싶다면',
-    cta: '맞춤 제작 문의',
-    related: '관련 작품',
-    thumbnailLabel: '작품 이미지 선택'
-  },
-  en: {
-    back: 'Back to collection',
-    specs: 'Work information',
-    story: 'Work story',
-    material: 'Material',
-    stones: 'Stones',
-    year: 'Year',
-    madeFor: 'Made for',
-    placeholder: 'To be confirmed',
-    detailStrip: 'Detail studies',
-    processTitle: 'Process applied to this work',
-    processCta: 'View technique',
-    ctaTitle: 'Interested in commissioning a work like this?',
-    cta: 'Bespoke inquiry',
-    related: 'Related works',
-    thumbnailLabel: 'Select work image'
-  }
-};
 
 export function generateStaticParams() {
   const slugs = koMessages.specialtyPages.collection.gallery.items.map((item) => item.id);
@@ -82,13 +45,14 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
 export default async function CollectionDetailPage({params}: Props) {
   const {locale, slug} = await params;
   setRequestLocale(locale);
+  const messages = getLocaleMessages(locale);
   const item = getCollectionItem(locale, slug);
 
   if (!item) {
     notFound();
   }
 
-  const text = copy[locale];
+  const text = messages.collectionUi.detail;
   const images = [item.image, ...detailImages].map((filename) => ({
     filename,
     alt: `${item.title} ${item.caption}`,
@@ -120,10 +84,10 @@ export default async function CollectionDetailPage({params}: Props) {
                   <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-accent">
                     {item.categoryLabel}
                   </p>
-                  <h1 className="font-heading text-[clamp(48px,7vw,94px)] font-semibold leading-none text-primary">
+                  <h1 className="font-heading text-[clamp(34px,5.5vw,64px)] font-semibold leading-none text-primary">
                     {item.title}
                   </h1>
-                  <p className="font-body text-[17px] leading-8 text-text">{item.caption}</p>
+                  <p className="font-body text-[14px] leading-7 text-text">{item.caption}</p>
                 </div>
                 <div className="space-y-1">
                   {specs.map(([label, value]) => (
@@ -137,7 +101,7 @@ export default async function CollectionDetailPage({params}: Props) {
                   <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.18em] text-accent">
                     {text.story}
                   </p>
-                  <p className="font-body text-[16px] leading-7 text-text">{item.caption}</p>
+                  <p className="font-body text-[14px] leading-7 text-text">{item.caption}</p>
                 </div>
               </aside>
             </Reveal>
@@ -148,7 +112,7 @@ export default async function CollectionDetailPage({params}: Props) {
       <section className="bg-bg py-section">
         <div className="mx-auto max-w-[1440px] space-y-8 px-container">
           <Reveal>
-            <h2 className="font-heading text-[clamp(42px,6vw,82px)] font-semibold leading-none text-primary">
+            <h2 className="font-heading text-[clamp(30px,4.4vw,54px)] font-semibold leading-none text-primary">
               {text.detailStrip}
             </h2>
           </Reveal>
@@ -168,7 +132,7 @@ export default async function CollectionDetailPage({params}: Props) {
 
       <section className="bg-white py-section">
         <Reveal className="mx-auto max-w-5xl space-y-6 px-container text-center">
-          <p className="font-heading text-[clamp(38px,6vw,74px)] font-semibold leading-tight text-primary">
+          <p className="font-heading text-[clamp(28px,4.4vw,50px)] font-semibold leading-tight text-primary">
             {text.processTitle}
           </p>
           <Link href={withLocale(locale, '/specialty/technique')} className="link-sweep inline-flex font-body text-sm font-semibold uppercase tracking-[0.12em]">
@@ -183,9 +147,9 @@ export default async function CollectionDetailPage({params}: Props) {
             <div className="max-w-4xl space-y-7">
               <div className="space-y-4">
                 <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-accent">
-                  COMMISSION
+                  {text.commissionEyebrow}
                 </p>
-                <p className="font-heading text-[clamp(32px,5vw,62px)] font-semibold leading-tight text-primary [text-wrap:balance]">
+                <p className="font-heading text-[clamp(24px,3.8vw,42px)] font-semibold leading-tight text-primary [text-wrap:balance]">
                   {text.ctaTitle}
                 </p>
               </div>
@@ -198,7 +162,7 @@ export default async function CollectionDetailPage({params}: Props) {
             </div>
           </Reveal>
           <Reveal>
-            <h2 className="font-heading text-[clamp(38px,6vw,74px)] font-semibold leading-none text-primary">
+            <h2 className="font-heading text-[clamp(28px,4.4vw,50px)] font-semibold leading-none text-primary">
               {text.related}
             </h2>
           </Reveal>
@@ -214,7 +178,7 @@ export default async function CollectionDetailPage({params}: Props) {
                   <p className="font-body text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
                     {entry.categoryLabel}
                   </p>
-                  <h3 className="font-heading text-[28px] font-semibold leading-tight text-primary">
+                  <h3 className="font-heading text-[22px] font-semibold leading-tight text-primary">
                     {entry.title}
                   </h3>
                 </div>
@@ -228,9 +192,7 @@ export default async function CollectionDetailPage({params}: Props) {
 }
 
 function getCollectionItems(locale: Locale) {
-  return locale === 'en'
-    ? enMessages.specialtyPages.collection.gallery.items
-    : koMessages.specialtyPages.collection.gallery.items;
+  return getLocaleMessages(locale).specialtyPages.collection.gallery.items;
 }
 
 function getCollectionItem(locale: Locale, slug: string) {

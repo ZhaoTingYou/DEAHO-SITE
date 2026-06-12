@@ -96,7 +96,7 @@ function PinnedProcess({steps}: SpecialtyProcessProps) {
                 initial={{opacity: 0, y: 14}}
                 animate={{opacity: 1, y: 0}}
                 transition={transition}
-                className="font-heading text-[clamp(74px,9vw,132px)] font-semibold leading-none text-primary"
+                className="font-heading text-[clamp(48px,6.5vw,84px)] font-semibold leading-none text-primary"
               >
                 {steps[activeIndex]?.number}
               </motion.p>
@@ -213,10 +213,10 @@ function ProcessCopyLayer({
       <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-accent">
         {step.number} / {step.label}
       </p>
-      <h2 className="mt-6 font-heading text-[clamp(42px,5vw,76px)] font-semibold leading-none text-primary">
+      <h2 className="mt-6 font-heading text-[clamp(30px,4vw,52px)] font-semibold leading-none text-primary">
         {step.title}
       </h2>
-      <p className="mt-7 max-w-md font-body text-[18px] leading-8 text-text">{step.body}</p>
+      <p className="mt-7 max-w-md font-body text-[15px] leading-7 text-text">{step.body}</p>
     </motion.article>
   );
 }
@@ -249,10 +249,10 @@ function ProcessCard({step}: {step: SpecialtyProcessStep}) {
         <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-accent">
           {step.number} / {step.label}
         </p>
-        <h2 className="font-heading text-[clamp(36px,10vw,54px)] font-semibold leading-tight text-primary">
+        <h2 className="font-heading text-[clamp(26px,8vw,38px)] font-semibold leading-tight text-primary">
           {step.title}
         </h2>
-        <p className="font-body text-[16px] leading-7 text-text">{step.body}</p>
+        <p className="font-body text-[14px] leading-7 text-text">{step.body}</p>
       </div>
     </article>
   );

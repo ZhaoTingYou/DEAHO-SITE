@@ -107,9 +107,9 @@ function LegacyMetricCell({
 
   const valueClass =
     variant === 'monument'
-      ? 'font-numeric text-[clamp(64px,11vw,180px)] font-semibold leading-none text-primary'
+      ? 'font-numeric text-[clamp(46px,8vw,112px)] font-semibold leading-none text-primary'
       : variant === 'compact'
-        ? 'font-numeric text-[clamp(42px,7vw,76px)] font-semibold leading-none text-primary'
+        ? 'font-numeric text-[clamp(32px,5vw,56px)] font-semibold leading-none text-primary'
         : 'font-numeric text-stat font-semibold leading-none text-primary';
 
   return (

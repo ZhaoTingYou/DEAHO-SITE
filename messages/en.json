@@ -45,9 +45,19 @@
       "eyebrow": "PROOF IN NUMBERS",
       "title": "Trust, held in numbers",
       "items": [
-        {"value": 1988, "label": "Established"},
-        {"value": 38, "label": "years of craft"},
-        {"value": 200000, "suffix": "+", "label": "rings produced"}
+        {
+          "value": 1988,
+          "label": "Established"
+        },
+        {
+          "value": 38,
+          "label": "years of craft"
+        },
+        {
+          "value": 200000,
+          "suffix": "+",
+          "label": "rings produced"
+        }
       ]
     },
     "pillars": {
@@ -92,7 +102,7 @@
     "hero": {
       "eyebrow": "EST. 1988",
       "title": "THE CHRONICLE",
-      "koreanTitle": "역사의 기록물",
+      "koreanTitle": "Archive of History",
       "subtitle": "The history of DEAHO is the history of championship and appointment rings in Korea.",
       "image": "chronicle_hero.png"
     },
@@ -198,9 +208,20 @@
       "eyebrow": "PROOF IN NUMBERS",
       "title": "The weight of trust, held in numbers",
       "items": [
-        {"value": 38, "label": "years of craft"},
-        {"value": 200000, "suffix": "+", "label": "rings produced"},
-        {"value": 0, "pad": 2, "label": "records pending"}
+        {
+          "value": 38,
+          "label": "years of craft"
+        },
+        {
+          "value": 200000,
+          "suffix": "+",
+          "label": "rings produced"
+        },
+        {
+          "value": 0,
+          "pad": 2,
+          "label": "records pending"
+        }
       ]
     },
     "closing": {
@@ -217,8 +238,18 @@
         "image": "legacy_loyalty_hero.png"
       },
       "metrics": [
-        {"value": 0, "pad": 2, "suffix": "%", "label": "retention ratio"},
-        {"value": 0, "pad": 2, "suffix": "+", "label": "repeat requests"}
+        {
+          "value": 0,
+          "pad": 2,
+          "suffix": "%",
+          "label": "retention ratio"
+        },
+        {
+          "value": 0,
+          "pad": 2,
+          "suffix": "+",
+          "label": "repeat requests"
+        }
       ],
       "statement": "Unconfirmed numbers remain as placeholders and can be replaced in the same structure when verified material arrives."
     },
@@ -230,16 +261,45 @@
         "image": "legacy_credibility_hero.png"
       },
       "metrics": [
-        {"value": 38, "label": "years of craft"},
-        {"value": 200000, "suffix": "+", "label": "rings produced"},
-        {"value": 0, "pad": 2, "label": "collaborations"},
-        {"value": 0, "pad": 2, "suffix": "%", "label": "pending ratio"}
+        {
+          "value": 38,
+          "label": "years of craft"
+        },
+        {
+          "value": 200000,
+          "suffix": "+",
+          "label": "rings produced"
+        },
+        {
+          "value": 0,
+          "pad": 2,
+          "label": "collaborations"
+        },
+        {
+          "value": 0,
+          "pad": 2,
+          "suffix": "%",
+          "label": "pending ratio"
+        }
       ],
       "partners": {
         "eyebrow": "PARTNER WALL",
         "title": "An arrangement of collaboration",
         "body": "Until verified logos arrive, this bright placeholder wall preserves the collaboration field.",
-        "labels": ["PARTNER 01", "PARTNER 02", "PARTNER 03", "PARTNER 04", "PARTNER 05", "PARTNER 06", "PARTNER 07", "PARTNER 08", "PARTNER 09", "PARTNER 10", "PARTNER 11", "PARTNER 12"]
+        "labels": [
+          "PARTNER 01",
+          "PARTNER 02",
+          "PARTNER 03",
+          "PARTNER 04",
+          "PARTNER 05",
+          "PARTNER 06",
+          "PARTNER 07",
+          "PARTNER 08",
+          "PARTNER 09",
+          "PARTNER 10",
+          "PARTNER 11",
+          "PARTNER 12"
+        ]
       }
     },
     "achievement": {
@@ -250,17 +310,37 @@
         "image": "legacy_achievement_hero.png"
       },
       "metrics": [
-        {"value": 0, "pad": 2, "label": "recognition records"},
-        {"value": 0, "pad": 2, "label": "notable projects"}
+        {
+          "value": 0,
+          "pad": 2,
+          "label": "recognition records"
+        },
+        {
+          "value": 0,
+          "pad": 2,
+          "label": "notable projects"
+        }
       ],
       "gallery": {
         "eyebrow": "RECOGNITION ARCHIVE",
         "title": "Scenes kept as records",
         "items": [
-          {"title": "Achievement 01", "image": "legacy_achievement_01.png"},
-          {"title": "Achievement 02", "image": "legacy_achievement_02.png"},
-          {"title": "Achievement 03", "image": "legacy_achievement_03.png"},
-          {"title": "Achievement 04", "image": "legacy_achievement_04.png"}
+          {
+            "title": "Achievement 01",
+            "image": "legacy_achievement_01.png"
+          },
+          {
+            "title": "Achievement 02",
+            "image": "legacy_achievement_02.png"
+          },
+          {
+            "title": "Achievement 03",
+            "image": "legacy_achievement_03.png"
+          },
+          {
+            "title": "Achievement 04",
+            "image": "legacy_achievement_04.png"
+          }
         ]
       }
     }
@@ -300,9 +380,21 @@
       "title": "The structure changes at the fingertips",
       "body": "Depth in metal, engraved lines, and the direction of polish decide the finish of each work.",
       "items": [
-        {"number": "01", "title": "Inner engraving", "image": "specialty_detail_01.png"},
-        {"number": "02", "title": "Carving depth", "image": "specialty_detail_02.png"},
-        {"number": "03", "title": "Mirror polish", "image": "specialty_detail_03.png"}
+        {
+          "number": "01",
+          "title": "Inner engraving",
+          "image": "specialty_detail_01.png"
+        },
+        {
+          "number": "02",
+          "title": "Carving depth",
+          "image": "specialty_detail_02.png"
+        },
+        {
+          "number": "03",
+          "title": "Mirror polish",
+          "image": "specialty_detail_03.png"
+        }
       ]
     },
     "closing": {
@@ -379,9 +471,21 @@
         "title": "Traces of the hand that mass production cannot replace",
         "body": "Inner engraving, carving depth, and mirror polish are detail standards that must be checked and adjusted by hand.",
         "items": [
-          {"title": "Inner engraving", "body": "Depth and spacing are tuned so names and records stay clear.", "image": "specialty_detail_01.png"},
-          {"title": "Carving depth", "body": "Layers are adjusted so symbols remain legible in light.", "image": "specialty_detail_02.png"},
-          {"title": "Mirror polish", "body": "The final polish completes both the impression and the wearing feel.", "image": "specialty_detail_03.png"}
+          {
+            "title": "Inner engraving",
+            "body": "Depth and spacing are tuned so names and records stay clear.",
+            "image": "specialty_detail_01.png"
+          },
+          {
+            "title": "Carving depth",
+            "body": "Layers are adjusted so symbols remain legible in light.",
+            "image": "specialty_detail_02.png"
+          },
+          {
+            "title": "Mirror polish",
+            "body": "The final polish completes both the impression and the wearing feel.",
+            "image": "specialty_detail_03.png"
+          }
         ]
       },
       "bespoke": {
@@ -403,24 +507,120 @@
         "eyebrow": "COLLECTION GALLERY",
         "title": "Categories of work",
         "filters": [
-          {"id": "all", "label": "All"},
-          {"id": "champion", "label": "Champion"},
-          {"id": "appointment", "label": "Appointment"},
-          {"id": "bespoke", "label": "Bespoke"}
+          {
+            "id": "all",
+            "label": "All"
+          },
+          {
+            "id": "champion",
+            "label": "Champion"
+          },
+          {
+            "id": "appointment",
+            "label": "Appointment"
+          },
+          {
+            "id": "bespoke",
+            "label": "Bespoke"
+          }
         ],
         "items": [
-          {"id": "ring-01", "title": "Collection 01", "caption": "A reserved slot for championship ring material.", "category": "champion", "categoryLabel": "Champion", "image": "collection_ring_01.png"},
-          {"id": "ring-02", "title": "Collection 02", "caption": "A reserved slot for appointment ring material.", "category": "appointment", "categoryLabel": "Appointment", "image": "collection_ring_02.png"},
-          {"id": "ring-03", "title": "Collection 03", "caption": "A reserved slot for bespoke ring material.", "category": "bespoke", "categoryLabel": "Bespoke", "image": "collection_ring_03.png"},
-          {"id": "ring-04", "title": "Collection 04", "caption": "A reserved slot for team symbols and records.", "category": "champion", "categoryLabel": "Champion", "image": "collection_ring_04.png"},
-          {"id": "ring-05", "title": "Collection 05", "caption": "A reserved slot for symbolic composition.", "category": "appointment", "categoryLabel": "Appointment", "image": "collection_ring_05.png"},
-          {"id": "ring-06", "title": "Collection 06", "caption": "A reserved slot for bespoke structure.", "category": "bespoke", "categoryLabel": "Bespoke", "image": "collection_ring_06.png"},
-          {"id": "ring-07", "title": "Collection 07", "caption": "A reserved slot for a work shaped by a winning moment.", "category": "champion", "categoryLabel": "Champion", "image": "collection_ring_07.png"},
-          {"id": "ring-08", "title": "Collection 08", "caption": "A reserved slot for meaning and wearing feel.", "category": "bespoke", "categoryLabel": "Bespoke", "image": "collection_ring_08.png"},
-          {"id": "ring-09", "title": "Collection 09", "caption": "A reserved slot for the side structure of a championship ring.", "category": "champion", "categoryLabel": "Champion", "image": "collection_ring_09.png"},
-          {"id": "ring-10", "title": "Collection 10", "caption": "A reserved slot for appointment and affiliation symbols.", "category": "appointment", "categoryLabel": "Appointment", "image": "collection_ring_10.png"},
-          {"id": "ring-11", "title": "Collection 11", "caption": "A reserved slot for bespoke production details.", "category": "bespoke", "categoryLabel": "Bespoke", "image": "collection_ring_11.png"},
-          {"id": "ring-12", "title": "Collection 12", "caption": "A reserved slot for final proportion and polish.", "category": "champion", "categoryLabel": "Champion", "image": "collection_ring_12.png"}
+          {
+            "id": "ring-01",
+            "title": "Collection 01",
+            "caption": "A reserved slot for championship ring material.",
+            "category": "champion",
+            "categoryLabel": "Champion",
+            "image": "collection_ring_01.png"
+          },
+          {
+            "id": "ring-02",
+            "title": "Collection 02",
+            "caption": "A reserved slot for appointment ring material.",
+            "category": "appointment",
+            "categoryLabel": "Appointment",
+            "image": "collection_ring_02.png"
+          },
+          {
+            "id": "ring-03",
+            "title": "Collection 03",
+            "caption": "A reserved slot for bespoke ring material.",
+            "category": "bespoke",
+            "categoryLabel": "Bespoke",
+            "image": "collection_ring_03.png"
+          },
+          {
+            "id": "ring-04",
+            "title": "Collection 04",
+            "caption": "A reserved slot for team symbols and records.",
+            "category": "champion",
+            "categoryLabel": "Champion",
+            "image": "collection_ring_04.png"
+          },
+          {
+            "id": "ring-05",
+            "title": "Collection 05",
+            "caption": "A reserved slot for symbolic composition.",
+            "category": "appointment",
+            "categoryLabel": "Appointment",
+            "image": "collection_ring_05.png"
+          },
+          {
+            "id": "ring-06",
+            "title": "Collection 06",
+            "caption": "A reserved slot for bespoke structure.",
+            "category": "bespoke",
+            "categoryLabel": "Bespoke",
+            "image": "collection_ring_06.png"
+          },
+          {
+            "id": "ring-07",
+            "title": "Collection 07",
+            "caption": "A reserved slot for a work shaped by a winning moment.",
+            "category": "champion",
+            "categoryLabel": "Champion",
+            "image": "collection_ring_07.png"
+          },
+          {
+            "id": "ring-08",
+            "title": "Collection 08",
+            "caption": "A reserved slot for meaning and wearing feel.",
+            "category": "bespoke",
+            "categoryLabel": "Bespoke",
+            "image": "collection_ring_08.png"
+          },
+          {
+            "id": "ring-09",
+            "title": "Collection 09",
+            "caption": "A reserved slot for the side structure of a championship ring.",
+            "category": "champion",
+            "categoryLabel": "Champion",
+            "image": "collection_ring_09.png"
+          },
+          {
+            "id": "ring-10",
+            "title": "Collection 10",
+            "caption": "A reserved slot for appointment and affiliation symbols.",
+            "category": "appointment",
+            "categoryLabel": "Appointment",
+            "image": "collection_ring_10.png"
+          },
+          {
+            "id": "ring-11",
+            "title": "Collection 11",
+            "caption": "A reserved slot for bespoke production details.",
+            "category": "bespoke",
+            "categoryLabel": "Bespoke",
+            "image": "collection_ring_11.png"
+          },
+          {
+            "id": "ring-12",
+            "title": "Collection 12",
+            "caption": "A reserved slot for final proportion and polish.",
+            "category": "champion",
+            "categoryLabel": "Champion",
+            "image": "collection_ring_12.png"
+          }
         ]
       }
     }
@@ -453,12 +653,30 @@
       "eyebrow": "LATEST INDEX",
       "title": "DEAHO Journal",
       "filters": [
-        {"id": "all", "label": "All"},
-        {"id": "making", "label": "Recent work"},
-        {"id": "story", "label": "Project stories"},
-        {"id": "press", "label": "Press / Features"},
-        {"id": "partner", "label": "Collaborations"},
-        {"id": "knowledge", "label": "Ring knowledge"}
+        {
+          "id": "all",
+          "label": "All"
+        },
+        {
+          "id": "making",
+          "label": "Recent work"
+        },
+        {
+          "id": "story",
+          "label": "Project stories"
+        },
+        {
+          "id": "press",
+          "label": "Press / Features"
+        },
+        {
+          "id": "partner",
+          "label": "Collaborations"
+        },
+        {
+          "id": "knowledge",
+          "label": "Ring knowledge"
+        }
       ],
       "cards": [
         {
@@ -515,13 +733,21 @@
   "golf": {
     "hero": {
       "eyebrow": "PREMIUM CUSTOMIZED GOLF BRACELET",
-      "titleLines": ["FORM", "OF THE", "GAME"],
+      "titleLines": [
+        "FORM",
+        "OF THE",
+        "GAME"
+      ],
       "subtitle": "Reinterpreting the structure of golf as a singular object.",
       "image": "golf_hero.png",
       "specLabel": "Configured bracelet"
     },
     "statement": {
-      "titleLines": ["FORM", "OF THE", "GAME"],
+      "titleLines": [
+        "FORM",
+        "OF THE",
+        "GAME"
+      ],
       "body": "The rhythm of a round, the line of a club, and the feeling on the wrist are arranged into one bright object.",
       "image": "golf_hero_2.png"
     },
@@ -597,7 +823,12 @@
       "body": "Scores, initials, dates, and course memories can be arranged on bright metal for a longer life.",
       "imagePrimary": "golf_engrave_studio.png",
       "imageDetail": "golf_engrave_detail.png",
-      "specs": ["Name", "Date", "Record", "Course"]
+      "specs": [
+        "Name",
+        "Date",
+        "Record",
+        "Course"
+      ]
     },
     "lifestyle": {
       "eyebrow": "OBJECT & LIFESTYLE",
@@ -614,5 +845,277 @@
       "shaftGroup": "Shaft color selection",
       "inquiryCta": "Inquire with this configuration"
     }
+  },
+  "common": {
+    "skipLink": "Skip to main content",
+    "navigation": {
+      "primaryLabel": "Primary navigation",
+      "mobileLabel": "Mobile navigation",
+      "languageSwitcherLabel": "Language switcher",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu",
+      "logoHome": "DAEHO home",
+      "submenuLabel": "{label} submenu",
+      "expand": "Expand {label}",
+      "collapse": "Collapse {label}",
+      "contactCta": "Contact",
+      "items": {
+        "home": "HOME",
+        "chronicle": "CHRONICLE",
+        "legacy": "LEGACY",
+        "loyalty": "LOYALTY",
+        "credibility": "CREDIBILITY",
+        "achievement": "ACHIEVEMENT",
+        "specialty": "SPECIALTY",
+        "technique": "TECHNIQUE",
+        "collection": "COLLECTION",
+        "news": "NEWS",
+        "golf": "GOLF"
+      },
+      "mega": {
+        "legacy": {
+          "eyebrow": "MEMORIAL HALL",
+          "title": "Trust made permanent",
+          "motif": "38 / 200,000+",
+          "descriptions": {
+            "loyalty": "Loyalty · Trust built through long relationships",
+            "credibility": "Credibility · Confidence proven by numbers",
+            "achievement": "Achievement · Recognition preserved as records"
+          }
+        },
+        "specialty": {
+          "eyebrow": "CRAFT ANATOMY",
+          "title": "Seven steps of precision",
+          "motif": "01-07",
+          "descriptions": {
+            "technique": "Technique · Seven careful stages",
+            "collection": "Collection · Completed works"
+          }
+        }
+      }
+    },
+    "footer": {
+      "tagline": "The moment of victory, shaped for eternity.",
+      "navigation": "Navigation",
+      "otherSites": "Other sites",
+      "locale": "Language",
+      "externalSites": {
+        "daeho": "DAEHO",
+        "oh": "OH",
+        "vulcan": "VULCAN"
+      }
+    }
+  },
+  "legacyUi": {
+    "backToLegacy": "Back to legacy"
+  },
+  "specialtyUi": {
+    "anatomyLabel": "Anatomy of Craft"
+  },
+  "homeUi": {
+    "currentPulse": {
+      "eyebrow": "THE CURRENT PULSE",
+      "title": "DEAHO, Now",
+      "body": "And we are still creating now.",
+      "question": "A piece or project worth remembering?"
+    },
+    "latestNews": {
+      "eyebrow": "LATEST NEWS",
+      "title": "Latest News",
+      "open": "Read more",
+      "close": "Close",
+      "label": "Latest news popup",
+      "fallback": "Image pending",
+      "body": "Verified source material will replace this article body when it arrives. For now, this popup keeps DEAHO’s recent production rhythm and project context in place."
+    },
+    "partners": {
+      "ariaLabel": "Collaboration and sponsorship brands",
+      "rows": [
+        [
+          "pcn",
+          "KB Kookmin Bank",
+          "NH NongHyup Bank",
+          "DOYAK",
+          "BHL",
+          "SHIFT UP",
+          "Shinhan Bank",
+          "IPARTNERS",
+          "Woori Bank",
+          "INNORED"
+        ],
+        [
+          "NC Entertainment",
+          "YeonSung Apparel",
+          "Jeonbuk Bank",
+          "SC First Bank",
+          "JK Friends",
+          "Charm Technology",
+          "kakaobank",
+          "KREITs",
+          "Kbank",
+          "KRAFTON"
+        ],
+        [
+          "toss bank",
+          "KEB Hana Bank",
+          "A Partners",
+          "Woori Bank",
+          "INNORED",
+          "SHIFT UP",
+          "Shinhan Bank",
+          "KRAFTON",
+          "Kbank",
+          "KB Kookmin Bank"
+        ]
+      ]
+    }
+  },
+  "contact": {
+    "hero": {
+      "eyebrow": "CONTACT",
+      "title": "Shape the meaning of victory",
+      "body": "For appointment, championship, and bespoke inquiries, leave only contactable project information. No payment or card information is collected."
+    },
+    "infoTitle": "Direct contact",
+    "address": "Address to be confirmed",
+    "phone": "Phone to be confirmed",
+    "email": "Email to be confirmed",
+    "hours": "Hours to be confirmed",
+    "faqTitle": "FAQ",
+    "faqs": [
+      {
+        "question": "How are timelines and minimum quantities set?",
+        "answer": "They are confirmed after reviewing the project scope and production specifications."
+      },
+      {
+        "question": "What should I prepare for bespoke work?",
+        "answer": "Bring the symbols, records, budget range, and preferred timing. We will shape the rest together."
+      }
+    ]
+  },
+  "forms": {
+    "contact": {
+      "name": "Name",
+      "organization": "Company / Team",
+      "contact": "Contact",
+      "type": "Inquiry type",
+      "message": "Message",
+      "submit": "Send inquiry",
+      "success": "Inquiry received. We will follow up through the contact you provided.",
+      "fallback": "If submission does not go through, use the direct contact details on this page.",
+      "options": [
+        {
+          "value": "appointment",
+          "label": "Appointment ring"
+        },
+        {
+          "value": "championship",
+          "label": "Championship ring"
+        },
+        {
+          "value": "bespoke",
+          "label": "Bespoke"
+        },
+        {
+          "value": "other",
+          "label": "Other"
+        }
+      ]
+    },
+    "golfInquiry": {
+      "name": "Name",
+      "contact": "Contact",
+      "quantity": "Quantity",
+      "due": "Desired delivery",
+      "team": "Group / Team name",
+      "use": "Use",
+      "message": "Message",
+      "submit": "Request consultation",
+      "success": "Inquiry received. We will contact you within 00 business days.",
+      "fallback": "If submission does not go through, contact us directly by phone or email."
+    }
+  },
+  "chronicleUi": {
+    "timeline": {
+      "open": "Open archive note",
+      "close": "Close",
+      "title": "Archive note",
+      "next": "The next record continues along the timeline.",
+      "previousYear": "Previous year",
+      "nextYear": "Next year",
+      "first": "First"
+    },
+    "horizontalAriaLabel": "DEAHO chronicle horizontal timeline"
+  },
+  "newsUi": {
+    "filtersLabel": "News filters",
+    "empty": {
+      "title": "No stories yet",
+      "body": "New verified journal entries will appear here when they are ready."
+    },
+    "indexBody": "New production cases and project notes remain in this bright journal field as they are verified.",
+    "share": {
+      "label": "Share",
+      "copied": "Link copied."
+    },
+    "detail": {
+      "back": "Back to news",
+      "author": "DEAHO Journal",
+      "lead": "Verified source material will replace this article body when available.",
+      "paragraphs": [
+        "For now, this bright article template keeps the project overview and production context in place.",
+        "Images, dates, sources, and exact figures will be updated only after verification.",
+        "The page keeps the rule-line masthead and narrow editorial measure of the DEAHO journal."
+      ],
+      "quote": "The principle of shaping victorious moments into permanence continues inside the article page.",
+      "tags": [
+        "DEAHO JOURNAL",
+        "COMING SOON"
+      ],
+      "ctaTitle": "Curious about this project?",
+      "cta": "Contact us",
+      "related": "Next stories"
+    }
+  },
+  "collectionUi": {
+    "filtersLabel": "Collection filters",
+    "empty": {
+      "title": "No works in this category",
+      "body": "Works in the selected category will appear here once the archive is ready."
+    },
+    "detail": {
+      "back": "Back to collection",
+      "specs": "Work information",
+      "story": "Work story",
+      "material": "Material",
+      "stones": "Stones",
+      "year": "Year",
+      "madeFor": "Made for",
+      "placeholder": "To be confirmed",
+      "detailStrip": "Detail studies",
+      "processTitle": "Process applied to this work",
+      "processCta": "View technique",
+      "commissionEyebrow": "Commission",
+      "ctaTitle": "Interested in commissioning a work like this?",
+      "cta": "Bespoke inquiry",
+      "related": "Related works",
+      "thumbnailLabel": "Select work image"
+    }
+  },
+  "golfInquiry": {
+    "hero": {
+      "eyebrow": "GOLF INQUIRY",
+      "title": "Review your configuration and request a consultation",
+      "body": "This step is a consultation request, not a payment. Do not enter card or account information."
+    },
+    "summary": "My configuration",
+    "head": "Club head",
+    "shaft": "Shaft color",
+    "engraving": "Engraving sample",
+    "edit": "Edit configuration"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "body": "The requested route is not ready yet or has moved."
   }
 }

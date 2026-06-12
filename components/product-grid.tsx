@@ -29,7 +29,7 @@ export function ProductGrid({items}: {items: ProductGridItem[]}) {
             </div>
           </div>
           <div className="mt-5 space-y-2">
-            <h3 className="font-heading text-2xl font-semibold text-primary">{item.title}</h3>
+            <h3 className="font-heading text-xl font-semibold text-primary">{item.title}</h3>
             <p className="font-body text-sm leading-6 text-subtext">{item.caption}</p>
           </div>
         </Link>

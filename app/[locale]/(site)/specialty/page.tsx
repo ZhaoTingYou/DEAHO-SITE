@@ -8,10 +8,9 @@ import {SectionIntro} from '@/components/section-intro';
 import {SpecialtyDetailTriplet} from '@/components/specialty/specialty-detail-triplet';
 import type {Locale} from '@/i18n/routing';
 import {imageExists} from '@/lib/image-exists';
+import {getLocaleMessages} from '@/lib/locale-messages';
 import {getPageMetadata} from '@/lib/seo';
 import {withLocale} from '@/lib/site-map';
-import enMessages from '@/messages/en.json';
-import koMessages from '@/messages/ko.json';
 
 type Props = {
   params: Promise<{locale: Locale}>;
@@ -25,7 +24,8 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
 export default async function SpecialtyPage({params}: Props) {
   const {locale} = await params;
   setRequestLocale(locale);
-  const content = locale === 'en' ? enMessages.specialty : koMessages.specialty;
+  const messages = getLocaleMessages(locale);
+  const content = messages.specialty;
   const detailItems = content.details.items.map((item) => ({
     ...item,
     hasImage: imageExists(item.image)
@@ -46,10 +46,10 @@ export default async function SpecialtyPage({params}: Props) {
               {content.hero.eyebrow}
             </p>
             <div className="space-y-5">
-              <h1 className="font-heading text-[clamp(54px,8vw,112px)] font-semibold leading-none text-primary">
+              <h1 className="font-heading text-[clamp(40px,6vw,74px)] font-semibold leading-none text-primary">
                 {content.hero.title}
               </h1>
-              <p className="font-heading text-[clamp(34px,5vw,70px)] font-semibold leading-tight text-primary">
+              <p className="font-heading text-[clamp(28px,4vw,46px)] font-semibold leading-tight text-primary">
                 {content.hero.koreanTitle}
               </p>
             </div>
@@ -78,7 +78,7 @@ export default async function SpecialtyPage({params}: Props) {
               className="pointer-events-none absolute -left-12 top-8 z-10 font-body text-xs font-semibold uppercase tracking-[0.18em] text-accent [writing-mode:vertical-rl]"
               aria-hidden="true"
             >
-              Anatomy of Craft
+              {messages.specialtyUi.anatomyLabel}
             </div>
             <SafeImage
               filename={content.hero.image}
@@ -128,10 +128,10 @@ export default async function SpecialtyPage({params}: Props) {
                     <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-accent">
                       {item.eyebrow}
                     </p>
-                    <h2 className="font-heading text-[clamp(38px,5vw,64px)] font-semibold leading-none text-primary">
+                    <h2 className="font-heading text-[clamp(28px,4vw,44px)] font-semibold leading-none text-primary">
                       {item.title}
                     </h2>
-                    <p className="max-w-md font-body text-[16px] leading-7 text-text">{item.body}</p>
+                    <p className="max-w-md font-body text-[14px] leading-7 text-text">{item.body}</p>
                     <span className="link-sweep inline-flex font-body text-sm font-semibold uppercase tracking-[0.12em]">
                       {item.cta}
                     </span>
@@ -160,7 +160,7 @@ export default async function SpecialtyPage({params}: Props) {
 
       <section className="bg-bg py-section">
         <Reveal className="mx-auto max-w-5xl space-y-8 px-container text-center">
-          <h2 className="font-heading text-[clamp(42px,7vw,88px)] font-semibold leading-tight text-primary">
+          <h2 className="font-heading text-[clamp(32px,5vw,58px)] font-semibold leading-tight text-primary">
             {content.closing.title}
           </h2>
           <Link

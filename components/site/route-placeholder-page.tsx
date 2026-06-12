@@ -2,7 +2,15 @@ import Link from 'next/link';
 
 import type {Locale} from '@/i18n/routing';
 import {SafeImage} from '@/components/safe-image';
-import {withLocale, type RoutePage} from '@/lib/site-map';
+import {type NavItem, withLocale} from '@/lib/site-map';
+
+type RoutePage = {
+  eyebrow: string;
+  title: string;
+  subtitle: string;
+  image: string;
+  sections?: NavItem[];
+};
 
 type RoutePlaceholderPageProps = {
   locale: Locale;
@@ -21,9 +29,6 @@ export function RoutePlaceholderPage({locale, page}: RoutePlaceholderPageProps) 
             {page.title}
           </h1>
           <p className="max-w-2xl font-body text-body text-text">{page.subtitle}</p>
-          <p className="inline-flex border border-hairline bg-white px-4 py-2 font-body text-xs font-semibold uppercase tracking-[0.16em] text-subtext">
-            Phase 2 route shell
-          </p>
         </div>
         <SafeImage filename={page.image} alt={page.title} aspect="aspect-[4/5]" priority />
       </section>
@@ -38,10 +43,7 @@ export function RoutePlaceholderPage({locale, page}: RoutePlaceholderPageProps) 
                   href={withLocale(locale, section.href)}
                   className="light-layer block p-8"
                 >
-                  <p className="font-body text-eyebrow font-medium uppercase tracking-[0.22em] text-subtext">
-                    Section
-                  </p>
-                  <h2 className="mt-4 font-heading text-4xl font-semibold text-primary">
+                  <h2 className="mt-4 font-heading text-xl font-semibold text-primary">
                     {section.label}
                   </h2>
                 </Link>

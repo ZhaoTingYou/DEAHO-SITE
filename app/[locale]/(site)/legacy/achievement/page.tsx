@@ -3,9 +3,8 @@ import {setRequestLocale} from 'next-intl/server';
 
 import {LegacyDetailPage} from '@/components/legacy/legacy-detail-page';
 import type {Locale} from '@/i18n/routing';
+import {getLocaleMessages} from '@/lib/locale-messages';
 import {getPageMetadata} from '@/lib/seo';
-import enMessages from '@/messages/en.json';
-import koMessages from '@/messages/ko.json';
 
 type Props = {
   params: Promise<{locale: Locale}>;
@@ -19,7 +18,7 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
 export default async function AchievementPage({params}: Props) {
   const {locale} = await params;
   setRequestLocale(locale);
-  const content = locale === 'en' ? enMessages.legacyPages.achievement : koMessages.legacyPages.achievement;
+  const content = getLocaleMessages(locale).legacyPages.achievement;
 
   return <LegacyDetailPage locale={locale} content={content} />;
 }

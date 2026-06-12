@@ -9,46 +9,13 @@ import {ShareLinkButton} from '@/components/news/share-link-button';
 import {SafeImage} from '@/components/safe-image';
 import type {Locale} from '@/i18n/routing';
 import {routing} from '@/i18n/routing';
+import {getLocaleMessages} from '@/lib/locale-messages';
 import {getDetailMetadata} from '@/lib/seo';
 import {withLocale} from '@/lib/site-map';
-import enMessages from '@/messages/en.json';
 import koMessages from '@/messages/ko.json';
 
 type Props = {
   params: Promise<{locale: Locale; slug: string}>;
-};
-
-const copy = {
-  ko: {
-    back: 'NEWS 목록',
-    author: 'DEAHO Journal',
-    lead: '확인된 자료가 도착하면 실제 기사 본문으로 교체됩니다.',
-    paragraphs: [
-      '현재는 프로젝트 개요와 제작 맥락을 정리하는 밝은 기사 템플릿으로 유지합니다.',
-      '사진, 날짜, 출처, 세부 수치는 모두 검증 후 업데이트됩니다.',
-      '대호의 뉴스 내지는 잡지형 지면의 규칙선과 좁은 판형을 유지합니다.'
-    ],
-    quote: '승리의 순간을 영원의 형태로 남긴다는 원칙은 기사 내지에서도 같은 리듬으로 이어집니다.',
-    tags: ['DEAHO JOURNAL', 'COMING SOON'],
-    ctaTitle: '이 프로젝트가 궁금하신가요?',
-    cta: '문의하기',
-    related: '다음 소식'
-  },
-  en: {
-    back: 'Back to NEWS',
-    author: 'DEAHO Journal',
-    lead: 'Verified source material will replace this article body when available.',
-    paragraphs: [
-      'For now, this bright article template keeps the project overview and production context in place.',
-      'Images, dates, sources, and exact figures will be updated only after verification.',
-      'The page keeps the rule-line masthead and narrow editorial measure of the DEAHO journal.'
-    ],
-    quote: 'The principle of shaping victorious moments into permanence continues inside the article page.',
-    tags: ['DEAHO JOURNAL', 'COMING SOON'],
-    ctaTitle: 'Curious about this project?',
-    cta: 'Contact us',
-    related: 'Next stories'
-  }
 };
 
 export function generateStaticParams() {
@@ -70,13 +37,14 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
 export default async function NewsDetailPage({params}: Props) {
   const {locale, slug} = await params;
   setRequestLocale(locale);
+  const messages = getLocaleMessages(locale);
   const card = getNewsCard(locale, slug);
 
   if (!card) {
     notFound();
   }
 
-  const text = copy[locale];
+  const text = messages.newsUi.detail;
   const related = getNewsCards(locale).filter((item) => item.id !== slug).slice(0, 3);
 
   return (
@@ -94,10 +62,10 @@ export default async function NewsDetailPage({params}: Props) {
               <span className="text-subtext">{card.date}</span>
               <span className="text-subtext">{text.author}</span>
             </div>
-            <h1 className="font-heading text-[clamp(46px,8vw,104px)] font-semibold leading-none text-primary">
+            <h1 className="font-heading text-[clamp(34px,5.8vw,68px)] font-semibold leading-none text-primary">
               {card.title}
             </h1>
-            <p className="max-w-3xl font-body text-[19px] leading-9 text-subtext">{text.lead}</p>
+            <p className="max-w-3xl font-body text-[15px] leading-7 text-subtext">{text.lead}</p>
           </Reveal>
           <Reveal className="mt-12">
             <SafeImage
@@ -115,11 +83,11 @@ export default async function NewsDetailPage({params}: Props) {
         <div className="mx-auto max-w-[720px] space-y-8 px-container">
           {text.paragraphs.map((paragraph) => (
             <Reveal key={paragraph}>
-              <p className="font-body text-[18px] leading-[1.8] text-text">{paragraph}</p>
+              <p className="font-body text-[15px] leading-8 text-text">{paragraph}</p>
             </Reveal>
           ))}
           <Reveal>
-            <blockquote className="border-l-2 border-accent bg-white px-6 py-5 font-heading text-[28px] font-semibold leading-tight text-primary">
+            <blockquote className="border-l-2 border-accent bg-white px-6 py-5 font-heading text-[22px] font-semibold leading-tight text-primary">
               {text.quote}
             </blockquote>
           </Reveal>
@@ -129,10 +97,10 @@ export default async function NewsDetailPage({params}: Props) {
                 {tag}
               </span>
             ))}
-            <ShareLinkButton locale={locale} />
+            <ShareLinkButton copy={messages.newsUi.share} />
           </Reveal>
           <Reveal className="bg-white p-6 shadow-[0_20px_70px_rgba(16,29,48,0.06)]">
-            <p className="font-heading text-[38px] font-semibold leading-tight text-primary">{text.ctaTitle}</p>
+            <p className="font-heading text-[28px] font-semibold leading-tight text-primary">{text.ctaTitle}</p>
             <Link href={withLocale(locale, `/contact?type=other&source=news&item=${slug}`)} className="link-sweep mt-5 inline-flex font-body text-sm font-semibold uppercase tracking-[0.12em]">
               {text.cta}
             </Link>
@@ -143,7 +111,7 @@ export default async function NewsDetailPage({params}: Props) {
       <section className="bg-white py-section">
         <div className="mx-auto max-w-[1440px] space-y-8 px-container">
           <Reveal>
-            <h2 className="font-heading text-[clamp(42px,6vw,82px)] font-semibold leading-none text-primary">
+            <h2 className="font-heading text-[clamp(30px,4.4vw,54px)] font-semibold leading-none text-primary">
               {text.related}
             </h2>
           </Reveal>
@@ -159,7 +127,7 @@ export default async function NewsDetailPage({params}: Props) {
                   <p className="font-body text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
                     {item.categoryLabel}
                   </p>
-                  <h3 className="font-heading text-[30px] font-semibold leading-tight text-primary">
+                  <h3 className="font-heading text-[22px] font-semibold leading-tight text-primary">
                     {item.title}
                   </h3>
                 </div>
@@ -173,7 +141,7 @@ export default async function NewsDetailPage({params}: Props) {
 }
 
 function getNewsCards(locale: Locale) {
-  return locale === 'en' ? enMessages.news.grid.cards : koMessages.news.grid.cards;
+  return getLocaleMessages(locale).news.grid.cards;
 }
 
 function getNewsCard(locale: Locale, slug: string) {

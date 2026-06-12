@@ -7,9 +7,8 @@ import {SafeImage} from '@/components/safe-image';
 import {SectionIntro} from '@/components/section-intro';
 import type {Locale} from '@/i18n/routing';
 import {imageExists} from '@/lib/image-exists';
+import {getLocaleMessages} from '@/lib/locale-messages';
 import {getPageMetadata} from '@/lib/seo';
-import enMessages from '@/messages/en.json';
-import koMessages from '@/messages/ko.json';
 
 type Props = {
   params: Promise<{locale: Locale}>;
@@ -23,7 +22,9 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
 export default async function NewsPage({params}: Props) {
   const {locale} = await params;
   setRequestLocale(locale);
-  const content = locale === 'en' ? enMessages.news : koMessages.news;
+  const messages = getLocaleMessages(locale);
+  const content = messages.news;
+  const text = messages.newsUi;
   const cards: NewsCard[] = content.grid.cards.map((card) => ({
     ...card,
     hasImage: imageExists(card.image)
@@ -35,14 +36,14 @@ export default async function NewsPage({params}: Props) {
       <section className="overflow-hidden bg-bg pt-28">
         <div className="mx-auto max-w-[1440px] px-container pb-8 pt-10 md:pt-14">
           <Reveal className="grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(280px,0.55fr)] lg:items-end">
-            <h1 className="font-heading text-[clamp(92px,18vw,260px)] font-semibold leading-[0.78] text-primary">
+            <h1 className="font-heading text-[clamp(52px,9vw,112px)] font-semibold leading-[0.82] text-primary">
               {content.masthead.title}
             </h1>
             <div className="space-y-5 pb-2 text-left lg:text-right">
               <p className="font-body text-[12px] font-semibold uppercase tracking-[0.22em] text-subtext">
                 {content.masthead.issue}
               </p>
-              <p className="font-body text-[15px] leading-7 text-text">
+              <p className="font-body text-[14px] leading-7 text-text">
                 {content.hero.subtitle}
               </p>
             </div>
@@ -69,7 +70,7 @@ export default async function NewsPage({params}: Props) {
             <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-subtext">
               {content.hero.eyebrow}
             </p>
-            <h2 className="font-heading text-[clamp(48px,7vw,96px)] font-semibold leading-none text-primary">
+            <h2 className="font-heading text-[clamp(34px,5vw,58px)] font-semibold leading-none text-primary">
               {content.hero.title}
             </h2>
             <p className="max-w-lg font-body text-body leading-[1.7] text-text">
@@ -112,10 +113,10 @@ export default async function NewsPage({params}: Props) {
                   <span className="text-subtext">{content.featured.category}</span>
                   <span className="text-subtext">{content.featured.date}</span>
                 </div>
-                <h2 className="font-heading text-[clamp(40px,6vw,76px)] font-semibold leading-none text-primary">
+                <h2 className="font-heading text-[clamp(30px,4.4vw,50px)] font-semibold leading-none text-primary">
                   {content.featured.title}
                 </h2>
-                <p className="max-w-2xl font-body text-[17px] leading-8 text-text">
+                <p className="max-w-2xl font-body text-[14px] leading-7 text-text">
                   {content.featured.body}
                 </p>
               </div>
@@ -133,10 +134,8 @@ export default async function NewsPage({params}: Props) {
               title={content.grid.title}
               variant="news"
             />
-            <p className="max-w-2xl font-body text-[16px] leading-7 text-text lg:justify-self-end">
-              {locale === 'ko'
-                ? '새로운 제작 사례와 프로젝트 소식은 확인되는 순서대로 이 밝은 저널 지면에 남습니다.'
-                : 'New production cases and project notes remain in this bright journal field as they are verified.'}
+            <p className="max-w-2xl font-body text-[14px] leading-7 text-text lg:justify-self-end">
+              {text.indexBody}
             </p>
           </Reveal>
 
@@ -144,7 +143,8 @@ export default async function NewsPage({params}: Props) {
             <NewsJournalGrid
               filters={content.grid.filters}
               cards={cards}
-              filterLabel={locale === 'ko' ? '뉴스 필터' : 'News filters'}
+              empty={text.empty}
+              filterLabel={text.filtersLabel}
               locale={locale}
             />
           </Reveal>

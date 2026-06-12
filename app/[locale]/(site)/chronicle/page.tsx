@@ -3,9 +3,8 @@ import {setRequestLocale} from 'next-intl/server';
 
 import {ChronicleHorizontal} from '@/components/chronicle/chronicle-horizontal';
 import type {Locale} from '@/i18n/routing';
+import {getLocaleMessages} from '@/lib/locale-messages';
 import {getPageMetadata} from '@/lib/seo';
-import enMessages from '@/messages/en.json';
-import koMessages from '@/messages/ko.json';
 
 type Props = {
   params: Promise<{locale: Locale}>;
@@ -19,7 +18,8 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
 export default async function ChroniclePage({params}: Props) {
   const {locale} = await params;
   setRequestLocale(locale);
-  const content = locale === 'en' ? enMessages.chronicle : koMessages.chronicle;
+  const messages = getLocaleMessages(locale);
+  const content = messages.chronicle;
   const slides = content.timeline.items.map((item) => ({
     year: item.year,
     label: item.kicker,
@@ -30,7 +30,7 @@ export default async function ChroniclePage({params}: Props) {
 
   return (
     <ChronicleHorizontal
-      ariaLabel={locale === 'ko' ? '대호 크로니클 가로 타임라인' : 'DEAHO chronicle horizontal timeline'}
+      ariaLabel={messages.chronicleUi.horizontalAriaLabel}
       introLabel="DAEHO"
       slides={slides}
     />
@@ -79,14 +79,14 @@ export default async function ChroniclePage({params}: Props) {
               {content.hero.eyebrow}
             </p>
             <div className="space-y-4">
-              <h1 className="font-heading text-[clamp(52px,7.5vw,100px)] font-bold leading-none tracking-normal text-primary">
+              <h1 className="font-heading text-[clamp(38px,5.8vw,68px)] font-bold leading-none tracking-normal text-primary">
                 {content.hero.title.split(' ').map((word) => (
                   <span key={word} className="block">
                     {word}
                   </span>
                 ))}
               </h1>
-              <p className="font-heading text-[clamp(34px,4vw,58px)] font-semibold leading-tight text-primary">
+              <p className="font-heading text-[clamp(26px,3vw,40px)] font-semibold leading-tight text-primary">
                 {content.hero.koreanTitle}
               </p>
             </div>
@@ -126,7 +126,7 @@ export default async function ChroniclePage({params}: Props) {
 
       <section className="bg-white py-section">
         <Reveal className="mx-auto max-w-5xl space-y-8 px-container text-center">
-          <p className="font-heading text-[clamp(42px,6vw,86px)] font-semibold leading-tight text-primary">
+          <p className="font-heading text-[clamp(30px,4.6vw,56px)] font-semibold leading-tight text-primary">
             {content.closing.title}
           </p>
           <p className="mx-auto max-w-2xl font-body text-body leading-[1.7] text-text">
