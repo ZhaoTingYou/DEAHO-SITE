@@ -27,9 +27,9 @@ export function LegacyMetricGrid({
 }: LegacyMetricGridProps) {
   const gridClass =
     variant === 'monument'
-      ? 'grid min-h-[82dvh] place-items-center gap-10 py-section text-center md:grid-cols-3'
+      ? 'grid gap-12 py-[clamp(24px,3vw,48px)] text-center md:grid-cols-3 md:gap-8'
       : variant === 'compact'
-        ? 'grid gap-5 sm:grid-cols-2'
+        ? 'grid gap-6 sm:grid-cols-2 md:gap-8'
         : 'grid gap-6 border-y border-hairline py-10 md:grid-cols-3';
 
   return (
@@ -107,9 +107,9 @@ function LegacyMetricCell({
 
   const valueClass =
     variant === 'monument'
-      ? 'font-numeric text-[clamp(46px,8vw,112px)] font-semibold leading-none text-primary'
+      ? 'font-numeric text-[clamp(36px,4.4vw,64px)] font-semibold leading-none text-primary'
       : variant === 'compact'
-        ? 'font-numeric text-[clamp(32px,5vw,56px)] font-semibold leading-none text-primary'
+        ? 'font-numeric text-[clamp(26px,2.8vw,40px)] font-semibold leading-none text-primary'
         : 'font-numeric text-stat font-semibold leading-none text-primary';
 
   return (
@@ -119,7 +119,7 @@ function LegacyMetricCell({
       whileInView={{opacity: 1, y: 0}}
       viewport={{once: true, amount: 0.35}}
       transition={{duration: prefersReducedMotion ? 0 : 0.8, ease: [0.16, 1, 0.3, 1]}}
-      className={variant === 'compact' ? 'border border-hairline bg-white p-7' : 'space-y-5'}
+      className={variant === 'compact' ? 'border border-hairline bg-white p-9' : 'space-y-4'}
     >
       <div className={valueClass}>
         <span ref={valueRef}>0</span>
@@ -132,7 +132,7 @@ function LegacyMetricCell({
           </span>
         ) : null}
       </div>
-      <p className="mx-auto max-w-[16rem] font-body text-sm font-semibold uppercase tracking-[0.14em] text-subtext">
+      <p className="mx-auto max-w-[16rem] font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-subtext">
         {item.label}
       </p>
     </motion.div>

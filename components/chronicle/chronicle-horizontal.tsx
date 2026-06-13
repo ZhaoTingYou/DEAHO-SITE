@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import {type CSSProperties, useEffect, useMemo, useRef, useState} from 'react';
 
 export type ChronicleHorizontalSlide = {
@@ -13,6 +14,12 @@ export type ChronicleHorizontalSlide = {
 
 type ChronicleHorizontalProps = {
   ariaLabel: string;
+  yearNavAriaLabel: string;
+  endNav: {
+    label: string;
+    title: string;
+    href: string;
+  };
   introLabel: string;
   slides: ChronicleHorizontalSlide[];
 };
@@ -30,7 +37,13 @@ const scrollLockKeys = new Set([
   'PageUp'
 ]);
 
-export function ChronicleHorizontal({ariaLabel, introLabel, slides}: ChronicleHorizontalProps) {
+export function ChronicleHorizontal({
+  ariaLabel,
+  yearNavAriaLabel,
+  endNav,
+  introLabel,
+  slides
+}: ChronicleHorizontalProps) {
   const stageRef = useRef<HTMLElement | null>(null);
   const frameRef = useRef<number | null>(null);
   const targetProgressRef = useRef(0);
@@ -166,10 +179,19 @@ export function ChronicleHorizontal({ariaLabel, introLabel, slides}: ChronicleHo
 
     const syncProgressFromStage = () => {
       const rect = stage.getBoundingClientRect();
+      const stageTop = window.scrollY + rect.top;
       const travel = Math.max(1, rect.height - window.innerHeight);
-      const nextProgress = clamp(-rect.top / travel);
-      const nextControlsVisible = rect.top <= 1 && rect.bottom > window.innerHeight;
+      const stageEnd = stageTop + travel;
+      const effectiveScrollY = Math.min(window.scrollY, stageEnd);
+      const effectiveTop = stageTop - effectiveScrollY;
+      const nextProgress = clamp((effectiveScrollY - stageTop) / travel);
+      const nextControlsVisible =
+        effectiveTop <= 1 && effectiveScrollY <= stageEnd + 1 && effectiveScrollY >= stageTop - 1;
       targetProgressRef.current = nextProgress;
+
+      if (introComplete && window.scrollY > stageEnd) {
+        window.scrollTo({top: stageEnd, behavior: 'auto'});
+      }
 
       if (controlsVisibleRef.current !== nextControlsVisible) {
         controlsVisibleRef.current = nextControlsVisible;
@@ -230,7 +252,7 @@ export function ChronicleHorizontal({ariaLabel, introLabel, slides}: ChronicleHo
       window.removeEventListener('scroll', requestUpdate);
       window.removeEventListener('resize', requestUpdate);
     };
-  }, [slides.length]);
+  }, [introComplete, slides.length]);
 
   useEffect(() => {
     const nextYear = slides[activeIndex]?.year ?? firstYear;
@@ -262,6 +284,77 @@ export function ChronicleHorizontal({ariaLabel, introLabel, slides}: ChronicleHo
     };
   }, [activeIndex, displayYear, firstYear, slides]);
 
+  useEffect(() => {
+    if (!introComplete) {
+      return;
+    }
+
+    let touchStartY = 0;
+
+    const getStageEndY = () => {
+      const stage = stageRef.current;
+
+      if (!stage) {
+        return null;
+      }
+
+      const rect = stage.getBoundingClientRect();
+      const travel = Math.max(1, rect.height - window.innerHeight);
+      return window.scrollY + rect.top + travel;
+    };
+
+    const lockAtChronicleEnd = () => {
+      const stageEndY = getStageEndY();
+
+      if (stageEndY === null || window.scrollY < stageEndY - 1) {
+        return false;
+      }
+
+      window.scrollTo({top: stageEndY, behavior: 'auto'});
+      return true;
+    };
+
+    const preventForwardWheel = (event: WheelEvent) => {
+      if (event.deltaY > 0 && lockAtChronicleEnd()) {
+        event.preventDefault();
+      }
+    };
+
+    const preventForwardKey = (event: KeyboardEvent) => {
+      if (![' ', 'ArrowDown', 'End', 'PageDown'].includes(event.key)) {
+        return;
+      }
+
+      if (lockAtChronicleEnd()) {
+        event.preventDefault();
+      }
+    };
+
+    const rememberTouchStart = (event: TouchEvent) => {
+      touchStartY = event.touches[0]?.clientY ?? 0;
+    };
+
+    const preventForwardTouch = (event: TouchEvent) => {
+      const currentY = event.touches[0]?.clientY ?? touchStartY;
+
+      if (touchStartY - currentY > 0 && lockAtChronicleEnd()) {
+        event.preventDefault();
+      }
+    };
+
+    document.addEventListener('wheel', preventForwardWheel, {capture: true, passive: false});
+    window.addEventListener('keydown', preventForwardKey, {capture: true});
+    document.addEventListener('touchstart', rememberTouchStart, {capture: true, passive: true});
+    document.addEventListener('touchmove', preventForwardTouch, {capture: true, passive: false});
+
+    return () => {
+      document.removeEventListener('wheel', preventForwardWheel, {capture: true});
+      window.removeEventListener('keydown', preventForwardKey, {capture: true});
+      document.removeEventListener('touchstart', rememberTouchStart, {capture: true});
+      document.removeEventListener('touchmove', preventForwardTouch, {capture: true});
+    };
+  }, [introComplete]);
+
   const trackStyle = useMemo(
     () =>
       ({
@@ -269,6 +362,7 @@ export function ChronicleHorizontal({ariaLabel, introLabel, slides}: ChronicleHo
       }) as CSSProperties,
     [progress, slideCount]
   );
+  const endNavVisible = controlsVisible && lineProgress > 0.92;
 
   const scrollToChronicleYear = (index: number) => {
     const stage = stageRef.current;
@@ -298,9 +392,9 @@ export function ChronicleHorizontal({ariaLabel, introLabel, slides}: ChronicleHo
     <main
       className={`chronicle-page is-day-theme ${stageVisible ? 'is-stage-visible' : ''} ${
         controlsVisible ? 'is-controls-visible' : ''
-      }`}
+      } ${endNavVisible ? 'is-end-nav-visible' : ''}`}
     >
-      <nav className="chronicle-year-nav" aria-label="Chronicle year navigation">
+      <nav className="chronicle-year-nav" aria-label={yearNavAriaLabel}>
         {yearStops.map((stop) => (
           <button
             className={activeIndex === stop.index ? 'is-active' : ''}
@@ -313,6 +407,10 @@ export function ChronicleHorizontal({ariaLabel, introLabel, slides}: ChronicleHo
           </button>
         ))}
       </nav>
+
+      <Link className="chronicle-end-nav" href={endNav.href} aria-label={endNav.label}>
+        <h2>{endNav.title}</h2>
+      </Link>
 
       <section
         className="chronicle-stage"
@@ -347,7 +445,8 @@ export function ChronicleHorizontal({ariaLabel, introLabel, slides}: ChronicleHo
                 >
                   <div className="chronicle-content">
                     <div className="chronicle-copy">
-                      <span>{slide.label}</span>
+                      <span className="chronicle-copy-kicker">{slide.label}</span>
+                      <span className="chronicle-copy-year" aria-hidden="true">{slide.year}</span>
                       <h1>{slide.title}</h1>
                       <p>{slide.desc}</p>
                     </div>

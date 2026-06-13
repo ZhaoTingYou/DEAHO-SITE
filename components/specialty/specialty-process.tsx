@@ -36,7 +36,7 @@ export function SpecialtyProcess({steps}: SpecialtyProcessProps) {
       <MobileProcess steps={steps} />
       {prefersReducedMotion ? (
         <section className="hidden bg-white py-section md:block">
-          <div className="mx-auto grid max-w-[1440px] gap-6 px-container lg:grid-cols-2">
+          <div className="mx-auto grid max-w-[1180px] gap-8 px-container lg:grid-cols-2">
             {steps.map((step) => (
               <ProcessCard key={step.number} step={step} />
             ))}
@@ -78,17 +78,10 @@ function PinnedProcess({steps}: SpecialtyProcessProps) {
           className="pointer-events-none absolute inset-y-0 left-[36%] w-px bg-primary/10"
           aria-hidden="true"
         />
-        <div
-          className="pointer-events-none absolute right-container top-28 font-heading text-[clamp(110px,18vw,280px)] font-semibold leading-none text-primary/[0.035]"
-          aria-hidden="true"
-        >
-          {steps[activeIndex]?.number}
-        </div>
-
-        <div className="relative mx-auto grid w-full max-w-[1440px] grid-cols-[0.8fr_1.22fr_0.88fr] items-center gap-10 px-container py-12">
+        <div className="relative mx-auto grid w-full max-w-[1280px] grid-cols-[0.8fr_1.22fr_0.88fr] items-center gap-12 px-container py-12">
           <aside className="space-y-10">
             <div className="space-y-4">
-              <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-subtext">
+              <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.26em] text-subtext">
                 PROCESS ANATOMY
               </p>
               <motion.p
@@ -96,7 +89,7 @@ function PinnedProcess({steps}: SpecialtyProcessProps) {
                 initial={{opacity: 0, y: 14}}
                 animate={{opacity: 1, y: 0}}
                 transition={transition}
-                className="font-heading text-[clamp(48px,6.5vw,84px)] font-semibold leading-none text-primary"
+                className="font-heading text-[clamp(30px,3.4vw,48px)] font-semibold leading-none text-primary"
               >
                 {steps[activeIndex]?.number}
               </motion.p>
@@ -106,11 +99,11 @@ function PinnedProcess({steps}: SpecialtyProcessProps) {
               {steps.map((step, index) => (
                 <div
                   key={step.number}
-                  className="grid grid-cols-[44px_1fr] items-center gap-4"
+                  className="grid grid-cols-[40px_1fr] items-center gap-4"
                   aria-current={index === activeIndex ? 'step' : undefined}
                 >
                   <span
-                    className={`flex h-11 w-11 items-center justify-center border font-numeric text-xs font-semibold transition duration-300 ${
+                    className={`flex h-10 w-10 items-center justify-center border font-numeric text-[11px] font-semibold transition duration-300 ${
                       index === activeIndex
                         ? 'border-accent bg-accent text-white'
                         : 'border-hairline bg-white text-subtext'
@@ -119,7 +112,7 @@ function PinnedProcess({steps}: SpecialtyProcessProps) {
                     {step.number}
                   </span>
                   <span
-                    className={`font-body text-sm font-semibold uppercase tracking-[0.14em] transition duration-300 ${
+                    className={`font-body text-[12px] font-semibold uppercase tracking-[0.16em] transition duration-300 ${
                       index === activeIndex ? 'text-primary' : 'text-subtext'
                     }`}
                   >
@@ -135,12 +128,6 @@ function PinnedProcess({steps}: SpecialtyProcessProps) {
               className="pointer-events-none absolute inset-6 z-20 border border-white/70"
               aria-hidden="true"
             />
-            <div
-              className="pointer-events-none absolute -left-10 bottom-0 z-20 font-heading text-[clamp(150px,16vw,250px)] font-semibold leading-none text-primary/[0.08]"
-              aria-hidden="true"
-            >
-              {steps[activeIndex]?.number}
-            </div>
             {steps.map((step, index) => (
               <ProcessVisualLayer
                 key={step.number}
@@ -210,13 +197,13 @@ function ProcessCopyLayer({
 
   return (
     <motion.article className="absolute inset-0 flex flex-col justify-center" style={{opacity, y}}>
-      <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-accent">
+      <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.26em] text-accent">
         {step.number} / {step.label}
       </p>
-      <h2 className="mt-6 font-heading text-[clamp(30px,4vw,52px)] font-semibold leading-none text-primary">
+      <h2 className="mt-5 font-heading text-[clamp(22px,2.4vw,32px)] font-semibold leading-[1.2] text-primary">
         {step.title}
       </h2>
-      <p className="mt-7 max-w-md font-body text-[15px] leading-7 text-text">{step.body}</p>
+      <p className="mt-6 max-w-md font-body text-[14px] leading-7 text-text">{step.body}</p>
     </motion.article>
   );
 }
@@ -235,24 +222,16 @@ function MobileProcess({steps}: SpecialtyProcessProps) {
 
 function ProcessCard({step}: {step: SpecialtyProcessStep}) {
   return (
-    <article className="bg-bg p-4 shadow-[0_18px_60px_rgba(16,29,48,0.07)]">
-      <div className="relative overflow-hidden">
-        <ProcessImage step={step} />
-        <span
-          className="pointer-events-none absolute -left-5 bottom-0 font-heading text-[clamp(96px,24vw,150px)] font-semibold leading-none text-primary/[0.08]"
-          aria-hidden="true"
-        >
-          {step.number}
-        </span>
-      </div>
-      <div className="space-y-4 px-1 py-6">
-        <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-accent">
+    <article className="bg-bg p-3 shadow-[0_14px_50px_rgba(16,29,48,0.05)]">
+      <ProcessImage step={step} />
+      <div className="space-y-3.5 px-2 py-7">
+        <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.26em] text-accent">
           {step.number} / {step.label}
         </p>
-        <h2 className="font-heading text-[clamp(26px,8vw,38px)] font-semibold leading-tight text-primary">
+        <h2 className="font-heading text-[clamp(20px,5.5vw,26px)] font-semibold leading-snug text-primary">
           {step.title}
         </h2>
-        <p className="font-body text-[14px] leading-7 text-text">{step.body}</p>
+        <p className="font-body text-[13px] leading-6 text-text">{step.body}</p>
       </div>
     </article>
   );

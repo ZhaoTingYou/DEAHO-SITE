@@ -629,17 +629,12 @@
     "masthead": {
       "title": "NEWS",
       "issue": "DEAHO JOURNAL · ISSUE 2026",
+      "body": "Project stories, workshop notes, press features, and collaborations gathered in one journal field.",
       "ticker": [
         "New production cases will be updated here when verified materials arrive.",
         "Project stories, press features, and collaborations are gathered in one journal field.",
         "DEAHO is still shaping the moments of victory into form."
       ]
-    },
-    "hero": {
-      "eyebrow": "THE CURRENT PULSE",
-      "title": "THE CURRENT PULSE",
-      "subtitle": "DEAHO is still creating now.",
-      "image": "news_hero.png"
     },
     "featured": {
       "eyebrow": "COMING SOON",
@@ -1036,16 +1031,13 @@
     }
   },
   "chronicleUi": {
-    "timeline": {
-      "open": "Open archive note",
-      "close": "Close",
-      "title": "Archive note",
-      "next": "The next record continues along the timeline.",
-      "previousYear": "Previous year",
-      "nextYear": "Next year",
-      "first": "First"
-    },
-    "horizontalAriaLabel": "DEAHO chronicle horizontal timeline"
+    "horizontalAriaLabel": "DEAHO chronicle horizontal timeline",
+    "yearNavAriaLabel": "Chronicle year navigation",
+    "endNav": {
+      "label": "Next chronicle navigation",
+      "title": "See what DEAHO is making now",
+      "href": "/news"
+    }
   },
   "newsUi": {
     "filtersLabel": "News filters",

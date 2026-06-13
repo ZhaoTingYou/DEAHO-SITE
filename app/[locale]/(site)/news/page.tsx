@@ -33,8 +33,8 @@ export default async function NewsPage({params}: Props) {
 
   return (
     <main className="bg-bg text-text">
-      <section className="overflow-hidden bg-bg pt-28">
-        <div className="mx-auto max-w-[1440px] px-container pb-8 pt-10 md:pt-14">
+      <section className="overflow-hidden bg-bg pt-[clamp(82px,8vw,104px)]">
+        <div className="mx-auto max-w-[1440px] px-container pb-4 pt-4 md:pb-5 md:pt-6">
           <Reveal className="grid gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(280px,0.55fr)] lg:items-end">
             <h1 className="font-heading text-[clamp(52px,9vw,112px)] font-semibold leading-[0.82] text-primary">
               {content.masthead.title}
@@ -44,14 +44,14 @@ export default async function NewsPage({params}: Props) {
                 {content.masthead.issue}
               </p>
               <p className="font-body text-[14px] leading-7 text-text">
-                {content.hero.subtitle}
+                {content.masthead.body}
               </p>
             </div>
           </Reveal>
 
-          <div className="news-rule-line mt-7 h-px w-full bg-primary/70" aria-hidden="true" />
+          <div className="news-rule-line mt-5 h-px w-full bg-primary/70" aria-hidden="true" />
 
-          <div className="mt-4 overflow-hidden border-y border-hairline bg-white/45 py-3">
+          <div className="mt-3 overflow-hidden border-y border-hairline bg-white/45 py-2.5">
             <div className="news-ticker-track flex w-max items-center gap-7 font-body text-[11px] font-semibold uppercase tracking-[0.18em] text-primary">
               {tickerItems.map((item, index) => (
                 <span key={`${item}-${index}`} className="flex items-center gap-7">
@@ -61,31 +61,6 @@ export default async function NewsPage({params}: Props) {
               ))}
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="bg-white py-12 md:py-16">
-        <div className="mx-auto grid max-w-[1440px] gap-10 px-container lg:grid-cols-[minmax(280px,0.72fr)_1.28fr] lg:items-center">
-          <Reveal className="space-y-6">
-            <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-subtext">
-              {content.hero.eyebrow}
-            </p>
-            <h2 className="font-heading text-[clamp(34px,5vw,58px)] font-semibold leading-none text-primary">
-              {content.hero.title}
-            </h2>
-            <p className="max-w-lg font-body text-body leading-[1.7] text-text">
-              {content.hero.subtitle}
-            </p>
-          </Reveal>
-          <Reveal>
-            <SafeImage
-              filename={content.hero.image}
-              alt={content.hero.subtitle}
-              aspect="aspect-[21/9]"
-              priority
-              variant="plain"
-            />
-          </Reveal>
         </div>
       </section>
 

@@ -70,35 +70,35 @@ export default async function CollectionDetailPage({params}: Props) {
   return (
     <main className="bg-bg text-text">
       <section className="bg-white pt-28">
-        <div className="mx-auto max-w-[1440px] px-container py-section">
-          <Link href={withLocale(locale, '/specialty/collection')} className="link-sweep font-body text-sm font-semibold uppercase tracking-[0.12em]">
+        <div className="mx-auto max-w-[1280px] px-container pb-section pt-[clamp(40px,5vw,72px)]">
+          <Link href={withLocale(locale, '/specialty/collection')} className="link-sweep font-body text-[12px] font-semibold uppercase tracking-[0.16em]">
             {text.back}
           </Link>
-          <div className="mt-12 grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.72fr)] lg:items-start">
+          <div className="mt-[clamp(40px,5vw,64px)] grid gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.72fr)] lg:items-start lg:gap-16">
             <Reveal>
               <CollectionDetailGallery images={images} thumbnailLabel={text.thumbnailLabel} />
             </Reveal>
             <Reveal className="lg:sticky lg:top-32">
-              <aside className="space-y-8 bg-bg p-5 shadow-[0_24px_88px_rgba(16,29,48,0.08)] md:p-8">
-                <div className="space-y-5">
-                  <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-accent">
+              <aside className="space-y-9 bg-bg p-6 shadow-[0_18px_70px_rgba(16,29,48,0.06)] md:p-9">
+                <div className="space-y-4">
+                  <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.26em] text-accent">
                     {item.categoryLabel}
                   </p>
-                  <h1 className="font-heading text-[clamp(34px,5.5vw,64px)] font-semibold leading-none text-primary">
+                  <h1 className="font-heading text-[clamp(24px,2.8vw,36px)] font-semibold leading-[1.15] text-primary">
                     {item.title}
                   </h1>
                   <p className="font-body text-[14px] leading-7 text-text">{item.caption}</p>
                 </div>
                 <div className="space-y-1">
                   {specs.map(([label, value]) => (
-                    <div key={label} className="grid grid-cols-[0.8fr_1.2fr] gap-5 border-t border-hairline py-4 font-body text-sm">
-                      <span className="font-semibold uppercase tracking-[0.14em] text-subtext">{label}</span>
+                    <div key={label} className="grid grid-cols-[0.8fr_1.2fr] gap-5 border-t border-hairline py-4 font-body text-[13px]">
+                      <span className="font-semibold uppercase tracking-[0.16em] text-subtext">{label}</span>
                       <span className="text-right text-primary">{value}</span>
                     </div>
                   ))}
                 </div>
-                <div className="space-y-4 border-l-2 border-accent bg-white px-5 py-4">
-                  <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.18em] text-accent">
+                <div className="space-y-3.5 border-l-2 border-accent bg-white px-6 py-5">
+                  <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.2em] text-accent">
                     {text.story}
                   </p>
                   <p className="font-body text-[14px] leading-7 text-text">{item.caption}</p>
@@ -110,13 +110,13 @@ export default async function CollectionDetailPage({params}: Props) {
       </section>
 
       <section className="bg-bg py-section">
-        <div className="mx-auto max-w-[1440px] space-y-8 px-container">
+        <div className="mx-auto max-w-[1280px] space-y-[clamp(40px,4vw,56px)] px-container">
           <Reveal>
-            <h2 className="font-heading text-[clamp(30px,4.4vw,54px)] font-semibold leading-none text-primary">
+            <h2 className="font-heading text-[clamp(22px,2.4vw,32px)] font-semibold leading-[1.2] text-primary">
               {text.detailStrip}
             </h2>
           </Reveal>
-          <div className="grid gap-5 md:grid-cols-3">
+          <div className="grid gap-6 md:grid-cols-3 md:gap-8">
             {detailImages.slice(0, 3).map((filename) => (
               <Reveal key={filename}>
                 <div className="hover-zoom">
@@ -131,59 +131,61 @@ export default async function CollectionDetailPage({params}: Props) {
       </section>
 
       <section className="bg-white py-section">
-        <Reveal className="mx-auto max-w-5xl space-y-6 px-container text-center">
-          <p className="font-heading text-[clamp(28px,4.4vw,50px)] font-semibold leading-tight text-primary">
+        <Reveal className="mx-auto max-w-3xl space-y-7 px-container text-center">
+          <p className="font-heading text-[clamp(22px,2.4vw,32px)] font-semibold leading-[1.25] text-primary">
             {text.processTitle}
           </p>
-          <Link href={withLocale(locale, '/specialty/technique')} className="link-sweep inline-flex font-body text-sm font-semibold uppercase tracking-[0.12em]">
+          <Link href={withLocale(locale, '/specialty/technique')} className="link-sweep inline-flex font-body text-[12px] font-semibold uppercase tracking-[0.16em]">
             {text.processCta}
           </Link>
         </Reveal>
       </section>
 
       <section className="bg-bg py-section">
-        <div className="mx-auto max-w-[1440px] space-y-10 px-container">
-          <Reveal className="border-y border-hairline bg-white px-5 py-10 md:px-8 md:py-12">
-            <div className="max-w-4xl space-y-7">
+        <div className="mx-auto max-w-[1280px] space-y-[clamp(48px,5vw,72px)] px-container">
+          <Reveal className="border-y border-hairline bg-white px-6 py-12 md:px-10 md:py-16">
+            <div className="mx-auto max-w-2xl space-y-7 text-center">
               <div className="space-y-4">
-                <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-accent">
+                <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.26em] text-accent">
                   {text.commissionEyebrow}
                 </p>
-                <p className="font-heading text-[clamp(24px,3.8vw,42px)] font-semibold leading-tight text-primary [text-wrap:balance]">
+                <p className="font-heading text-[clamp(20px,2.2vw,28px)] font-semibold leading-[1.3] text-primary [text-wrap:balance]">
                   {text.ctaTitle}
                 </p>
               </div>
               <Link
                 href={withLocale(locale, `/contact?type=bespoke&source=collection&item=${slug}`)}
-                className="consult-cta consult-cta--accent consult-cta--large w-fit shrink-0"
+                className="consult-cta consult-cta--accent consult-cta--large mx-auto w-fit shrink-0"
               >
                 <span className="consult-cta__label">{text.cta}</span>
               </Link>
             </div>
           </Reveal>
-          <Reveal>
-            <h2 className="font-heading text-[clamp(28px,4.4vw,50px)] font-semibold leading-none text-primary">
-              {text.related}
-            </h2>
-          </Reveal>
-          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
-            {related.map((entry) => (
-              <Link
-                key={entry.id}
-                href={withLocale(locale, `/specialty/collection/${entry.id}`)}
-                className="group block bg-white p-3 shadow-[0_14px_52px_rgba(16,29,48,0.055)] transition duration-hover ease-brand hover:-translate-y-1"
-              >
-                <SafeImage filename={entry.image} alt={entry.title} aspect="aspect-square" variant="plain" />
-                <div className="space-y-2 px-1 py-4">
-                  <p className="font-body text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
-                    {entry.categoryLabel}
-                  </p>
-                  <h3 className="font-heading text-[22px] font-semibold leading-tight text-primary">
-                    {entry.title}
-                  </h3>
-                </div>
-              </Link>
-            ))}
+          <div className="space-y-[clamp(32px,3.5vw,48px)]">
+            <Reveal>
+              <h2 className="font-heading text-[clamp(22px,2.4vw,32px)] font-semibold leading-[1.2] text-primary">
+                {text.related}
+              </h2>
+            </Reveal>
+            <div className="grid grid-cols-2 gap-5 lg:grid-cols-4 lg:gap-8">
+              {related.map((entry) => (
+                <Link
+                  key={entry.id}
+                  href={withLocale(locale, `/specialty/collection/${entry.id}`)}
+                  className="group block bg-white p-3 shadow-[0_14px_50px_rgba(16,29,48,0.05)] transition duration-hover ease-brand hover:-translate-y-1"
+                >
+                  <SafeImage filename={entry.image} alt={entry.title} aspect="aspect-square" variant="plain" />
+                  <div className="space-y-2 px-2 pb-4 pt-5">
+                    <p className="font-body text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
+                      {entry.categoryLabel}
+                    </p>
+                    <h3 className="font-heading text-[clamp(16px,1.5vw,19px)] font-semibold leading-snug text-primary">
+                      {entry.title}
+                    </h3>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>

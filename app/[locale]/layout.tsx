@@ -54,6 +54,12 @@ export default async function LocaleLayout({children, params}: Props) {
 
   setRequestLocale(locale);
   const messages = (await getMessages()) as LocaleMessages;
+  // Only namespaces read via useTranslations in client components belong here;
+  // server components get their copy through getLocaleMessages(locale) props.
+  const clientMessages = {
+    common: messages.common,
+    notFound: messages.notFound
+  };
   const localeClass = locale === 'ko' ? 'locale-ko' : 'locale-en';
 
   return (
@@ -62,7 +68,7 @@ export default async function LocaleLayout({children, params}: Props) {
         <a href="#main-content" className="skip-link">
           {messages.common.skipLink}
         </a>
-        <NextIntlClientProvider messages={messages} locale={locale as Locale}>
+        <NextIntlClientProvider messages={clientMessages} locale={locale as Locale}>
           <ReducedMotionProvider>
             <LenisProvider>
               <div id="main-content" tabIndex={-1}>

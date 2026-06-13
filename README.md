@@ -88,6 +88,11 @@ Latest verification before this README update:
   components and utilities.
 - Use `useTranslations(...)` in client components that are inside the
   `NextIntlClientProvider`.
+- The client provider in `app/[locale]/layout.tsx` only receives the `common`
+  and `notFound` namespaces to keep page payloads small. If a new client
+  component needs another namespace via `useTranslations`, add that namespace
+  to `clientMessages` in that layout (or pass the copy down as props from a
+  server component, which is preferred).
 - Keep route structure in `lib/site-map.ts`, but do not put page copy there.
 - Future content is expected to move to a database, so keep page components
   data-driven.
@@ -121,7 +126,7 @@ Latest verification before this README update:
 - `/[locale]/contact`
 - `/sitemap.xml`
 - `/robots.txt`
-- `/__styleguide`
+- `/[locale]/styleguide-internal`
 
 System states:
 
@@ -198,6 +203,9 @@ Current home decisions:
 - The previous golf preview block was removed from home.
 - The second section was redesigned with wide side margins and a smaller,
   Omega-like layout.
+- The `currentPulse` (지금, 대호) section is part of home and uses
+  `homeUi.currentPulse`; it should not be removed from home when adjusting the
+  News page.
 - The home section that previously acted as entry cards was changed to show
   recent news cards. Clicking opens a popup instead of navigating as a page
   entrance.
@@ -233,23 +241,28 @@ Important files:
 
 Current decisions:
 
-- Chronicle was replaced with a horizontal scroll/archive style based on the
-  earlier local project at `/Users/tingyouzhao/Desktop/daeho/deaho官网`.
-- The old chronicle implementation is kept as a block comment in
+- Chronicle is a horizontal scroll/archive experience, benchmarked against the
+  Omega chronicle pages (`omegawatches.co.kr/ko/chronicle/...`), which scroll
+  sideways on desktop. A brief vertical rebuild was attempted and reverted;
+  the horizontal version is the intended one.
+- The old (pre-horizontal) implementation is kept as a block comment in
   `app/[locale]/(site)/chronicle/page.tsx` for reference.
 - Intro animation locks scrolling until it completes.
-- Left-side year selector was made into a solid panel matching the background.
-- The year selector background is around 50% opacity.
-- The progress line sits above the solid panel and follows the scroll position.
-- The progress bar should keep the original progress-line feeling while moving
-  with the scroll.
-- The year selector and progress line should not be pulled down into the footer
-  after the chronicle scroll area ends.
+- Left-side year selector / progress line follow the scroll position and are
+  not pulled into the footer after the chronicle scroll area ends.
+- Scrolling forward past the last slide is locked; an end-of-chronicle side
+  panel (`chronicle-end-nav`, copy under `chronicleUi.endNav`) appears near the
+  end and links to NEWS.
+- The chronicle palette uses the brand accent/primary CSS variables (migrated
+  from the old blue tones).
+- The horizontal scroll animation loop suspends itself when settled and wakes
+  on scroll/resize, so the page does not burn CPU while idle.
 
 Data:
 
 - `messages/*.json` under `chronicle`
-- UI labels under `chronicleUi`
+- UI labels under `chronicleUi` (`horizontalAriaLabel`, `yearNavAriaLabel`,
+  `endNav`)
 
 ## Legacy Pages Status
 
@@ -264,7 +277,15 @@ Important files:
 
 Current decisions:
 
-- Typography was reduced across desktop and mobile.
+- LEGACY index and detail pages were redesigned to an Omega/Porsche visual
+  scale: centered compact hero intros (eyebrow, title around 44-46px max,
+  short subtitle) followed by a wide 21/9 image, instead of full-viewport
+  heroes with oversized type.
+- The giant watermark background text (38 / LEGACY / page titles) was removed.
+- Metric numbers were reduced (monument max ~64px, compact max ~40px) and the
+  monument grid no longer stretches to 82dvh.
+- Section intros use a smaller legacy variant title (max 36px).
+- Card titles sit around 19-26px with 13px body text and larger grid gaps.
 - Detail-page back button text is now in messages via `legacyUi.backToLegacy`.
 - Legacy detail pages are data-driven from `messages/*.json`.
 
@@ -288,9 +309,19 @@ Important files:
 
 Current decisions:
 
-- Typography was reduced.
+- SPECIALTY, TECHNIQUE, COLLECTION, and collection detail pages were redesigned
+  to the same Omega/Porsche scale as LEGACY: centered compact heroes plus a
+  wide 21/9 image, no full-viewport heroes, no watermark background text.
+- Branch/detail cards lost their giant ghost numbers; indexes are now small
+  uppercase labels (for example `01 — BRANCH`).
+- The pinned process section uses a smaller active number (max 48px) and
+  smaller step copy; the in-image ghost number was removed.
+- Collection gallery and related-work card titles are around 16-19px.
+- Content containers max out at 1180px (1280px for the 4-column gallery and
+  detail layout) instead of 1440px.
 - The `Anatomy of Craft` vertical label is now localized through
-  `specialtyUi.anatomyLabel`.
+  `specialtyUi.anatomyLabel` and sits beside the specialty hero image on
+  desktop.
 - Collection detail CTA section was adjusted because the previous layout around
   `이와 같은 작품을 의뢰하고 싶다면` felt awkward.
 - Collection detail buttons were simplified to match the brand style.
@@ -322,6 +353,10 @@ Important files:
 Current decisions:
 
 - News index and detail pages are data-driven.
+- The previous News current-pulse section (`THE CURRENT PULSE / 지금, 대호`) was
+  removed; News now starts with the compact journal masthead and ticker.
+- The News masthead uses `news.masthead.body` for its short intro copy and has
+  reduced top/bottom spacing.
 - Empty state and filter labels are localized.
 - Share button labels are localized.
 - Home uses recent news popups instead of using that section as navigation

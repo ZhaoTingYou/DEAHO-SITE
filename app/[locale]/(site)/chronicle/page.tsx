@@ -5,6 +5,7 @@ import {ChronicleHorizontal} from '@/components/chronicle/chronicle-horizontal';
 import type {Locale} from '@/i18n/routing';
 import {getLocaleMessages} from '@/lib/locale-messages';
 import {getPageMetadata} from '@/lib/seo';
+import {withLocale} from '@/lib/site-map';
 
 type Props = {
   params: Promise<{locale: Locale}>;
@@ -27,10 +28,16 @@ export default async function ChroniclePage({params}: Props) {
     desc: item.body,
     image: `/images/${item.image}`
   }));
+  const endNav = {
+    ...messages.chronicleUi.endNav,
+    href: withLocale(locale, messages.chronicleUi.endNav.href)
+  };
 
   return (
     <ChronicleHorizontal
       ariaLabel={messages.chronicleUi.horizontalAriaLabel}
+      yearNavAriaLabel={messages.chronicleUi.yearNavAriaLabel}
+      endNav={endNav}
       introLabel="DAEHO"
       slides={slides}
     />

@@ -28,31 +28,26 @@ export default async function LegacyPage({params}: Props) {
 
   return (
     <main className="bg-bg text-text">
-      <section className="relative overflow-hidden bg-white pt-28">
-        <div
-          className="pointer-events-none absolute inset-x-0 top-28 text-center font-heading text-[clamp(120px,28vw,380px)] font-semibold leading-none text-primary/[0.035]"
-          aria-hidden="true"
-        >
-          38
-        </div>
-        <div className="relative mx-auto flex min-h-[100dvh] max-w-[1440px] flex-col items-center justify-center gap-12 px-container py-section text-center">
-          <Reveal className="mx-auto max-w-6xl space-y-8">
-            <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-subtext">
+      <section className="bg-white pt-28">
+        <div className="mx-auto max-w-[1280px] px-container pb-[clamp(72px,8vw,128px)] pt-[clamp(64px,8vw,120px)]">
+          <Reveal className="mx-auto max-w-3xl space-y-6 text-center">
+            <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.26em] text-subtext">
               {content.hero.eyebrow}
             </p>
-            <h1 className="font-heading text-[clamp(36px,6.6vw,80px)] font-semibold leading-none text-primary">
+            <h1 className="font-heading text-[clamp(30px,3.8vw,46px)] font-semibold leading-[1.12] text-primary">
               {content.hero.title}
             </h1>
             <LegacyLightSweepText
               lines={content.hero.lines}
-              className="mx-auto max-w-5xl space-y-3 font-heading text-[clamp(24px,4.2vw,52px)] font-semibold leading-[1.18] text-primary"
+              className="mx-auto max-w-2xl space-y-1.5 font-heading text-[clamp(17px,1.9vw,24px)] font-semibold leading-[1.4] text-primary"
             />
           </Reveal>
-          <Reveal className="w-full max-w-5xl">
+          <Reveal className="mx-auto mt-[clamp(48px,6vw,88px)] w-full max-w-[1180px]">
             <SafeImage
               filename={content.hero.image}
               alt={content.hero.lines.join(' ')}
               aspect="aspect-[21/9]"
+              variant="plain"
               priority
             />
           </Reveal>
@@ -60,7 +55,7 @@ export default async function LegacyPage({params}: Props) {
       </section>
 
       <section className="bg-bg py-section">
-        <div className="mx-auto max-w-[1440px] space-y-16 px-container">
+        <div className="mx-auto max-w-[1180px] space-y-[clamp(56px,6vw,88px)] px-container">
           <Reveal>
             <SectionIntro
               eyebrow={content.pillars.eyebrow}
@@ -68,12 +63,12 @@ export default async function LegacyPage({params}: Props) {
               variant="legacy"
             />
           </Reveal>
-          <Reveal className="grid gap-6 lg:grid-cols-3">
+          <Reveal className="grid gap-8 lg:grid-cols-3 lg:gap-10">
             {content.pillars.items.map((item) => (
               <RevealItem key={item.href}>
                 <Link
                   href={withLocale(locale, item.href)}
-                  className="group block h-full bg-white p-4 shadow-[0_18px_65px_rgba(16,29,48,0.06)] transition duration-hover ease-brand hover:-translate-y-1 hover:shadow-[0_30px_95px_rgba(16,29,48,0.11)]"
+                  className="group block h-full bg-white p-3 shadow-[0_14px_50px_rgba(16,29,48,0.05)] transition duration-hover ease-brand hover:-translate-y-1 hover:shadow-[0_24px_70px_rgba(16,29,48,0.09)]"
                 >
                   <div className="hover-zoom">
                     <div className="hover-zoom-media">
@@ -85,17 +80,17 @@ export default async function LegacyPage({params}: Props) {
                       />
                     </div>
                   </div>
-                  <div className="space-y-4 px-2 py-7 text-center">
-                    <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-subtext">
+                  <div className="space-y-3.5 px-3 pb-8 pt-7 text-center">
+                    <p className="font-body text-[10px] font-semibold uppercase tracking-[0.26em] text-subtext">
                       {item.eyebrow}
                     </p>
-                    <h2 className="font-heading text-[clamp(26px,3vw,40px)] font-semibold leading-none text-primary">
+                    <h2 className="font-heading text-[clamp(19px,1.7vw,24px)] font-semibold leading-snug text-primary">
                       {item.title}
                     </h2>
-                    <p className="mx-auto max-w-sm font-body text-[14px] leading-7 text-text">
+                    <p className="mx-auto max-w-xs font-body text-[13px] leading-6 text-text">
                       {item.body}
                     </p>
-                    <span className="link-sweep inline-flex font-body text-sm font-semibold uppercase tracking-[0.12em]">
+                    <span className="link-sweep inline-flex pt-1 font-body text-[12px] font-semibold uppercase tracking-[0.16em]">
                       {item.cta}
                     </span>
                   </div>
@@ -106,15 +101,9 @@ export default async function LegacyPage({params}: Props) {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-white">
-        <div
-          className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 text-center font-heading text-[clamp(118px,22vw,360px)] font-semibold leading-none text-primary/[0.035]"
-          aria-hidden="true"
-        >
-          LEGACY
-        </div>
-        <div className="relative mx-auto max-w-[1440px] px-container">
-          <Reveal className="pt-section">
+      <section className="bg-white py-section">
+        <div className="mx-auto max-w-[1180px] space-y-[clamp(56px,6vw,88px)] px-container">
+          <Reveal>
             <SectionIntro
               eyebrow={content.proof.eyebrow}
               title={content.proof.title}
@@ -126,13 +115,13 @@ export default async function LegacyPage({params}: Props) {
       </section>
 
       <section className="bg-bg py-section">
-        <Reveal className="mx-auto max-w-5xl space-y-8 px-container text-center">
-          <h2 className="font-heading text-[clamp(32px,5vw,60px)] font-semibold leading-tight text-primary">
+        <Reveal className="mx-auto max-w-3xl space-y-7 px-container text-center">
+          <h2 className="font-heading text-[clamp(22px,2.4vw,32px)] font-semibold leading-[1.25] text-primary">
             {content.closing.title}
           </h2>
           <Link
             href={withLocale(locale, '/specialty')}
-            className="link-sweep font-body text-sm font-semibold uppercase tracking-[0.12em]"
+            className="link-sweep font-body text-[12px] font-semibold uppercase tracking-[0.16em]"
           >
             {content.closing.cta}
           </Link>

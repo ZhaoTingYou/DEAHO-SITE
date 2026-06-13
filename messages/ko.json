@@ -629,17 +629,12 @@
     "masthead": {
       "title": "NEWS",
       "issue": "DEAHO JOURNAL · 발행 2026",
+      "body": "프로젝트 스토리와 제작 현장, 언론/피처, 협업 소식을 한곳에 모읍니다.",
       "ticker": [
         "최신 제작 사례는 확인 자료가 도착하면 이 지면에 업데이트됩니다.",
         "프로젝트 스토리 · 언론/피처 · 협업 소식을 한곳에 모읍니다.",
         "대호는 지금도 승리의 순간을 형태로 남기고 있습니다."
       ]
-    },
-    "hero": {
-      "eyebrow": "THE CURRENT PULSE",
-      "title": "지금, 대호",
-      "subtitle": "그리고 지금도 만들고 있다.",
-      "image": "news_hero.png"
     },
     "featured": {
       "eyebrow": "COMING SOON",
@@ -1036,16 +1031,13 @@
     }
   },
   "chronicleUi": {
-    "timeline": {
-      "open": "이 해의 의미 보기",
-      "close": "접기",
-      "title": "아카이브 노트",
-      "next": "다음 기록은 시간축을 따라 이어집니다.",
-      "previousYear": "이전 연도",
-      "nextYear": "다음 연도",
-      "first": "처음"
-    },
-    "horizontalAriaLabel": "대호 크로니클 가로 타임라인"
+    "horizontalAriaLabel": "대호 크로니클 가로 타임라인",
+    "yearNavAriaLabel": "크로니클 연도 선택",
+    "endNav": {
+      "label": "크로니클 다음 탐색",
+      "title": "최근 대호 근황 알아보기",
+      "href": "/news"
+    }
   },
   "newsUi": {
     "filtersLabel": "뉴스 필터",

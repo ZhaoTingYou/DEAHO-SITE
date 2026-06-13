@@ -23,10 +23,12 @@ export function SectionIntro({
   const alignment = align === 'center' && variant === 'default' ? 'mx-auto text-center' : '';
   const titleClass =
     variant === 'legacy'
-      ? 'font-heading text-[clamp(34px,5vw,64px)] font-semibold leading-none text-primary'
-      : variant === 'news'
-        ? 'font-heading text-[clamp(36px,5.8vw,68px)] font-bold leading-none text-primary'
-        : 'font-heading text-h1 font-semibold text-primary';
+      ? 'font-heading text-[clamp(24px,2.6vw,36px)] font-semibold leading-[1.15] text-primary'
+      : variant === 'specialty'
+        ? 'font-heading text-[clamp(24px,2.6vw,36px)] font-semibold leading-[1.15] text-primary'
+        : variant === 'news'
+          ? 'font-heading text-[clamp(36px,5.8vw,68px)] font-bold leading-none text-primary'
+          : 'font-heading text-h1 font-semibold text-primary';
 
   return (
     <div className={`max-w-3xl space-y-5 ${alignment} ${variantClass}`}>

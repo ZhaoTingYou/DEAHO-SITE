@@ -135,8 +135,8 @@ function getPageSeo(locale: Locale, pageKey: PageKey): PageSeo {
     case 'news':
       return {
         path: '/news',
-        title: messages.news.hero.title,
-        description: messages.news.hero.subtitle
+        title: messages.news.masthead.title,
+        description: messages.news.masthead.body
       };
     case 'golf':
       return {

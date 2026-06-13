@@ -38,38 +38,33 @@ export default async function TechniquePage({params}: Props) {
 
   return (
     <main className="bg-bg text-text">
-      <section className="relative overflow-hidden bg-white pt-28">
-        <div
-          className="pointer-events-none absolute inset-x-0 top-32 text-center font-heading text-[clamp(96px,22vw,320px)] font-semibold leading-none text-primary/[0.035]"
-          aria-hidden="true"
-        >
-          PROCESS
-        </div>
-        <div className="relative mx-auto grid min-h-[92dvh] max-w-[1440px] items-center gap-12 px-container py-section lg:grid-cols-[0.82fr_1.18fr]">
-          <Reveal className="max-w-3xl space-y-7">
-            <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-subtext">
+      <section className="bg-white pt-28">
+        <div className="mx-auto max-w-[1280px] px-container pb-[clamp(72px,8vw,128px)] pt-[clamp(64px,8vw,120px)]">
+          <Reveal className="mx-auto max-w-3xl space-y-6 text-center">
+            <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.26em] text-subtext">
               {content.hero.eyebrow}
             </p>
-            <h1 className="font-heading text-[clamp(42px,6.6vw,80px)] font-semibold leading-none text-primary">
+            <h1 className="font-heading text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.12] text-primary">
               {content.hero.title}
             </h1>
-            <p className="max-w-2xl font-body text-body leading-[1.75] text-text">
+            <p className="mx-auto max-w-xl font-body text-[14px] leading-[1.85] text-text">
               {content.hero.subtitle}
             </p>
           </Reveal>
-          <Reveal className="relative">
+          <Reveal className="mx-auto mt-[clamp(48px,6vw,88px)] w-full max-w-[1180px]">
             <SafeImage
               filename={content.hero.image}
               alt={content.hero.subtitle}
-              aspect="aspect-[21/9] lg:aspect-[16/9]"
+              aspect="aspect-[21/9]"
+              variant="plain"
               priority
             />
           </Reveal>
         </div>
       </section>
 
-      <section className="bg-bg py-section">
-        <div className="mx-auto max-w-[1440px] px-container">
+      <section className="bg-bg pb-[clamp(48px,5vw,80px)] pt-section">
+        <div className="mx-auto max-w-[1180px] px-container">
           <Reveal>
             <SectionIntro
               eyebrow={content.process.eyebrow}
@@ -85,7 +80,7 @@ export default async function TechniquePage({params}: Props) {
       <SpecialtyProcess steps={processSteps} />
 
       <section className="bg-white py-section">
-        <div className="mx-auto max-w-[1440px] space-y-14 px-container">
+        <div className="mx-auto max-w-[1180px] space-y-[clamp(56px,6vw,88px)] px-container">
           <Reveal>
             <SectionIntro
               eyebrow={content.details.eyebrow}
@@ -100,20 +95,20 @@ export default async function TechniquePage({params}: Props) {
       </section>
 
       <section className="bg-bg py-section">
-        <div className="mx-auto grid max-w-[1440px] items-center gap-12 px-container lg:grid-cols-[0.95fr_1.05fr]">
-          <Reveal className="order-2 space-y-6 lg:order-1">
-            <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-accent">
+        <div className="mx-auto grid max-w-[1180px] items-center gap-12 px-container lg:grid-cols-2 lg:gap-16">
+          <Reveal className="order-2 max-w-md space-y-5 lg:order-1">
+            <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.26em] text-accent">
               {content.bespoke.eyebrow}
             </p>
-            <h2 className="font-heading text-[clamp(32px,5vw,58px)] font-semibold leading-tight text-primary">
+            <h2 className="font-heading text-[clamp(22px,2.4vw,32px)] font-semibold leading-[1.25] text-primary">
               {content.bespoke.title}
             </h2>
-            <p className="max-w-2xl font-body text-body leading-[1.75] text-text">
+            <p className="font-body text-[14px] leading-[1.85] text-text">
               {content.bespoke.body}
             </p>
             <Link
               href={withLocale(locale, '/specialty/collection')}
-              className="link-sweep font-body text-sm font-semibold uppercase tracking-[0.12em]"
+              className="link-sweep inline-flex pt-1 font-body text-[12px] font-semibold uppercase tracking-[0.16em]"
             >
               {content.bespoke.cta}
             </Link>
@@ -123,6 +118,7 @@ export default async function TechniquePage({params}: Props) {
               filename={content.bespoke.image}
               alt={content.bespoke.body}
               aspect="aspect-[4/3]"
+              variant="plain"
             />
           </Reveal>
         </div>

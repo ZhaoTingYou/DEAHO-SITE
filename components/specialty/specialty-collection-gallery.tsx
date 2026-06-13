@@ -60,7 +60,7 @@ export function SpecialtyCollectionGallery({
                 type="button"
                 aria-pressed={isActive}
                 onClick={() => setActiveFilter(filter.id)}
-                className={`min-h-11 border px-5 py-3 font-body text-sm font-semibold uppercase tracking-[0.14em] transition duration-hover ease-brand ${
+                className={`min-h-11 border px-5 py-2.5 font-body text-[12px] font-semibold uppercase tracking-[0.16em] transition duration-hover ease-brand ${
                   isActive
                     ? 'border-accent bg-accent text-white'
                     : 'border-hairline bg-white text-primary hover:border-primary/40'
@@ -75,7 +75,7 @@ export function SpecialtyCollectionGallery({
         {visibleItems.length === 0 ? (
           <EmptyState title={empty.title} body={empty.body} />
         ) : (
-          <motion.div layout className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
+          <motion.div layout className="grid grid-cols-2 gap-5 lg:grid-cols-4 lg:gap-8">
             <AnimatePresence mode="popLayout">
               {visibleItems.map((item, index) => (
                 <motion.article
@@ -97,14 +97,14 @@ export function SpecialtyCollectionGallery({
                         <CollectionImage item={item} />
                       </div>
                     </div>
-                    <div className="space-y-2 px-1 py-4">
-                      <p className="font-body text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
+                    <div className="space-y-2 px-2 pb-4 pt-5">
+                      <p className="font-body text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">
                         {item.categoryLabel}
                       </p>
-                      <h2 className="font-heading text-[clamp(24px,4vw,34px)] font-semibold leading-tight text-primary">
+                      <h2 className="font-heading text-[clamp(16px,1.5vw,19px)] font-semibold leading-snug text-primary">
                         {item.title}
                       </h2>
-                      <p className="hidden font-body text-sm leading-6 text-text md:block">{item.caption}</p>
+                      <p className="hidden font-body text-[13px] leading-6 text-text md:block">{item.caption}</p>
                     </div>
                   </Link>
                 </motion.article>

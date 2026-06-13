@@ -32,30 +32,25 @@ export default async function CollectionPage({params}: Props) {
 
   return (
     <main className="bg-bg text-text">
-      <section className="relative overflow-hidden bg-white pt-28">
-        <div
-          className="pointer-events-none absolute inset-x-0 top-32 text-center font-heading text-[clamp(96px,22vw,320px)] font-semibold leading-none text-primary/[0.035]"
-          aria-hidden="true"
-        >
-          WORKS
-        </div>
-        <div className="relative mx-auto grid min-h-[92dvh] max-w-[1440px] items-center gap-12 px-container py-section lg:grid-cols-[0.84fr_1.16fr]">
-          <Reveal className="max-w-3xl space-y-7">
-            <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.22em] text-subtext">
+      <section className="bg-white pt-28">
+        <div className="mx-auto max-w-[1280px] px-container pb-[clamp(72px,8vw,128px)] pt-[clamp(64px,8vw,120px)]">
+          <Reveal className="mx-auto max-w-3xl space-y-6 text-center">
+            <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.26em] text-subtext">
               {content.hero.eyebrow}
             </p>
-            <h1 className="font-heading text-[clamp(42px,6.6vw,80px)] font-semibold leading-none text-primary">
+            <h1 className="font-heading text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.12] text-primary">
               {content.hero.title}
             </h1>
-            <p className="max-w-2xl font-body text-body leading-[1.75] text-text">
+            <p className="mx-auto max-w-xl font-body text-[14px] leading-[1.85] text-text">
               {content.hero.subtitle}
             </p>
           </Reveal>
-          <Reveal>
+          <Reveal className="mx-auto mt-[clamp(48px,6vw,88px)] w-full max-w-[1180px]">
             <SafeImage
               filename={content.hero.image}
               alt={content.hero.subtitle}
-              aspect="aspect-[21/9] lg:aspect-[16/9]"
+              aspect="aspect-[21/9]"
+              variant="plain"
               priority
             />
           </Reveal>
@@ -63,7 +58,7 @@ export default async function CollectionPage({params}: Props) {
       </section>
 
       <section className="bg-bg py-section">
-        <div className="mx-auto max-w-[1440px] space-y-12 px-container">
+        <div className="mx-auto max-w-[1280px] space-y-[clamp(48px,5vw,72px)] px-container">
           <Reveal>
             <SectionIntro
               eyebrow={content.gallery.eyebrow}
