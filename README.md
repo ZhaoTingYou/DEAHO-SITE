@@ -316,8 +316,13 @@ Current decisions:
   wide 21/9 image, no full-viewport heroes, no watermark background text.
 - Branch/detail cards lost their giant ghost numbers; indexes are now small
   uppercase labels (for example `01 — BRANCH`).
-- The pinned process section uses a smaller active number (max 48px) and
-  smaller step copy; the in-image ghost number was removed.
+- The technique process section (`components/specialty/specialty-process.tsx`)
+  was rebuilt to a Patek-style vertical "chapters" scrollytelling layout
+  (benchmarked against patek.com Artisans of Time / hand-finishing): each
+  process step is a full editorial block with a large 4:3 image and a
+  number/label + title + body, alternating left/right, with a subtle image
+  parallax on scroll and a fade-up text reveal. The previous 760vh pinned/
+  sticky crossfade version was removed. Motion respects reduced motion.
 - Collection gallery and related-work card titles are around 16-19px.
 - Content containers max out at 1180px (1280px for the 4-column gallery and
   detail layout) instead of 1440px.
