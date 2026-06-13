@@ -7,11 +7,9 @@ import koMessages from '@/messages/ko.json';
 const staticPaths = [
   '/',
   '/chronicle',
-  '/legacy',
   '/legacy/loyalty',
   '/legacy/credibility',
   '/legacy/achievement',
-  '/specialty',
   '/specialty/technique',
   '/specialty/collection',
   '/news',

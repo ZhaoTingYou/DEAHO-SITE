@@ -282,46 +282,37 @@ export function SiteHeader({locale}: SiteHeaderProps) {
               const hasMega = megaKey !== null;
               const active = isActivePath(relativePath, item.href);
               const itemLabel = navText(`items.${item.id}`);
+              const openDesktopMega = () => {
+                if (megaKey) {
+                  openMegaMenu(megaKey);
+                }
+              };
 
               return (
                 <motion.div key={item.href} variants={itemVariants}>
-                  <Link
-                    href={withLocale(locale, item.href)}
-                    className={`site-nav-link ${active ? 'is-active' : ''}`}
-                    aria-current={active ? 'page' : undefined}
-                    aria-haspopup={hasMega ? 'true' : undefined}
-                    aria-expanded={hasMega ? openMenu === megaKey : undefined}
-                    onMouseEnter={() => {
-                      if (megaKey) {
-                        openMegaMenu(megaKey);
-                      }
-                    }}
-                    onMouseLeave={() => {
-                      if (hasMega) {
-                        scheduleMegaClose();
-                      }
-                    }}
-                    onFocus={() => {
-                      if (megaKey) {
-                        openMegaMenu(megaKey);
-                      }
-                    }}
-                    onClick={(event) => {
-                      if (
-                        megaKey &&
-                        window.matchMedia('(hover: none)').matches &&
-                        openMenu !== megaKey
-                      ) {
-                        event.preventDefault();
-                        openMegaMenu(megaKey);
-                        return;
-                      }
-
-                      setOpenMenu(null);
-                    }}
-                  >
-                    {itemLabel}
-                  </Link>
+                  {hasMega ? (
+                    <button
+                      type="button"
+                      className={`site-nav-link border-0 bg-transparent p-0 ${active ? 'is-active' : ''}`}
+                      aria-haspopup="true"
+                      aria-expanded={openMenu === megaKey}
+                      onMouseEnter={openDesktopMega}
+                      onMouseLeave={scheduleMegaClose}
+                      onFocus={openDesktopMega}
+                      onClick={openDesktopMega}
+                    >
+                      {itemLabel}
+                    </button>
+                  ) : (
+                    <Link
+                      href={withLocale(locale, item.href)}
+                      className={`site-nav-link ${active ? 'is-active' : ''}`}
+                      aria-current={active ? 'page' : undefined}
+                      onClick={() => setOpenMenu(null)}
+                    >
+                      {itemLabel}
+                    </Link>
+                  )}
                 </motion.div>
               );
             })}
@@ -520,6 +511,11 @@ export function SiteHeader({locale}: SiteHeaderProps) {
                 const isExpanded = expanded[item.id];
                 const details = isMegaMenuKey(item.id) ? megaMenuDetails[item.id] : null;
                 const itemLabel = navText(`items.${item.id}`);
+                const toggleExpanded = () =>
+                  setExpanded((current) => ({
+                    ...current,
+                    [item.id]: !current[item.id]
+                  }));
 
                 return (
                   <motion.div
@@ -528,27 +524,35 @@ export function SiteHeader({locale}: SiteHeaderProps) {
                     className="border-b border-hairline pb-4"
                   >
                     <div className="flex items-center justify-between gap-4">
-                      <Link
-                        href={withLocale(locale, item.href)}
-                        onClick={() => setIsMenuOpen(false)}
-                        className={`font-heading text-[clamp(26px,8vw,40px)] font-semibold leading-tight ${
-                          isActivePath(relativePath, item.href) ? 'text-accent' : ''
-                        }`}
-                      >
-                        {itemLabel}
-                      </Link>
+                      {hasChildren ? (
+                        <button
+                          type="button"
+                          aria-expanded={isExpanded}
+                          onClick={toggleExpanded}
+                          className={`border-0 bg-transparent p-0 text-left font-heading text-[clamp(26px,8vw,40px)] font-semibold leading-tight ${
+                            isActivePath(relativePath, item.href) ? 'text-accent' : ''
+                          }`}
+                        >
+                          {itemLabel}
+                        </button>
+                      ) : (
+                        <Link
+                          href={withLocale(locale, item.href)}
+                          onClick={() => setIsMenuOpen(false)}
+                          className={`font-heading text-[clamp(26px,8vw,40px)] font-semibold leading-tight ${
+                            isActivePath(relativePath, item.href) ? 'text-accent' : ''
+                          }`}
+                        >
+                          {itemLabel}
+                        </Link>
+                      )}
                       {hasChildren ? (
                         <button
                           type="button"
                           aria-expanded={isExpanded}
                           aria-label={navText(isExpanded ? 'collapse' : 'expand', {label: itemLabel})}
                           className="flex h-11 w-11 items-center justify-center border border-hairline bg-white text-xl text-primary"
-                          onClick={() =>
-                            setExpanded((current) => ({
-                              ...current,
-                              [item.id]: !current[item.id]
-                            }))
-                          }
+                          onClick={toggleExpanded}
                         >
                           <span aria-hidden="true">{isExpanded ? '-' : '+'}</span>
                         </button>

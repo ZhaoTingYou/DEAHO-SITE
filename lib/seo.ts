@@ -6,11 +6,9 @@ import {getLocaleMessages} from '@/lib/locale-messages';
 type PageKey =
   | 'home'
   | 'chronicle'
-  | 'legacy'
   | 'loyalty'
   | 'credibility'
   | 'achievement'
-  | 'specialty'
   | 'technique'
   | 'collection'
   | 'news'
@@ -90,12 +88,6 @@ function getPageSeo(locale: Locale, pageKey: PageKey): PageSeo {
         title: messages.chronicle.hero.title,
         description: messages.chronicle.hero.subtitle
       };
-    case 'legacy':
-      return {
-        path: '/legacy',
-        title: messages.legacy.hero.title,
-        description: messages.legacy.hero.lines.join(' ')
-      };
     case 'loyalty':
       return {
         path: '/legacy/loyalty',
@@ -113,12 +105,6 @@ function getPageSeo(locale: Locale, pageKey: PageKey): PageSeo {
         path: '/legacy/achievement',
         title: messages.legacyPages.achievement.hero.title,
         description: messages.legacyPages.achievement.hero.subtitle
-      };
-    case 'specialty':
-      return {
-        path: '/specialty',
-        title: messages.specialty.hero.title,
-        description: messages.specialty.hero.subtitle
       };
     case 'technique':
       return {

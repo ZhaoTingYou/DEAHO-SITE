@@ -111,11 +111,9 @@ Latest verification before this README update:
 
 - `/ko` and `/en`
 - `/[locale]/chronicle`
-- `/[locale]/legacy`
 - `/[locale]/legacy/loyalty`
 - `/[locale]/legacy/credibility`
 - `/[locale]/legacy/achievement`
-- `/[locale]/specialty`
 - `/[locale]/specialty/technique`
 - `/[locale]/specialty/collection`
 - `/[locale]/specialty/collection/[slug]`
@@ -268,7 +266,6 @@ Data:
 
 Important files:
 
-- `app/[locale]/(site)/legacy/page.tsx`
 - `app/[locale]/(site)/legacy/loyalty/page.tsx`
 - `app/[locale]/(site)/legacy/credibility/page.tsx`
 - `app/[locale]/(site)/legacy/achievement/page.tsx`
@@ -277,7 +274,10 @@ Important files:
 
 Current decisions:
 
-- LEGACY index and detail pages were redesigned to an Omega/Porsche visual
+- The `/[locale]/legacy` parent index page has been removed. Header parent
+  clicks only open child navigation; footer and sitemap list child routes
+  directly.
+- LEGACY detail pages were redesigned to an Omega/Porsche visual
   scale: centered compact hero intros (eyebrow, title around 44-46px max,
   short subtitle) followed by a wide 21/9 image, instead of full-viewport
   heroes with oversized type.
@@ -299,7 +299,6 @@ Data:
 
 Important files:
 
-- `app/[locale]/(site)/specialty/page.tsx`
 - `app/[locale]/(site)/specialty/technique/page.tsx`
 - `app/[locale]/(site)/specialty/collection/page.tsx`
 - `app/[locale]/(site)/specialty/collection/[slug]/page.tsx`
@@ -309,7 +308,10 @@ Important files:
 
 Current decisions:
 
-- SPECIALTY, TECHNIQUE, COLLECTION, and collection detail pages were redesigned
+- The `/[locale]/specialty` parent index page has been removed. Header parent
+  clicks only open child navigation; footer and sitemap list child routes
+  directly.
+- TECHNIQUE, COLLECTION, and collection detail pages were redesigned
   to the same Omega/Porsche scale as LEGACY: centered compact heroes plus a
   wide 21/9 image, no full-viewport heroes, no watermark background text.
 - Branch/detail cards lost their giant ghost numbers; indexes are now small

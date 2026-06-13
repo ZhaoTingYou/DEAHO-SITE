@@ -15,6 +15,7 @@ export function SiteFooter({locale}: SiteFooterProps) {
   const text = getLocaleMessages(locale).common;
   const navLabels = text.navigation.items;
   const externalLabels = text.footer.externalSites;
+  const footerNavItems = navItems.flatMap((item) => item.children ?? [item]);
 
   return (
     <footer className="border-t border-hairline bg-bg px-container py-14 text-primary">
@@ -32,7 +33,7 @@ export function SiteFooter({locale}: SiteFooterProps) {
           <div>
             <p className="footer-label">{text.footer.navigation}</p>
             <div className="mt-4 grid gap-3">
-              {navItems.map((item) => (
+              {footerNavItems.map((item) => (
                 <Link key={item.href} href={withLocale(locale, item.href)} className="footer-link">
                   {navLabels[item.id as keyof typeof navLabels]}
                 </Link>
