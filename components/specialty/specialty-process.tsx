@@ -41,6 +41,8 @@ function ProcessChapter({step, reversed}: {step: SpecialtyProcessStep; reversed:
     offset: ['start end', 'end start']
   });
   const parallax = useTransform(scrollYProgress, [0, 1], prefersReducedMotion ? [0, 0] : [38, -38]);
+  const textOpacity = useTransform(scrollYProgress, [0.12, 0.4], prefersReducedMotion ? [1, 1] : [0, 1]);
+  const textY = useTransform(scrollYProgress, [0.12, 0.4], prefersReducedMotion ? [0, 0] : [48, 0]);
 
   return (
     <section
@@ -54,10 +56,7 @@ function ProcessChapter({step, reversed}: {step: SpecialtyProcessStep; reversed:
 
       <motion.div
         className={`max-w-md ${reversed ? 'lg:order-1 lg:justify-self-end' : ''}`}
-        initial={prefersReducedMotion ? {opacity: 1, y: 0} : {opacity: 0, y: 36}}
-        whileInView={{opacity: 1, y: 0}}
-        viewport={{once: true, amount: 0.5}}
-        transition={{duration: prefersReducedMotion ? 0.2 : 1, ease: [0.16, 1, 0.3, 1]}}
+        style={{opacity: textOpacity, y: textY}}
       >
         <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.26em] text-accent">
           {step.number} / {step.label}

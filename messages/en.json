@@ -508,20 +508,22 @@
         "title": "Categories of work",
         "filters": [
           {
-            "id": "all",
-            "label": "All"
-          },
-          {
             "id": "champion",
-            "label": "Champion"
+            "label": "Championship Rings",
+            "description": "The winning moment, made permanent",
+            "image": "collection_category_champion.png"
           },
           {
             "id": "appointment",
-            "label": "Appointment"
+            "label": "Appointment Rings",
+            "description": "Rings for belonging and appointment",
+            "image": "collection_category_appointment.png"
           },
           {
             "id": "bespoke",
-            "label": "Bespoke"
+            "label": "Bespoke",
+            "description": "Made-to-order works shaped by a story",
+            "image": "collection_category_bespoke.png"
           }
         ],
         "items": [
@@ -530,7 +532,10 @@
             "title": "Collection 01",
             "caption": "A reserved slot for championship ring material.",
             "category": "champion",
-            "categoryLabel": "Champion",
+            "categoryLabel": "Championship Ring",
+            "sportCategory": "baseball",
+            "sportCategoryLabel": "Baseball",
+            "year": "2026",
             "image": "collection_ring_01.png"
           },
           {
@@ -538,7 +543,7 @@
             "title": "Collection 02",
             "caption": "A reserved slot for appointment ring material.",
             "category": "appointment",
-            "categoryLabel": "Appointment",
+            "categoryLabel": "Appointment Ring",
             "image": "collection_ring_02.png"
           },
           {
@@ -554,7 +559,10 @@
             "title": "Collection 04",
             "caption": "A reserved slot for team symbols and records.",
             "category": "champion",
-            "categoryLabel": "Champion",
+            "categoryLabel": "Championship Ring",
+            "sportCategory": "basketball",
+            "sportCategoryLabel": "Basketball",
+            "year": "2025",
             "image": "collection_ring_04.png"
           },
           {
@@ -562,7 +570,7 @@
             "title": "Collection 05",
             "caption": "A reserved slot for symbolic composition.",
             "category": "appointment",
-            "categoryLabel": "Appointment",
+            "categoryLabel": "Appointment Ring",
             "image": "collection_ring_05.png"
           },
           {
@@ -578,7 +586,10 @@
             "title": "Collection 07",
             "caption": "A reserved slot for a work shaped by a winning moment.",
             "category": "champion",
-            "categoryLabel": "Champion",
+            "categoryLabel": "Championship Ring",
+            "sportCategory": "football",
+            "sportCategoryLabel": "Football",
+            "year": "2024",
             "image": "collection_ring_07.png"
           },
           {
@@ -594,7 +605,10 @@
             "title": "Collection 09",
             "caption": "A reserved slot for the side structure of a championship ring.",
             "category": "champion",
-            "categoryLabel": "Champion",
+            "categoryLabel": "Championship Ring",
+            "sportCategory": "volleyball",
+            "sportCategoryLabel": "Volleyball",
+            "year": "2023",
             "image": "collection_ring_09.png"
           },
           {
@@ -602,7 +616,7 @@
             "title": "Collection 10",
             "caption": "A reserved slot for appointment and affiliation symbols.",
             "category": "appointment",
-            "categoryLabel": "Appointment",
+            "categoryLabel": "Appointment Ring",
             "image": "collection_ring_10.png"
           },
           {
@@ -618,7 +632,10 @@
             "title": "Collection 12",
             "caption": "A reserved slot for final proportion and polish.",
             "category": "champion",
-            "categoryLabel": "Champion",
+            "categoryLabel": "Championship Ring",
+            "sportCategory": "baseball",
+            "sportCategoryLabel": "Baseball",
+            "year": "2022",
             "image": "collection_ring_12.png"
           }
         ]
@@ -1092,6 +1109,24 @@
       "cta": "Bespoke inquiry",
       "related": "Related works",
       "thumbnailLabel": "Select work image"
+    },
+    "allCategories": "All categories",
+    "countSuffix": "pieces",
+    "chooseLabel": "Choose a category",
+    "view": "Discover more",
+    "finder": {
+      "eyebrow": "CHAMPIONSHIP RING FINDER",
+      "title": "Find your championship ring",
+      "body": "Explore DEAHO championship ring works by sport category and production year.",
+      "filterButton": "Filter",
+      "filterBy": "Filter by",
+      "sportCategory": "Sport category",
+      "year": "Year",
+      "all": "All",
+      "clear": "Clear",
+      "apply": "Apply",
+      "close": "Close",
+      "results": "Showing"
     }
   },
   "golfInquiry": {

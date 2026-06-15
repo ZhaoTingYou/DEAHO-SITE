@@ -3,6 +3,7 @@ import Link from 'next/link';
 import {setRequestLocale} from 'next-intl/server';
 
 import {Reveal} from '@/components/motion/reveal';
+import {ScrollText} from '@/components/motion/scroll-text';
 import {SafeImage} from '@/components/safe-image';
 import {SectionIntro} from '@/components/section-intro';
 import {SpecialtyDetailTriplet} from '@/components/specialty/specialty-detail-triplet';
@@ -40,7 +41,7 @@ export default async function TechniquePage({params}: Props) {
     <main className="bg-bg text-text">
       <section className="bg-white pt-28">
         <div className="mx-auto max-w-[1280px] px-container pb-[clamp(72px,8vw,128px)] pt-[clamp(64px,8vw,120px)]">
-          <Reveal className="mx-auto max-w-3xl space-y-6 text-center">
+          <ScrollText className="mx-auto max-w-3xl space-y-6 text-center">
             <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.26em] text-subtext">
               {content.hero.eyebrow}
             </p>
@@ -50,7 +51,7 @@ export default async function TechniquePage({params}: Props) {
             <p className="mx-auto max-w-xl font-body text-[14px] leading-[1.85] text-text">
               {content.hero.subtitle}
             </p>
-          </Reveal>
+          </ScrollText>
           <Reveal className="mx-auto mt-[clamp(48px,6vw,88px)] w-full max-w-[1180px]">
             <SafeImage
               filename={content.hero.image}
@@ -65,7 +66,7 @@ export default async function TechniquePage({params}: Props) {
 
       <section className="bg-bg pb-[clamp(48px,5vw,80px)] pt-section">
         <div className="mx-auto max-w-[1180px] px-container">
-          <Reveal>
+          <ScrollText>
             <SectionIntro
               eyebrow={content.process.eyebrow}
               title={content.process.title}
@@ -73,7 +74,7 @@ export default async function TechniquePage({params}: Props) {
             >
               <p>{content.process.body}</p>
             </SectionIntro>
-          </Reveal>
+          </ScrollText>
         </div>
       </section>
 
@@ -81,7 +82,7 @@ export default async function TechniquePage({params}: Props) {
 
       <section className="bg-white py-section">
         <div className="mx-auto max-w-[1180px] space-y-[clamp(56px,6vw,88px)] px-container">
-          <Reveal>
+          <ScrollText>
             <SectionIntro
               eyebrow={content.details.eyebrow}
               title={content.details.title}
@@ -89,14 +90,14 @@ export default async function TechniquePage({params}: Props) {
             >
               <p>{content.details.body}</p>
             </SectionIntro>
-          </Reveal>
+          </ScrollText>
           <SpecialtyDetailTriplet items={detailItems} />
         </div>
       </section>
 
       <section className="bg-bg py-section">
         <div className="mx-auto grid max-w-[1180px] items-center gap-12 px-container lg:grid-cols-2 lg:gap-16">
-          <Reveal className="order-2 max-w-md space-y-5 lg:order-1">
+          <ScrollText className="order-2 max-w-md space-y-5 lg:order-1">
             <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.26em] text-accent">
               {content.bespoke.eyebrow}
             </p>
@@ -112,7 +113,7 @@ export default async function TechniquePage({params}: Props) {
             >
               {content.bespoke.cta}
             </Link>
-          </Reveal>
+          </ScrollText>
           <Reveal className="order-1 lg:order-2">
             <SafeImage
               filename={content.bespoke.image}

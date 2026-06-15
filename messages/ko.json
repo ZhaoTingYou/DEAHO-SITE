@@ -508,20 +508,22 @@
         "title": "작품의 분류",
         "filters": [
           {
-            "id": "all",
-            "label": "전체"
-          },
-          {
             "id": "champion",
-            "label": "챔피언"
+            "label": "우승반지",
+            "description": "승리의 순간을 영원의 형태로",
+            "image": "collection_category_champion.png"
           },
           {
             "id": "appointment",
-            "label": "임관"
+            "label": "임관반지",
+            "description": "소속과 임명의 의미를 담은 반지",
+            "image": "collection_category_appointment.png"
           },
           {
             "id": "bespoke",
-            "label": "주문 제작"
+            "label": "주문제작",
+            "description": "이야기에서 시작되는 맞춤 제작",
+            "image": "collection_category_bespoke.png"
           }
         ],
         "items": [
@@ -530,7 +532,10 @@
             "title": "Collection 01",
             "caption": "챔피언십 링 자료가 들어갈 자리입니다.",
             "category": "champion",
-            "categoryLabel": "챔피언",
+            "categoryLabel": "우승반지",
+            "sportCategory": "baseball",
+            "sportCategoryLabel": "야구",
+            "year": "2026",
             "image": "collection_ring_01.png"
           },
           {
@@ -538,7 +543,7 @@
             "title": "Collection 02",
             "caption": "임관 반지 자료가 들어갈 자리입니다.",
             "category": "appointment",
-            "categoryLabel": "임관",
+            "categoryLabel": "임관반지",
             "image": "collection_ring_02.png"
           },
           {
@@ -546,7 +551,7 @@
             "title": "Collection 03",
             "caption": "주문 제작 반지 자료가 들어갈 자리입니다.",
             "category": "bespoke",
-            "categoryLabel": "주문 제작",
+            "categoryLabel": "주문제작",
             "image": "collection_ring_03.png"
           },
           {
@@ -554,7 +559,10 @@
             "title": "Collection 04",
             "caption": "팀 상징과 기록을 보여줄 자리입니다.",
             "category": "champion",
-            "categoryLabel": "챔피언",
+            "categoryLabel": "우승반지",
+            "sportCategory": "basketball",
+            "sportCategoryLabel": "농구",
+            "year": "2025",
             "image": "collection_ring_04.png"
           },
           {
@@ -562,7 +570,7 @@
             "title": "Collection 05",
             "caption": "상징과 문양의 구성을 보여줄 자리입니다.",
             "category": "appointment",
-            "categoryLabel": "임관",
+            "categoryLabel": "임관반지",
             "image": "collection_ring_05.png"
           },
           {
@@ -570,7 +578,7 @@
             "title": "Collection 06",
             "caption": "맞춤 제작 구조를 보여줄 자리입니다.",
             "category": "bespoke",
-            "categoryLabel": "주문 제작",
+            "categoryLabel": "주문제작",
             "image": "collection_ring_06.png"
           },
           {
@@ -578,7 +586,10 @@
             "title": "Collection 07",
             "caption": "우승의 순간을 담은 작품 자료 자리입니다.",
             "category": "champion",
-            "categoryLabel": "챔피언",
+            "categoryLabel": "우승반지",
+            "sportCategory": "football",
+            "sportCategoryLabel": "축구",
+            "year": "2024",
             "image": "collection_ring_07.png"
           },
           {
@@ -586,7 +597,7 @@
             "title": "Collection 08",
             "caption": "의미와 착용감을 함께 보여줄 자리입니다.",
             "category": "bespoke",
-            "categoryLabel": "주문 제작",
+            "categoryLabel": "주문제작",
             "image": "collection_ring_08.png"
           },
           {
@@ -594,7 +605,10 @@
             "title": "Collection 09",
             "caption": "챔피언십 링의 측면 구조를 보여줄 자료 자리입니다.",
             "category": "champion",
-            "categoryLabel": "챔피언",
+            "categoryLabel": "우승반지",
+            "sportCategory": "volleyball",
+            "sportCategoryLabel": "배구",
+            "year": "2023",
             "image": "collection_ring_09.png"
           },
           {
@@ -602,7 +616,7 @@
             "title": "Collection 10",
             "caption": "임관과 소속의 상징을 보여줄 자료 자리입니다.",
             "category": "appointment",
-            "categoryLabel": "임관",
+            "categoryLabel": "임관반지",
             "image": "collection_ring_10.png"
           },
           {
@@ -610,7 +624,7 @@
             "title": "Collection 11",
             "caption": "주문 제작 디테일을 보여줄 자료 자리입니다.",
             "category": "bespoke",
-            "categoryLabel": "주문 제작",
+            "categoryLabel": "주문제작",
             "image": "collection_ring_11.png"
           },
           {
@@ -618,7 +632,10 @@
             "title": "Collection 12",
             "caption": "완성된 결과물의 비율과 광택을 보여줄 자료 자리입니다.",
             "category": "champion",
-            "categoryLabel": "챔피언",
+            "categoryLabel": "우승반지",
+            "sportCategory": "baseball",
+            "sportCategoryLabel": "야구",
+            "year": "2022",
             "image": "collection_ring_12.png"
           }
         ]
@@ -1092,6 +1109,24 @@
       "cta": "맞춤 제작 문의",
       "related": "관련 작품",
       "thumbnailLabel": "작품 이미지 선택"
+    },
+    "allCategories": "전체 분류",
+    "countSuffix": "점",
+    "chooseLabel": "분류 선택",
+    "view": "자세히 보기",
+    "finder": {
+      "eyebrow": "CHAMPIONSHIP RING FINDER",
+      "title": "우승반지 찾기",
+      "body": "스포츠와 제작 연도를 기준으로 대호의 우승반지 아카이브를 살펴봅니다.",
+      "filterButton": "필터",
+      "filterBy": "필터 기준",
+      "sportCategory": "스포츠별로 카테고리",
+      "year": "연도",
+      "all": "전체",
+      "clear": "초기화",
+      "apply": "적용",
+      "close": "닫기",
+      "results": "표시"
     }
   },
   "golfInquiry": {

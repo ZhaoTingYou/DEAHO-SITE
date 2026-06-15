@@ -1,9 +1,7 @@
 import type {Metadata} from 'next';
 import {setRequestLocale} from 'next-intl/server';
 
-import {Reveal} from '@/components/motion/reveal';
-import {SafeImage} from '@/components/safe-image';
-import {SectionIntro} from '@/components/section-intro';
+import {ScrollText} from '@/components/motion/scroll-text';
 import {SpecialtyCollectionGallery} from '@/components/specialty/specialty-collection-gallery';
 import type {Locale} from '@/i18n/routing';
 import {imageExists} from '@/lib/image-exists';
@@ -29,51 +27,38 @@ export default async function CollectionPage({params}: Props) {
     ...item,
     hasImage: imageExists(item.image)
   }));
+  const filters = content.gallery.filters.map((filter) => ({
+    ...filter,
+    hasImage: Boolean(filter.image && imageExists(filter.image))
+  }));
 
   return (
-    <main className="bg-bg text-text">
-      <section className="bg-white pt-28">
-        <div className="mx-auto max-w-[1280px] px-container pb-[clamp(72px,8vw,128px)] pt-[clamp(64px,8vw,120px)]">
-          <Reveal className="mx-auto max-w-3xl space-y-6 text-center">
+    <main className="bg-white text-text">
+      <section className="pt-28">
+        <div className="mx-auto max-w-[1180px] px-container pb-[clamp(44px,5vw,80px)] pt-[clamp(64px,7vw,112px)]">
+          <ScrollText className="mx-auto max-w-3xl space-y-5 text-center">
             <p className="font-body text-eyebrow font-semibold uppercase tracking-[0.26em] text-subtext">
               {content.hero.eyebrow}
             </p>
-            <h1 className="font-heading text-[clamp(28px,3.6vw,44px)] font-semibold leading-[1.12] text-primary">
+            <h1 className="font-heading text-[clamp(30px,3.4vw,44px)] font-semibold leading-[1.12] text-primary">
               {content.hero.title}
             </h1>
-            <p className="mx-auto max-w-xl font-body text-[14px] leading-[1.85] text-text">
+            <p className="mx-auto max-w-2xl font-body text-[14px] leading-[1.85] text-text">
               {content.hero.subtitle}
             </p>
-          </Reveal>
-          <Reveal className="mx-auto mt-[clamp(48px,6vw,88px)] w-full max-w-[1180px]">
-            <SafeImage
-              filename={content.hero.image}
-              alt={content.hero.subtitle}
-              aspect="aspect-[21/9]"
-              variant="plain"
-              priority
-            />
-          </Reveal>
+          </ScrollText>
         </div>
       </section>
 
-      <section className="bg-bg py-section">
-        <div className="mx-auto max-w-[1280px] space-y-[clamp(48px,5vw,72px)] px-container">
-          <Reveal>
-            <SectionIntro
-              eyebrow={content.gallery.eyebrow}
-              title={content.gallery.title}
-              variant="specialty"
-            />
-          </Reveal>
-          <SpecialtyCollectionGallery
-            filters={content.gallery.filters}
-            items={items}
-            empty={text.empty}
-            filterLabel={text.filtersLabel}
-            locale={locale}
-          />
-        </div>
+      <section>
+        <SpecialtyCollectionGallery
+          filters={filters}
+          items={items}
+          chooseLabel={text.chooseLabel}
+          countSuffix={text.countSuffix}
+          viewLabel={text.view}
+          locale={locale}
+        />
       </section>
     </main>
   );
